@@ -1,0 +1,11 @@
+# PrestaShop / IDE artifacts
+/var/
+/cache/
+/img/tmp/
+/config/settings.inc.php
+/config/parameters.php
+node_modules/
+*.log
+.DS_Store
+.idea/
+.vscode/

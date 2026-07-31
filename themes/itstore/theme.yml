@@ -49,6 +49,10 @@ global_settings:
       - ps_sharebuttons
       - itstoreimageslot
       - itstoresupport
+      - itstoretrustbar
+      - itstorecategoriesblock
+      - itstoredeals
+      - itstorebrands
 
   hooks:
     modules_to_hook:
@@ -63,9 +67,14 @@ global_settings:
         - ps_shoppingcart
       displayTop:
         - ps_mainmenu
+      displayWrapperTop:
+        - itstoretrustbar
       displayHome:
         - itstoreimageslot
+        - itstorecategoriesblock
         - ps_featuredproducts
+        - itstoredeals
+        - itstorebrands
         - ps_banner
         - ps_customtext
       displayFooterBefore:

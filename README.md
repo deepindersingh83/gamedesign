@@ -28,9 +28,19 @@ themes/itstore/                     # the IT Store theme (child of classic)
   templates/index.tpl               # home page (composes displayHome hooks)
   preview.svg                       # back-office preview thumbnail
 
-modules/itstoreimageslot/           # hero "image slot" slider module
-modules/itstoresupport/             # floating support / help widget module
+modules/itstoreimageslot/           # hero "image slot" slider (displayHome)
+modules/itstorecategoriesblock/     # "shop by category" tiles (displayHome)
+modules/itstoredeals/               # deals / price-drop block (displayHome)
+modules/itstorebrands/              # brand / manufacturer logo strip (displayHome)
+modules/itstoretrustbar/            # site-wide trust / USP bar (displayWrapperTop)
+modules/itstoresupport/             # floating support / help widget (displayFooterAfter)
 ```
+
+All six `itstore*` modules are custom to this theme and auto-enabled via
+`theme.yml`. The theme also uses PrestaShop's own bundled modules (`ps_mainmenu`,
+`ps_searchbar`, `ps_shoppingcart`, `ps_featuredproducts`, `ps_facetedsearch`,
+`ps_emailsubscription`, `ps_linklist`, `ps_contactinfo`, …) — those ship with
+PrestaShop and only need enabling, which `theme.yml` handles.
 
 ## Theme
 
@@ -69,6 +79,55 @@ modules/itstoresupport/             # floating support / help widget module
   shortcut. All labels/contacts are configurable in the back office.
 * Behaviour lives in `views/js/support.js` (`window.SupportWidget`),
   auto-initialising any `[data-support-widget]` element.
+
+## `itstorecategoriesblock` — shop by category
+
+* Home grid of category tiles built from the children of a configurable parent
+  category (defaults to the Home category), with title and tile-count settings.
+* Hooked into `displayHome`; uses core `Category` APIs (no custom table).
+
+## `itstoredeals` — deals block
+
+* Home grid of discounted products from `Product::getPricesDrop`, with a
+  percentage-off badge and locale-aware pricing (`getCurrentLocale()->formatPrice`,
+  falling back to `Tools::displayPrice`).
+* Configurable title and product count. Renders nothing when there are no
+  current price drops.
+
+## `itstorebrands` — brands strip
+
+* Home row of manufacturer logos linking to each brand's listing. Only
+  manufacturers with an uploaded logo are shown (grayscale → colour on hover).
+* Configurable title and max logos; uses core `Manufacturer` APIs.
+
+## `itstoretrustbar` — trust / USP bar
+
+* Site-wide reassurance strip (free delivery, warranty, secure payment, expert
+  support) rendered on `displayWrapperTop`, so it appears under the header on
+  every page. Icons are inline SVG (no icon-font dependency).
+* Four fully configurable items (icon keyword, title, text) plus an on/off
+  switch, stored in `Configuration`.
+
+## Modules we can add next (roadmap)
+
+Custom `itstore*` blocks that would further strengthen an IT/tech store:
+
+| Module idea | What it adds |
+|---|---|
+| `itstorecompare` | Side-by-side spec comparison for components/laptops |
+| `itstorepcbuilder` | Guided custom-PC builder with compatibility checks |
+| `itstorespecsheet` | Structured spec table on the product page from features |
+| `itstorestock` | Live stock / “X left” + back-in-stock email alerts |
+| `itstorefinance` | “From $x/month” finance / buy-now-pay-later messaging |
+| `itstorebundles` | “Frequently bought together” / accessory bundles |
+| `itstorewarranty` | Extended-warranty upsell add-on at product/cart |
+| `itstorequickview` | Product quick-view modal from listing cards |
+| `itstoremegamenu` | Department mega-menu with promo columns |
+| `itstorereviews` | Verified-buyer reviews with rating summaries |
+
+(PrestaShop already ships free equivalents for some of these — e.g.
+`productcomments` for reviews, `blockwishlist` for wishlists — so those can be
+enabled rather than built.)
 
 ## Development notes
 

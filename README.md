@@ -1,9 +1,17 @@
 # IT Store — PrestaShop theme
 
-A modern, tech-focused storefront theme for **PrestaShop 1.7.6 – 8.x**, built
+A modern, tech-focused storefront theme for **PrestaShop 1.7.6 – 9.1.x**, built
 from the *IT Store Mockups* design. It ships as a child of the `classic` theme
-plus two companion modules that implement the interactive pieces of the mockup:
-a hero **image slot** slider and a floating **support** widget.
+plus a suite of companion `itstore*` modules that implement the interactive and
+commercial features of an IT/tech store.
+
+**Compatibility:** every module declares `ps_versions_compliancy` `1.7.6.0 –
+9.99.99` and the theme's `theme.yml` sets `compatibility.to: 9.99.99`. Modules
+target PHP 8.1+ and avoid APIs removed in PrestaShop 9 — prices are formatted via
+`Context::getCurrentLocale()->formatPrice()` (with a `Tools::displayPrice`
+fallback for older installs), product tabs use the modern
+`displayProductExtraContent` / `ProductExtraContent` API, and all front
+controllers extend `ModuleFrontController`.
 
 > **Note on the source design:** this implementation was built against the
 > *IT Store Mockups* Claude Design project. The design files
@@ -34,9 +42,19 @@ modules/itstoredeals/               # deals / price-drop block (displayHome)
 modules/itstorebrands/              # brand / manufacturer logo strip (displayHome)
 modules/itstoretrustbar/            # site-wide trust / USP bar (displayWrapperTop)
 modules/itstoresupport/             # floating support / help widget (displayFooterAfter)
+modules/itstoremegamenu/            # department mega-menu (displayTop)
+modules/itstorepcbuilder/           # custom-PC builder + home CTA (front controller)
+modules/itstorecompare/             # product comparison tray + page (front controller)
+modules/itstorequickview/           # quick-view modal on listings (displayProductListReviews)
+modules/itstorespecsheet/           # spec table tab (displayProductExtraContent)
+modules/itstorereviews/             # verified-buyer reviews tab (displayProductExtraContent)
+modules/itstorefinance/             # "from $x/month" messaging (displayProductAdditionalInfo)
+modules/itstorestock/               # stock indicator + back-in-stock alerts (front controller)
+modules/itstorewarranty/            # warranty upsell (displayProductAdditionalInfo)
+modules/itstorebundles/             # frequently bought together (displayFooterProduct)
 ```
 
-All six `itstore*` modules are custom to this theme and auto-enabled via
+All sixteen `itstore*` modules are custom to this theme and auto-enabled via
 `theme.yml`. The theme also uses PrestaShop's own bundled modules (`ps_mainmenu`,
 `ps_searchbar`, `ps_shoppingcart`, `ps_featuredproducts`, `ps_facetedsearch`,
 `ps_emailsubscription`, `ps_linklist`, `ps_contactinfo`, …) — those ship with
@@ -108,31 +126,36 @@ PrestaShop and only need enabling, which `theme.yml` handles.
 * Four fully configurable items (icon keyword, title, text) plus an on/off
   switch, stored in `Configuration`.
 
-## Modules we can add next (roadmap)
+## Feature modules (product & catalogue)
 
-Custom `itstore*` blocks that would further strengthen an IT/tech store:
+| Module | What it adds | Integration |
+|---|---|---|
+| `itstoremegamenu` | Two-level department mega-menu from the category tree with an optional promo panel | `displayTop` |
+| `itstorepcbuilder` | Guided custom-PC builder: maps component slots to categories, live total, add-whole-build-to-cart, home CTA | front controller `builder` |
+| `itstorecompare` | Compare tray (browser-stored) + side-by-side spec table page | front controller `compare` |
+| `itstorequickview` | Quick-view modal button on listing miniatures | `displayProductListReviews` + `displayFooter` |
+| `itstorespecsheet` | Formatted specifications tab from product features | `displayProductExtraContent` |
+| `itstorereviews` | Verified-buyer reviews: star summary, moderated list, submit form, BO moderation | `displayProductExtraContent` + front controller `submit` |
+| `itstorefinance` | "From $x/month" instalment messaging (term + optional APR) | `displayProductAdditionalInfo` |
+| `itstorestock` | Stock indicator ("In stock" / "Only N left" / "Out of stock") + back-in-stock email capture | `displayProductAdditionalInfo` + front controller `notify` |
+| `itstorewarranty` | Extended-warranty upsell tiers, each optionally mapped to a cart product | `displayProductAdditionalInfo` |
+| `itstorebundles` | "Frequently bought together" from native product accessories | `displayFooterProduct` |
 
-| Module idea | What it adds |
-|---|---|
-| `itstorecompare` | Side-by-side spec comparison for components/laptops |
-| `itstorepcbuilder` | Guided custom-PC builder with compatibility checks |
-| `itstorespecsheet` | Structured spec table on the product page from features |
-| `itstorestock` | Live stock / “X left” + back-in-stock email alerts |
-| `itstorefinance` | “From $x/month” finance / buy-now-pay-later messaging |
-| `itstorebundles` | “Frequently bought together” / accessory bundles |
-| `itstorewarranty` | Extended-warranty upsell add-on at product/cart |
-| `itstorequickview` | Product quick-view modal from listing cards |
-| `itstoremegamenu` | Department mega-menu with promo columns |
-| `itstorereviews` | Verified-buyer reviews with rating summaries |
-
-(PrestaShop already ships free equivalents for some of these — e.g.
-`productcomments` for reviews, `blockwishlist` for wishlists — so those can be
-enabled rather than built.)
+Notes:
+* `itstorereviews` and `itstorestock` create their own tables
+  (`ps_itstore_review`, `ps_itstore_stock_alert`) and drop them on uninstall.
+  Back-in-stock emails are captured and stored; wiring the actual send to a cron
+  is a small follow-up.
+* PrestaShop ships free equivalents for a couple of these (`productcomments`,
+  `blockwishlist`) — use whichever you prefer.
 
 ## Development notes
 
 * No build step is required — the theme relies on the parent `classic` assets
   plus `custom.css`/`custom.js`, which PrestaShop's `FrontController` loads
   automatically.
-* Module PHP targets PrestaShop 1.7.6+ / 8.x conventions (`HelperForm`, hook
-  registration, `registerStylesheet`/`registerJavascript`).
+* Module PHP targets PrestaShop 1.7.6 – 9.1.x conventions (`HelperForm`, hook
+  registration, `registerStylesheet`/`registerJavascript`,
+  `ModuleFrontController`) and PHP 8.1+.
+* Prices are formatted with `Context::getCurrentLocale()->formatPrice()` (with a
+  `Tools::displayPrice()` fallback) so they render correctly on PrestaShop 8 and 9.

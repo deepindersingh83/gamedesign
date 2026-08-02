@@ -1,0 +1,49 @@
+/** IT Store — product reviews styles. */
+.itstore-reviews__summary { margin-bottom: 18px; }
+.itstore-reviews__score { display: flex; align-items: baseline; gap: 10px; }
+.itstore-reviews__avg { font-size: 34px; font-weight: 800; color: #0b1f33; }
+.itstore-reviews__stars { color: #f5a623; font-size: 20px; letter-spacing: 2px; }
+.itstore-reviews__count { color: #64748b; font-size: 14px; }
+
+.itstore-reviews__list { list-style: none; margin: 0 0 24px; padding: 0; }
+.itstore-reviews__item { padding: 16px 0; border-top: 1px solid #edf1f6; }
+.itstore-reviews__item-head { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+.itstore-reviews__item-stars { color: #f5a623; letter-spacing: 1px; }
+.itstore-reviews__author { color: #0f172a; }
+.itstore-reviews__verified {
+  font-size: 11px;
+  font-weight: 700;
+  color: #16a34a;
+  background: #eafaf0;
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+.itstore-reviews__title { font-weight: 700; margin: 0 0 4px; color: #0b1f33; }
+.itstore-reviews__text { margin: 0; color: #475569; font-size: 14px; }
+
+.itstore-reviews__form-wrap { max-width: 560px; }
+.itstore-reviews__form-title { font-size: 16px; font-weight: 800; color: #0b1f33; margin-bottom: 12px; }
+.itstore-reviews__form { display: flex; flex-direction: column; gap: 10px; }
+.itstore-reviews__form input[type="text"],
+.itstore-reviews__form textarea {
+  border: 1px solid #dbe3ee;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-family: inherit;
+}
+.itstore-reviews__rating { display: inline-flex; gap: 4px; }
+.itstore-reviews__star {
+  background: none;
+  border: 0;
+  font-size: 26px;
+  line-height: 1;
+  color: #cbd5e1;
+  cursor: pointer;
+  padding: 0;
+}
+.itstore-reviews__star.is-on { color: #f5a623; }
+.itstore-reviews__msg { margin: 4px 0 0; font-size: 13px; }
+.itstore-reviews__msg.is-ok { color: #16a34a; }
+.itstore-reviews__msg.is-error { color: #dc2626; }
+.itstore-reviews__signin { color: #64748b; font-size: 14px; }

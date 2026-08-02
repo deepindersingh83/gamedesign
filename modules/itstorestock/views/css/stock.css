@@ -1,0 +1,30 @@
+/** IT Store — stock indicator + notify form styles. */
+.itstore-stock {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  margin: 10px 0;
+}
+.itstore-stock__dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.itstore-stock--in { color: #16a34a; }
+.itstore-stock--in .itstore-stock__dot { background: #16a34a; }
+.itstore-stock--low { color: #d97706; }
+.itstore-stock--low .itstore-stock__dot { background: #d97706; }
+.itstore-stock--out { color: #dc2626; }
+.itstore-stock--out .itstore-stock__dot { background: #dc2626; }
+
+.itstore-stock__notify { margin: 10px 0 16px; max-width: 420px; }
+.itstore-stock__notify-label { display: block; font-size: 13px; font-weight: 600; color: #475569; margin-bottom: 6px; }
+.itstore-stock__notify-row { display: flex; gap: 8px; }
+.itstore-stock__notify-row input {
+  flex: 1;
+  border: 1px solid #dbe3ee;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+.itstore-stock__notify-msg { margin: 8px 0 0; font-size: 13px; }
+.itstore-stock__notify-msg.is-ok { color: #16a34a; }
+.itstore-stock__notify-msg.is-error { color: #dc2626; }

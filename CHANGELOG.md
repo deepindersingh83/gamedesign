@@ -19,7 +19,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - `AggregateRating` / `Review` JSON-LD in `itstorereviews`.
 - Basic component compatibility warnings in `itstorepcbuilder`.
 - Project tooling: MIT `LICENSE`, packaging script (`build/package-theme.sh`),
-  and a GitHub Actions lint workflow.
+  a GitHub Actions lint workflow, and an integration workflow that installs all
+  modules onto a live PrestaShop 9.1 + MySQL and smoke-tests the front office.
 - Dark-mode support and accessibility refinements in the theme CSS.
 
 ### Changed

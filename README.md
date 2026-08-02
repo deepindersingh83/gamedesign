@@ -192,9 +192,13 @@ Notes:
   `ProductExtraContent`) and PHP 8.1+. Prices via
   `Context::getCurrentLocale()->formatPrice()` (with a `Tools::displayPrice()`
   fallback).
-* **CI** (`.github/workflows/lint.yml`) runs `php -l` (PHP 8.1/8.2/8.3),
+* **CI — lint** (`.github/workflows/lint.yml`): `php -l` (PHP 8.1/8.2/8.3),
   `node --check`, and YAML validation on every push.
-* **Static verification only:** the code is lint/API-checked, not yet installed
-  on a live PrestaShop 9.1 instance. Smoke-test the data-driven paths
-  (`getPricesDrop`, `getAccessories`, the PC-builder cart add, review
-  verified-buyer query) on a real store before go-live.
+* **CI — integration** (`.github/workflows/integration.yml`): boots a real
+  PrestaShop (9.1, falling back to 9.0) + MySQL, installs all sixteen modules via
+  `bin/console prestashop:module install`, and smoke-tests the home page, a
+  product page, the category listing, and the PC-builder / compare front
+  controllers for HTTP 5xx and PHP errors. Because the stock `classic` theme
+  fires the same hooks the modules use, this exercises the real data paths
+  (`getPricesDrop`, `getManufacturers`, `getFrontFeaturesStatic`,
+  `getAccessories`, the review query, the builder cart add).

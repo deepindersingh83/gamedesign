@@ -19,4 +19,5 @@
       </li>
     {/foreach}
   </ul>
+  <p class="itstore-warranty__note">{l s='Warranty cover applies to this product — add it to your cart together.' mod='itstorewarranty'}</p>
 </div>

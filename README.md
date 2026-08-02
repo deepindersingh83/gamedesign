@@ -29,12 +29,22 @@ controllers extend `ModuleFrontController`.
 themes/itstore/                     # the IT Store theme (child of classic)
   theme.yml                         # manifest: layouts, hooks, image types, module wiring
   config/theme.yml                  # runtime theme settings
-  assets/css/custom.css             # IT Store visual identity (auto-loaded by core)
+  assets/css/custom.css             # IT Store identity + dark mode + a11y (auto-loaded)
+  assets/css/custom-rtl.css         # right-to-left overrides (auto-loaded when RTL)
   assets/js/custom.js               # small progressive enhancements
   assets/js/image-slot.js           # hero slider component (reference copy)
   assets/js/support.js              # support widget component (reference copy)
+  assets/img/                       # logo.png, logo-white.png, favicon.png
+  assets/fonts/                     # self-hosted font drop-in (README)
   templates/index.tpl               # home page (composes displayHome hooks)
-  preview.svg                       # back-office preview thumbnail
+  templates/_partials/footer.tpl    # footer override with IT Store copyright
+  mails/                            # theme email-override guide
+  preview.png                       # back-office preview thumbnail (905×600)
+  preview.svg                       # vector source of the preview
+
+build/package-theme.sh              # assembles dist/itstore.zip with bundled modules
+.github/workflows/lint.yml          # CI: php -l, node --check, YAML validation
+LICENSE  CHANGELOG.md               # MIT licence + changelog
 
 modules/itstoreimageslot/           # hero "image slot" slider (displayHome)
 modules/itstorecategoriesblock/     # "shop by category" tiles (displayHome)
@@ -62,23 +72,31 @@ PrestaShop and only need enabling, which `theme.yml` handles.
 
 ## Theme
 
-* **Parent theme:** `classic`. Only `index.tpl` is overridden; every other
-  template falls back to the parent, and `custom.css` restyles the existing
-  classic markup (`#header`, `#footer`, `.product-miniature`, `.block_newsletter`,
-  …) with the IT Store identity (navy + blue/cyan + orange accent, Inter type).
+* **Parent theme:** `classic`. `index.tpl` and `_partials/footer.tpl` are
+  overridden; every other template falls back to the parent, and `custom.css`
+  restyles the existing classic markup (`#header`, `#footer`, `.product-miniature`,
+  `.block_newsletter`, …) with the IT Store identity (navy + blue/cyan + orange
+  accent). Ships **dark-mode**, **RTL**, **print** and **reduced-motion** styles.
 * **Layouts:** full-width home, left-column listings.
-* **Home composition** (via `displayHome` in `theme.yml`): image slot hero →
-  featured products → banner → custom text.
+* **Home composition** (via `displayHome` in `theme.yml`): image-slot hero →
+  category tiles → PC-builder CTA → featured products → deals → brands → banner →
+  custom text.
 
 ### Install the theme
 
-1. Copy `themes/itstore/` into your shop's `themes/` directory.
-2. Copy `modules/itstoreimageslot/` and `modules/itstoresupport/` into `modules/`.
-3. Back office → **Design → Theme & Logo → Add new theme → Import from FTP**
-   (or select `itstore` if already present) and use it.
-4. PrestaShop enables and hooks the two modules automatically from the theme
-   manifest. If installing modules manually, install **IT Store Image Slot** and
-   **IT Store Support Widget** from **Modules**.
+**Recommended — one zip with everything bundled:**
+
+1. Run `bash build/package-theme.sh` → produces `dist/itstore.zip`. The script
+   copies every `itstore*` module into the theme's `dependencies/modules/` so
+   PrestaShop installs them automatically on import.
+2. Back office → **Design → Theme & Logo → Add new theme → Import from your
+   computer** → upload `dist/itstore.zip`, then **Use** it.
+3. Set the shop logo to `themes/itstore/assets/img/logo.png` (or your own) under
+   **Design → Theme & Logo**, and the favicon to `assets/img/favicon.png`.
+
+**Manual:** copy `themes/itstore/` into `themes/` and each `modules/itstore*/`
+into `modules/`, then apply the theme; `theme.yml` enables and positions all
+sixteen modules. Configure each from **Modules** as needed.
 
 ## `itstoreimageslot` — hero image slot
 
@@ -135,27 +153,48 @@ PrestaShop and only need enabling, which `theme.yml` handles.
 | `itstorecompare` | Compare tray (browser-stored) + side-by-side spec table page | front controller `compare` |
 | `itstorequickview` | Quick-view modal button on listing miniatures | `displayProductListReviews` + `displayFooter` |
 | `itstorespecsheet` | Formatted specifications tab from product features | `displayProductExtraContent` |
-| `itstorereviews` | Verified-buyer reviews: star summary, moderated list, submit form, BO moderation | `displayProductExtraContent` + front controller `submit` |
+| `itstorereviews` | Verified-buyer reviews: star summary, moderated list, submit form, BO moderation, **JSON-LD `AggregateRating`/`Review`** | `displayProductExtraContent` + front controller `submit` |
 | `itstorefinance` | "From $x/month" instalment messaging (term + optional APR) | `displayProductAdditionalInfo` |
-| `itstorestock` | Stock indicator ("In stock" / "Only N left" / "Out of stock") + back-in-stock email capture | `displayProductAdditionalInfo` + front controller `notify` |
+| `itstorestock` | Stock indicator + back-in-stock capture **and email sender** | `displayProductAdditionalInfo` + `notify` / `cron` controllers |
 | `itstorewarranty` | Extended-warranty upsell tiers, each optionally mapped to a cart product | `displayProductAdditionalInfo` |
 | `itstorebundles` | "Frequently bought together" from native product accessories | `displayFooterProduct` |
 
 Notes:
 * `itstorereviews` and `itstorestock` create their own tables
   (`ps_itstore_review`, `ps_itstore_stock_alert`) and drop them on uninstall.
-  Back-in-stock emails are captured and stored; wiring the actual send to a cron
-  is a small follow-up.
+* **Back-in-stock emails** are sent by `itstorestock`'s `cron` controller — call
+  the token-protected URL shown on the module's config screen from a server cron
+  (uses the themed `modules/itstorestock/mails/en/backinstock.*` templates).
+* `itstorepcbuilder` warns when the selected CPU and motherboard disagree on a
+  configurable **compatibility feature** (default `Socket`).
 * PrestaShop ships free equivalents for a couple of these (`productcomments`,
   `blockwishlist`) — use whichever you prefer.
 
-## Development notes
+## Internationalisation & accessibility
+
+* Every user-facing string uses `$this->l()` / `{l s=…}` and each module carries
+  a `translations/` catalogue. Generate full XLIFF with
+  `php bin/console translation:extract <locale>` on your shop, or translate from
+  **International → Translations**.
+* `assets/css/custom-rtl.css` is auto-loaded for RTL languages.
+* Fonts are self-hosted / system-stack — **no external Google Fonts request**
+  (GDPR-friendly). Drop a `.woff2` into `assets/fonts/` to ship Inter (see its
+  README).
+* Includes a skip-to-content link, visible focus rings, `prefers-reduced-motion`
+  and `prefers-color-scheme: dark` support.
+
+## Development & verification
 
 * No build step is required — the theme relies on the parent `classic` assets
-  plus `custom.css`/`custom.js`, which PrestaShop's `FrontController` loads
-  automatically.
-* Module PHP targets PrestaShop 1.7.6 – 9.1.x conventions (`HelperForm`, hook
-  registration, `registerStylesheet`/`registerJavascript`,
-  `ModuleFrontController`) and PHP 8.1+.
-* Prices are formatted with `Context::getCurrentLocale()->formatPrice()` (with a
-  `Tools::displayPrice()` fallback) so they render correctly on PrestaShop 8 and 9.
+  plus `custom.css`/`custom.js`, which PrestaShop's `FrontController` loads.
+* Module PHP targets PrestaShop 1.7.6 – 9.1.x (`HelperForm`, hook registration,
+  `registerStylesheet`/`registerJavascript`, `ModuleFrontController`,
+  `ProductExtraContent`) and PHP 8.1+. Prices via
+  `Context::getCurrentLocale()->formatPrice()` (with a `Tools::displayPrice()`
+  fallback).
+* **CI** (`.github/workflows/lint.yml`) runs `php -l` (PHP 8.1/8.2/8.3),
+  `node --check`, and YAML validation on every push.
+* **Static verification only:** the code is lint/API-checked, not yet installed
+  on a live PrestaShop 9.1 instance. Smoke-test the data-driven paths
+  (`getPricesDrop`, `getAccessories`, the PC-builder cart add, review
+  verified-buyer query) on a real store before go-live.

@@ -57,6 +57,7 @@ class Itstorepcbuilder extends Module
             Configuration::updateValue('ITSTORE_PB_' . $k, 0);
         }
         Configuration::updateValue('ITSTORE_PB_CTA', $this->l('Build your own PC'));
+        Configuration::updateValue('ITSTORE_PB_COMPAT', 'Socket');
 
         return true;
     }
@@ -67,6 +68,7 @@ class Itstorepcbuilder extends Module
             Configuration::deleteByName('ITSTORE_PB_' . $k);
         }
         Configuration::deleteByName('ITSTORE_PB_CTA');
+        Configuration::deleteByName('ITSTORE_PB_COMPAT');
 
         return parent::uninstall();
     }
@@ -104,6 +106,7 @@ class Itstorepcbuilder extends Module
                 Configuration::updateValue('ITSTORE_PB_' . $k, (int) Tools::getValue('ITSTORE_PB_' . $k));
             }
             Configuration::updateValue('ITSTORE_PB_CTA', Tools::getValue('ITSTORE_PB_CTA'));
+            Configuration::updateValue('ITSTORE_PB_COMPAT', Tools::getValue('ITSTORE_PB_COMPAT'));
             $output .= $this->displayConfirmation($this->l('Settings saved.'));
         }
 
@@ -112,7 +115,10 @@ class Itstorepcbuilder extends Module
 
     protected function renderForm()
     {
-        $inputs = [['type' => 'text', 'label' => $this->l('Home CTA text'), 'name' => 'ITSTORE_PB_CTA']];
+        $inputs = [
+            ['type' => 'text', 'label' => $this->l('Home CTA text'), 'name' => 'ITSTORE_PB_CTA'],
+            ['type' => 'text', 'label' => $this->l('Compatibility feature'), 'name' => 'ITSTORE_PB_COMPAT', 'desc' => $this->l('Feature name compared between CPU and Motherboard (e.g. Socket). Leave empty to disable.'), 'class' => 'fixed-width-lg'],
+        ];
         foreach ($this->slots() as $k => $label) {
             $inputs[] = [
                 'type' => 'text',
@@ -135,7 +141,10 @@ class Itstorepcbuilder extends Module
         $helper->currentIndex = AdminController::$currentIndex . '&configure=' . $this->name;
         $helper->submit_action = 'submitItstorePb';
 
-        $values = ['ITSTORE_PB_CTA' => Configuration::get('ITSTORE_PB_CTA')];
+        $values = [
+            'ITSTORE_PB_CTA' => Configuration::get('ITSTORE_PB_CTA'),
+            'ITSTORE_PB_COMPAT' => Configuration::get('ITSTORE_PB_COMPAT'),
+        ];
         foreach (array_keys($this->slots()) as $k) {
             $values['ITSTORE_PB_' . $k] = (int) Configuration::get('ITSTORE_PB_' . $k);
         }

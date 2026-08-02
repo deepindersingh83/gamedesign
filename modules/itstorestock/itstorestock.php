@@ -48,6 +48,7 @@ class Itstorestock extends Module
         ) ENGINE=' . _MYSQL_ENGINE_ . ' DEFAULT CHARSET=utf8mb4;';
 
         Configuration::updateValue('ITSTORE_STK_LOW', 5);
+        Configuration::updateValue('ITSTORE_STK_CRON_TOKEN', Tools::passwdGen(24));
 
         return parent::install()
             && Db::getInstance()->execute($sql)
@@ -59,6 +60,7 @@ class Itstorestock extends Module
     {
         Db::getInstance()->execute('DROP TABLE IF EXISTS `' . _DB_PREFIX_ . 'itstore_stock_alert`;');
         Configuration::deleteByName('ITSTORE_STK_LOW');
+        Configuration::deleteByName('ITSTORE_STK_CRON_TOKEN');
 
         return parent::uninstall();
     }
@@ -126,7 +128,72 @@ class Itstorestock extends Module
             $output .= $this->displayConfirmation($this->l('Settings saved.'));
         }
 
-        return $output . $this->renderAlerts() . $this->renderForm();
+        return $output . $this->renderCronInfo() . $this->renderAlerts() . $this->renderForm();
+    }
+
+    protected function renderCronInfo()
+    {
+        $url = $this->context->link->getModuleLink(
+            $this->name,
+            'cron',
+            ['token' => Configuration::get('ITSTORE_STK_CRON_TOKEN')],
+            true
+        );
+
+        return '<div class="panel"><div class="panel-heading"><i class="icon-time"></i> '
+            . $this->l('Back-in-stock cron') . '</div>'
+            . '<p>' . $this->l('Call this URL from your server cron (e.g. hourly) to email waiting customers when their product is back in stock:') . '</p>'
+            . '<pre style="white-space:normal;word-break:break-all">' . htmlspecialchars($url) . '</pre></div>';
+    }
+
+    /**
+     * Notify waiting customers for products that are back in stock.
+     * Returns the number of emails sent. Safe to call repeatedly.
+     */
+    public function sendBackInStockAlerts()
+    {
+        $rows = Db::getInstance()->executeS(
+            'SELECT * FROM `' . _DB_PREFIX_ . 'itstore_stock_alert` WHERE notified = 0'
+        ) ?: [];
+
+        $sent = 0;
+        foreach ($rows as $r) {
+            $idProduct = (int) $r['id_product'];
+            $idAttr = (int) $r['id_product_attribute'];
+            $qty = (int) StockAvailable::getQuantityAvailableByProduct($idProduct, $idAttr ?: null);
+            if ($qty <= 0) {
+                continue;
+            }
+
+            $idLang = (int) Configuration::get('PS_LANG_DEFAULT');
+            $product = new Product($idProduct, false, $idLang);
+            if (!Validate::isLoadedObject($product)) {
+                continue;
+            }
+
+            Mail::Send(
+                $idLang,
+                'backinstock',
+                $this->l('Back in stock'),
+                [
+                    '{product}' => is_array($product->name) ? reset($product->name) : $product->name,
+                    '{url}' => $this->context->link->getProductLink($idProduct),
+                    '{shop_name}' => Configuration::get('PS_SHOP_NAME'),
+                ],
+                $r['email'],
+                null,
+                null,
+                null,
+                null,
+                null,
+                dirname(__FILE__) . '/mails/'
+            );
+
+            Db::getInstance()->update('itstore_stock_alert', ['notified' => 1], 'id_alert = ' . (int) $r['id_alert']);
+            $sent++;
+        }
+
+        return $sent;
     }
 
     protected function renderAlerts()

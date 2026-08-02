@@ -21,3 +21,4 @@
 .itstore-warranty__label { font-weight: 600; color: #0f172a; }
 .itstore-warranty__price { margin-left: auto; font-weight: 800; color: #0b1f33; }
 .itstore-warranty__add { flex: 0 0 auto; }
+.itstore-warranty__note { margin: 10px 0 0; font-size: 12px; color: #64748b; }

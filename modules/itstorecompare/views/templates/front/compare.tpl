@@ -8,7 +8,15 @@
 {block name='page_content'}
   <section class="itstore-compare-page">
     {if $compare_products|@count < 1}
-      <p>{l s='No products selected to compare.' mod='itstorecompare'}</p>
+      <div class="itstore-compare-empty">
+        <p>{l s='No products selected to compare.' mod='itstorecompare'}</p>
+        <a class="btn btn-primary" href="{$urls.base_url}">{l s='Browse products' mod='itstorecompare'}</a>
+      </div>
+    {elseif $compare_products|@count < 2}
+      <div class="itstore-compare-empty">
+        <p>{l s='Add at least two products to compare them side by side.' mod='itstorecompare'}</p>
+        <a class="btn btn-primary" href="{$urls.base_url}">{l s='Browse products' mod='itstorecompare'}</a>
+      </div>
     {else}
       <div class="itstore-compare-scroll">
         <table class="itstore-compare-table">

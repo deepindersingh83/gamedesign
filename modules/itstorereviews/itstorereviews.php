@@ -116,6 +116,7 @@ class Itstorereviews extends Module
         $canReview = $customer && $customer->isLogged();
 
         $this->smarty->assign([
+            'itstore_rv_jsonld' => $count ? $this->buildJsonLd($idProduct, $reviews, $avg, $count) : '',
             'itstore_rv_reviews' => $reviews,
             'itstore_rv_count' => $count,
             'itstore_rv_avg' => $avg,
@@ -137,6 +138,49 @@ class Itstorereviews extends Module
         $extra->setTitle($title)->setContent($html);
 
         return [$extra];
+    }
+
+    /**
+     * Build AggregateRating + Review JSON-LD for rich snippets.
+     */
+    protected function buildJsonLd($idProduct, array $reviews, $avg, $count)
+    {
+        $idLang = (int) $this->context->language->id;
+        $product = new Product($idProduct, false, $idLang);
+        if (!Validate::isLoadedObject($product)) {
+            return '';
+        }
+
+        $reviewNodes = [];
+        foreach (array_slice($reviews, 0, 10) as $r) {
+            $reviewNodes[] = [
+                '@type' => 'Review',
+                'reviewRating' => [
+                    '@type' => 'Rating',
+                    'ratingValue' => (int) $r['rating'],
+                    'bestRating' => 5,
+                ],
+                'author' => ['@type' => 'Person', 'name' => $r['customer_name']],
+                'datePublished' => date('Y-m-d', strtotime($r['date_add'])),
+                'reviewBody' => Tools::substr(strip_tags((string) $r['content']), 0, 500),
+            ];
+        }
+
+        $data = [
+            '@context' => 'https://schema.org',
+            '@type' => 'Product',
+            'name' => is_array($product->name) ? reset($product->name) : $product->name,
+            'aggregateRating' => [
+                '@type' => 'AggregateRating',
+                'ratingValue' => $avg,
+                'reviewCount' => (int) $count,
+                'bestRating' => 5,
+                'worstRating' => 1,
+            ],
+            'review' => $reviewNodes,
+        ];
+
+        return json_encode($data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
     }
 
     /**

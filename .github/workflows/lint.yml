@@ -1,0 +1,64 @@
+name: Lint
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  php:
+    name: PHP syntax (php -l)
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version: ["8.1", "8.2", "8.3"]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up PHP ${{ matrix.php-version }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+      - name: Lint all PHP files
+        run: |
+          set -e
+          fail=0
+          while IFS= read -r -d '' f; do
+            if ! php -l "$f" >/dev/null; then
+              echo "Syntax error in $f"
+              fail=1
+            fi
+          done < <(find modules themes -name '*.php' -print0)
+          exit $fail
+
+  js:
+    name: JavaScript syntax (node --check)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Check all JS files
+        run: |
+          set -e
+          fail=0
+          while IFS= read -r -d '' f; do
+            if ! node --check "$f"; then
+              echo "Syntax error in $f"
+              fail=1
+            fi
+          done < <(find modules themes -name '*.js' -print0)
+          exit $fail
+
+  yaml:
+    name: theme.yml validity
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml
+      - name: Validate theme YAML
+        run: |
+          python -c "import yaml; yaml.safe_load(open('themes/itstore/theme.yml')); yaml.safe_load(open('themes/itstore/config/theme.yml')); print('YAML OK')"

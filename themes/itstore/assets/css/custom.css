@@ -2,9 +2,21 @@
  * IT Store — theme stylesheet
  * A modern, tech-focused storefront design for PrestaShop.
  * Restyles the classic parent theme markup with an IT / tech identity.
+ *
+ * Fonts are self-hosted / system-stack — no external requests (GDPR-friendly).
+ * To ship the Inter webfont, drop the .woff2 files into assets/fonts/ and
+ * uncomment the @font-face blocks below.
  */
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+/*
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url("../fonts/Inter-roman.var.woff2") format("woff2");
+}
+*/
 
 :root {
   --it-navy: #0b1f33;
@@ -80,8 +92,6 @@ img { max-width: 100%; height: auto; }
   padding-bottom: 14px;
 }
 #header .logo { max-height: 44px; }
-.header-nav__brand { font-size: 22px; font-weight: 800; color: #fff; letter-spacing: .3px; }
-.header-nav__brand span { color: var(--it-cyan); }
 
 #search_widget form {
   display: flex;
@@ -94,18 +104,14 @@ img { max-width: 100%; height: auto; }
 #search_widget input[type="text"] { border: 0; padding: 12px 16px; flex: 1; outline: none; }
 #search_widget button { background: var(--it-blue); border: 0; color: #fff; padding: 0 18px; cursor: pointer; }
 
-.header-top__actions { display: flex; align-items: center; gap: 18px; margin-left: auto; }
+#_desktop_user_info, #_desktop_cart { display: flex; align-items: center; }
 
 /* Main menu bar */
-#header .menu, .header-nav { background: var(--it-navy-700); }
+.header-nav, #_desktop_top_menu { background: var(--it-navy-700); }
 #_desktop_top_menu ul { display: flex; gap: 6px; list-style: none; margin: 0; padding: 0; }
 #_desktop_top_menu a { display: block; padding: 12px 16px; font-weight: 600; }
 
-/* ---------- Trust bar ---------- */
-.trust-bar { background: #fff; border-bottom: 1px solid var(--it-line); }
-.trust-bar .container { display: flex; flex-wrap: wrap; gap: 24px; padding: 14px 20px; }
-.trust-bar__item { display: flex; align-items: center; gap: 10px; color: var(--it-muted); font-size: 14px; font-weight: 600; }
-.trust-bar__item i { color: var(--it-blue); font-size: 20px; }
+/* Trust bar lives in the itstoretrustbar module (.itstore-trustbar). */
 
 /* ---------- Sections ---------- */
 .page-section { padding: 40px 0; }
@@ -176,6 +182,8 @@ img { max-width: 100%; height: auto; }
 #footer ul { list-style: none; padding: 0; margin: 0; }
 #footer li { padding: 5px 0; font-size: 14px; }
 .footer__copyright { border-top: 1px solid var(--it-navy-700); padding: 18px 0; text-align: center; font-size: 13px; color: #8aa0bb; }
+.itstore-footer__brand { font-weight: 800; color: #fff; margin-right: 6px; }
+.itstore-footer__brand span { color: var(--it-cyan); }
 
 /* ---------- Newsletter ---------- */
 .block_newsletter {
@@ -195,4 +203,45 @@ img { max-width: 100%; height: auto; }
 @media (max-width: 600px) {
   .products, .product_list { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
   .section-title { font-size: 20px; }
+}
+
+/* ---------- Accessibility ---------- */
+:focus-visible { outline: 3px solid rgba(31, 111, 235, 0.55); outline-offset: 2px; }
+.itstore-skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 3000;
+  background: var(--it-navy);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 0 0 8px 0;
+}
+.itstore-skip-link:focus { left: 0; color: #fff; }
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+}
+
+/* ---------- Dark mode ---------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --it-ink: #e6edf6;
+    --it-muted: #9fb0c4;
+    --it-line: #24344a;
+    --it-bg: #0a1622;
+    --it-white: #0f1e2e;
+  }
+  body { background: var(--it-bg); color: var(--it-ink); }
+  .product-miniature .thumbnail-container,
+  .js-product-miniature { background: #0f1e2e; border-color: #24344a; }
+  .product-title a { color: var(--it-ink); }
+  .section-title { color: #e6edf6; }
+  .trust-bar, .itstore-trustbar { background: #0f1e2e; border-color: #24344a; }
+  #search_widget form { background: #0f1e2e; }
+  #search_widget input[type="text"] { background: #0f1e2e; color: var(--it-ink); }
+}
+
+/* ---------- Print ---------- */
+@media print {
+  #header, #footer, .itstore-trustbar, .support-widget, .itstore-cmp-tray { display: none !important; }
 }

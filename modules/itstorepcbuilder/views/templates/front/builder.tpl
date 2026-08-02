@@ -13,10 +13,11 @@
         <div class="itstore-pb__slot">
           <label class="itstore-pb__slot-label" for="pb_{$slot.key}">{$slot.label|escape:'html':'UTF-8'}</label>
           {if $slot.products}
-            <select class="itstore-pb__select js-itstore-pb-select" id="pb_{$slot.key}" name="build[{$slot.key}]" data-slot="{$slot.key}">
-              <option value="" data-price="0">{l s='— none —' mod='itstorepcbuilder'}</option>
+            <select class="itstore-pb__select js-itstore-pb-select" id="pb_{$slot.key}" name="build[{$slot.key}]"
+                    data-slot="{$slot.key}"{if $slot.compat_check} data-compat-check="1"{/if}>
+              <option value="" data-price="0" data-compat="">{l s='— none —' mod='itstorepcbuilder'}</option>
               {foreach from=$slot.products item=p}
-                <option value="{$p.id|intval}" data-price="{$p.price_raw}">{$p.name|escape:'html':'UTF-8'} — {$p.price}</option>
+                <option value="{$p.id|intval}" data-price="{$p.price_raw}" data-compat="{$p.compat|escape:'html':'UTF-8'}">{$p.name|escape:'html':'UTF-8'} — {$p.price}</option>
               {/foreach}
             </select>
           {else}
@@ -28,6 +29,12 @@
 
     <aside class="itstore-pb__summary">
       <h3>{l s='Your build' mod='itstorepcbuilder'}</h3>
+      <p class="itstore-pb__warning js-itstore-pb-warning" role="alert" hidden
+         data-feature="{$pb_compat_feature|escape:'html':'UTF-8'}">
+        {l s='Warning: the selected CPU and motherboard' mod='itstorepcbuilder'}
+        <span class="js-itstore-pb-feature">{$pb_compat_feature|escape:'html':'UTF-8'}</span>
+        {l s='do not match.' mod='itstorepcbuilder'}
+      </p>
       <ul class="itstore-pb__list js-itstore-pb-list"></ul>
       <div class="itstore-pb__total">
         <span>{l s='Total' mod='itstorepcbuilder'}</span>

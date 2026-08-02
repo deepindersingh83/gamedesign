@@ -43,5 +43,14 @@
 .itstore-pb__total { display: flex; justify-content: space-between; align-items: baseline; margin: 12px 0 16px; font-size: 16px; }
 .itstore-pb__total strong { font-size: 22px; color: #0b1f33; }
 .itstore-pb__add { width: 100%; }
+.itstore-pb__warning {
+  background: #fff4e5;
+  border: 1px solid #f6c177;
+  color: #92400e;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 13px;
+  margin: 0 0 12px;
+}
 
 @media (max-width: 900px) { .itstore-pb { grid-template-columns: 1fr; } .itstore-pb__summary { position: static; } }

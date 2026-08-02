@@ -54,6 +54,7 @@ class ItstorepcbuilderBuilderModuleFrontController extends ModuleFrontController
         parent::initContent();
 
         $idLang = (int) $this->context->language->id;
+        $compatFeature = trim((string) Configuration::get('ITSTORE_PB_COMPAT'));
         $slots = [];
 
         foreach ($this->module->slots() as $key => $label) {
@@ -71,6 +72,7 @@ class ItstorepcbuilderBuilderModuleFrontController extends ModuleFrontController
                             'name' => isset($row['name']) ? $row['name'] : '',
                             'price_raw' => $priceRaw,
                             'price' => $this->formatPrice($priceRaw),
+                            'compat' => $compatFeature !== '' ? $this->featureValue($id, $idLang, $compatFeature) : '',
                         ];
                     }
                 }
@@ -79,16 +81,33 @@ class ItstorepcbuilderBuilderModuleFrontController extends ModuleFrontController
                 'key' => $key,
                 'label' => $label,
                 'products' => $products,
+                // Only CPU and Motherboard participate in the compatibility check.
+                'compat_check' => in_array($key, ['CPU', 'MB'], true) && $compatFeature !== '',
             ];
         }
 
         $this->context->smarty->assign([
             'pb_slots' => $slots,
+            'pb_compat_feature' => $compatFeature,
             'pb_action' => $this->context->link->getModuleLink('itstorepcbuilder', 'builder', [], true),
             'pb_currency_sign' => $this->context->currency ? $this->context->currency->sign : '',
         ]);
 
         $this->setTemplate('module:itstorepcbuilder/views/templates/front/builder.tpl');
+    }
+
+    /**
+     * Value of a named feature for a product (empty string if absent).
+     */
+    protected function featureValue($idProduct, $idLang, $featureName)
+    {
+        foreach (Product::getFrontFeaturesStatic($idLang, $idProduct) as $f) {
+            if (isset($f['name']) && strcasecmp($f['name'], $featureName) === 0) {
+                return isset($f['value']) ? $f['value'] : '';
+            }
+        }
+
+        return '';
     }
 
     protected function formatPrice($price)

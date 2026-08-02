@@ -2,6 +2,9 @@
  * IT Store — product reviews (summary, list, form).
  *}
 <div class="itstore-reviews">
+  {if $itstore_rv_jsonld}
+    <script type="application/ld+json">{$itstore_rv_jsonld nofilter}</script>
+  {/if}
   <div class="itstore-reviews__summary">
     <div class="itstore-reviews__score">
       <span class="itstore-reviews__avg">{$itstore_rv_avg}</span>

@@ -3,6 +3,22 @@
 All notable changes to the IT Store theme and its modules are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.2.0] - 2026-08-05
+
+### Added — B2B sections from the mockup
+- `itstorehero` (audience-tabbed Deal-of-the-Month hero), `itstorefleetdeals`
+  (Business Fleet Deals + Clearance + Request-Quote controller/table),
+  `itstorestats` (count-up stats band), `itstoretestimonials`, `itstoreblog`,
+  `itstorebulkpricing`, `itstoreautoreorder`, `itstoreaskquestion` (Q&A tab).
+- Home order re-composed to match the design; hero replaces the image slider.
+
+### Changed
+- Palette/type reconciled to the real mockup (ink `#0b1220`, blue `#2f6fed`,
+  Inter + JetBrains Mono + Source Serif 4); product cards, badges, buttons and
+  the out-of-stock notify box restyled to the design.
+- Recorded that `image-slot.js` / `support.js` are Design-Composer tooling, not
+  storefront libraries (so they are intentionally not shipped).
+
 ## [1.1.0] - 2026-08-02
 
 ### Added

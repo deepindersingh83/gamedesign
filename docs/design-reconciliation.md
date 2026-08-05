@@ -36,13 +36,28 @@ tool, not the shop. The theme's `ImageSlot`/`SupportWidget` are the correct
 storefront implementations and must **not** copy these files. Checklist rows
 22–23 are therefore closed as "not applicable".
 
-### Still to do (net-new B2B sections in the mockup)
+### Net-new B2B sections — BUILT
 
-These have no equivalent yet and each is a follow-up module/section: audience-
-tabbed **"Deal of the Month" hero** (For Business / For Gamers & Home),
-**Business Fleet Deals** bulk-pricing promo + **Request Quote**, **stats /
-counters** row, **"What Our Customers Say"** testimonials, **From the Blog**,
-product-page **Bulk/Business pricing**, **Auto-reorder**, and **Ask a Question**.
+All the mockup's B2B sections now ship as modules, built to the design's exact
+markup/tokens and wired into `theme.yml`:
+
+- **`itstorehero`** — audience-tabbed "Deal of the Month" hero (For Business /
+  For Gamers & Home) with Get Bulk Quote. Replaces the old image slider as the
+  home hero.
+- **`itstorefleetdeals`** — Business Fleet Deals + Clearance band + Request-Quote
+  front controller (`itstore_quote` table, BO list, shop email).
+- **`itstorestats`** — proof-point stats band with on-scroll count-up.
+- **`itstoretestimonials`** — "What Our Customers Say" grid.
+- **`itstoreblog`** — "From the Blog" preview.
+- **`itstorebulkpricing`** — product-page Bulk/Business pricing tiers.
+- **`itstoreautoreorder`** — Subscribe & Save opt-in (presentational; recurring
+  billing still needs a subscription-payment module).
+- **`itstoreaskquestion`** — product Q&A tab + BO answers.
+
+The out-of-stock notify box in `itstorestock` was restyled to the design's amber
+card. Remaining non-module items are theme-template layouts (full category-page
+sidebar/banner, cart saved-cart) — deferred to avoid classic regressions and
+best done on a running store.
 
 ## How to use
 1. Open the mockup and the referenced files side by side.

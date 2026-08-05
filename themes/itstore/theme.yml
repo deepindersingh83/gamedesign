@@ -68,6 +68,9 @@ global_settings:
       - itstorestats
       - itstoretestimonials
       - itstoreblog
+      - itstorebulkpricing
+      - itstoreautoreorder
+      - itstoreaskquestion
 
   hooks:
     modules_to_hook:
@@ -100,11 +103,14 @@ global_settings:
         - ps_customtext
       displayProductAdditionalInfo:
         - itstorestock
+        - itstorebulkpricing
+        - itstoreautoreorder
         - itstorefinance
         - itstorewarranty
       displayProductExtraContent:
         - itstorespecsheet
         - itstorereviews
+        - itstoreaskquestion
       displayFooterProduct:
         - itstorebundles
       displayProductListReviews:

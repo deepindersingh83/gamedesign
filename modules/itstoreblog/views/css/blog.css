@@ -1,0 +1,21 @@
+/** IT Store — From the Blog. */
+.itstore-blog--band { background: #fff; border-top: 1px solid #e3e7ef; }
+.itstore-blog__head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; gap: 16px; }
+.itstore-blog__all { font-size: 13.5px; font-weight: 600; white-space: nowrap; }
+.itstore-blog__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.itstore-blog__card {
+  border: 1px solid #e3e7ef;
+  border-radius: 14px;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, .04), 0 4px 16px rgba(16, 24, 40, .04);
+  overflow: hidden;
+  display: block;
+  color: inherit;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.itstore-blog__card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(16, 24, 40, .12); color: inherit; }
+.itstore-blog__media { display: block; height: 140px; background: #f8f9fc; }
+.itstore-blog__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.itstore-blog__body { display: block; padding: 16px; }
+.itstore-blog__tag { display: block; color: #2f6fed; font-size: 11.5px; font-weight: 700; letter-spacing: .5px; margin-bottom: 6px; }
+.itstore-blog__title { display: block; font-weight: 700; font-size: 15px; color: #0b1220; line-height: 1.35; }
+@media (max-width: 820px) { .itstore-blog__grid { grid-template-columns: 1fr; } }

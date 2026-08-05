@@ -63,6 +63,11 @@ global_settings:
       - itstorestock
       - itstorewarranty
       - itstorebundles
+      - itstorehero
+      - itstorefleetdeals
+      - itstorestats
+      - itstoretestimonials
+      - itstoreblog
 
   hooks:
     modules_to_hook:
@@ -81,12 +86,16 @@ global_settings:
       displayWrapperTop:
         - itstoretrustbar
       displayHome:
-        - itstoreimageslot
+        - itstorehero
         - itstorecategoriesblock
-        - itstorepcbuilder
+        - itstorefleetdeals
         - ps_featuredproducts
         - itstoredeals
+        - itstorestats
+        - itstoretestimonials
         - itstorebrands
+        - itstoreblog
+        - itstorepcbuilder
         - ps_banner
         - ps_customtext
       displayProductAdditionalInfo:

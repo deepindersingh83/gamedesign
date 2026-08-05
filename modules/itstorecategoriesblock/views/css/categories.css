@@ -14,22 +14,22 @@
   gap: 12px;
   padding: 20px 14px;
   background: #fff;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e3e7ef;
   border-radius: 14px;
-  color: #0f172a;
+  color: #0b1220;
   transition: box-shadow .15s ease, transform .15s ease, border-color .15s ease;
 }
 .itstore-cats__tile:hover {
   box-shadow: 0 10px 30px rgba(15, 23, 42, .08);
   transform: translateY(-3px);
   border-color: #cdd8e6;
-  color: #1f6feb;
+  color: #2f6fed;
 }
 .itstore-cats__media {
   width: 92px;
   height: 92px;
   border-radius: 50%;
-  background: #f2f6fc;
+  background: #eaf1ff;
   display: inline-flex;
   align-items: center;
   justify-content: center;

@@ -3,9 +3,9 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  border: 1px solid #dbe3ee;
+  border: 1px solid #d7dce6;
   background: #fff;
-  color: #0b1f33;
+  color: #0b1220;
   border-radius: 8px;
   padding: 7px 12px;
   font-size: 13px;
@@ -14,7 +14,7 @@
   margin-top: 8px;
   transition: background .15s ease, border-color .15s ease, color .15s ease;
 }
-.itstore-qv-btn:hover { background: #1f6feb; border-color: #1f6feb; color: #fff; }
+.itstore-qv-btn:hover { background: #2f6fed; border-color: #2f6fed; color: #fff; }
 .itstore-qv-btn svg { width: 16px; height: 16px; }
 
 .itstore-qv[hidden] { display: none; }
@@ -46,7 +46,7 @@
   height: 36px;
   border: 0;
   border-radius: 50%;
-  background: #0b1f33;
+  background: #0b1220;
   color: #fff;
   font-size: 22px;
   line-height: 1;
@@ -58,7 +58,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #64748b;
+  color: #5a6478;
   font-weight: 600;
 }
 .itstore-qv__frame { width: 100%; height: 100%; border: 0; transition: opacity .2s ease; background: #fff; }

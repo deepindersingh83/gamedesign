@@ -8,7 +8,7 @@
 }
 .itstore-deals__card {
   background: #fff;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e3e7ef;
   border-radius: 14px;
   overflow: hidden;
   display: flex;
@@ -20,22 +20,24 @@
   transform: translateY(-3px);
   border-color: #cdd8e6;
 }
-.itstore-deals__media { position: relative; display: block; background: #f5f7fb; }
-.itstore-deals__media img { width: 100%; height: 200px; object-fit: contain; display: block; padding: 10px; }
+.itstore-deals__media { position: relative; display: block; background: #f8f9fc; height: 170px; }
+.itstore-deals__media img { width: 100%; height: 100%; object-fit: contain; display: block; padding: 12px; }
 .itstore-deals__badge {
   position: absolute;
   top: 10px;
   left: 10px;
-  background: #16a34a;
-  color: #fff;
-  font-size: 12px;
+  background: #fee2e2;
+  color: #dc2626;
+  font-size: 10.5px;
   font-weight: 800;
+  letter-spacing: .3px;
   padding: 4px 10px;
   border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.12);
 }
-.itstore-deals__body { padding: 12px 14px 16px; display: flex; flex-direction: column; gap: 8px; }
-.itstore-deals__name { color: #0f172a; font-weight: 600; font-size: 14px; line-height: 1.35; }
-.itstore-deals__name:hover { color: #1f6feb; }
-.itstore-deals__price { display: flex; align-items: baseline; gap: 8px; }
-.itstore-deals__now { color: #0b1f33; font-weight: 800; font-size: 18px; }
-.itstore-deals__was { color: #94a3b8; text-decoration: line-through; font-size: 14px; }
+.itstore-deals__body { padding: 16px; display: flex; flex-direction: column; gap: 7px; flex: 1; }
+.itstore-deals__name { color: #0b1220; font-weight: 700; font-size: 14.5px; line-height: 1.35; }
+.itstore-deals__name:hover { color: #2f6fed; }
+.itstore-deals__price { display: flex; align-items: baseline; gap: 8px; margin-top: auto; }
+.itstore-deals__now { color: #0b1220; font-weight: 800; font-size: 18px; font-family: "JetBrains Mono", ui-monospace, monospace; }
+.itstore-deals__was { color: #9aa4b8; text-decoration: line-through; font-size: 13px; }

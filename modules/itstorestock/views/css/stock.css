@@ -16,11 +16,11 @@
 .itstore-stock--out .itstore-stock__dot { background: #dc2626; }
 
 .itstore-stock__notify { margin: 10px 0 16px; max-width: 420px; }
-.itstore-stock__notify-label { display: block; font-size: 13px; font-weight: 600; color: #475569; margin-bottom: 6px; }
+.itstore-stock__notify-label { display: block; font-size: 13px; font-weight: 600; color: #3c485f; margin-bottom: 6px; }
 .itstore-stock__notify-row { display: flex; gap: 8px; }
 .itstore-stock__notify-row input {
   flex: 1;
-  border: 1px solid #dbe3ee;
+  border: 1px solid #d7dce6;
   border-radius: 8px;
   padding: 10px 12px;
   font-size: 14px;

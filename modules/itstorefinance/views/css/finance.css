@@ -5,13 +5,13 @@
   gap: 10px;
   margin: 12px 0;
   padding: 10px 14px;
-  background: #f2f6fc;
-  border: 1px solid #e2e8f0;
+  background: #eaf1ff;
+  border: 1px solid #e3e7ef;
   border-radius: 10px;
   font-size: 14px;
   color: #334155;
 }
-.itstore-finance__icon { color: #1f6feb; display: inline-flex; }
+.itstore-finance__icon { color: #2f6fed; display: inline-flex; }
 .itstore-finance__icon svg { width: 20px; height: 20px; }
-.itstore-finance__amount { color: #0b1f33; font-weight: 800; }
-.itstore-finance__terms { color: #64748b; }
+.itstore-finance__amount { color: #0b1220; font-weight: 800; }
+.itstore-finance__terms { color: #5a6478; }

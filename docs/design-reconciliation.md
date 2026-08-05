@@ -9,6 +9,41 @@ file(s), and tick the box.
 > The current values below are what the theme ships today — they are the deltas
 > to verify, not confirmed matches.
 
+## Reconciled from the mockup (design tokens pass)
+
+The following were pulled from `IT Store Mockups.dc.html` / `ProductCard.dc.html`
+and applied theme-wide:
+
+- **Palette:** ink `#0b1220`, blue `#2f6fed` (hover `#1d4ed8`, light `#eaf1ff`),
+  slate `#3c485f`, muted `#5a6478`/`#8b94a8`, borders `#e3e7ef`/`#d7dce6`,
+  surfaces `#f6f7fb`/`#eef0f4`, success `#16a34a`, amber `#f59e0b`, danger
+  `#dc2626`. (The earlier navy/cyan/orange placeholders are gone.)
+- **Typography:** Inter (400–800) body, **JetBrains Mono** (prices, specs,
+  eyebrows), **Source Serif 4** available as `--it-serif`.
+- **Buttons:** primary = blue; product CTA = near-black `#0b1220` → blue on hover
+  (matches the card's "Add to Cart").
+- **Cards / badges:** 14px radius, `0 1px 2px` rest / `0 12px 28px` hover shadow,
+  mono prices, badge colours SALE `#fee2e2/#dc2626`, NEW `#ccfbf1/#0f766e`,
+  pack/B2B `#eaf1ff/#1d4ed8`.
+- **Section eyebrow** pattern (`.section-eyebrow`, uppercase mono) matching the
+  mockup's "EXPLORE THE RANGE / Shop by Category" headers.
+
+**Correction — `image-slot.js` / `support.js` are NOT storefront libraries.**
+`image-slot.js` is the Design-Composer `<image-slot>` image *placeholder* element
+("omelette starter scaffold, @ds-adherence-ignore"); `support.js` is the DC React
+runtime ("GENERATED from dc-runtime… do not edit"). They power the mockup preview
+tool, not the shop. The theme's `ImageSlot`/`SupportWidget` are the correct
+storefront implementations and must **not** copy these files. Checklist rows
+22–23 are therefore closed as "not applicable".
+
+### Still to do (net-new B2B sections in the mockup)
+
+These have no equivalent yet and each is a follow-up module/section: audience-
+tabbed **"Deal of the Month" hero** (For Business / For Gamers & Home),
+**Business Fleet Deals** bulk-pricing promo + **Request Quote**, **stats /
+counters** row, **"What Our Customers Say"** testimonials, **From the Blog**,
+product-page **Bulk/Business pricing**, **Auto-reorder**, and **Ask a Question**.
+
 ## How to use
 1. Open the mockup and the referenced files side by side.
 2. For each row, record the real design value, then edit the file(s).

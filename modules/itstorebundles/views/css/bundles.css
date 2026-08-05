@@ -1,6 +1,6 @@
 /** IT Store — bundle / frequently-bought-together styles. */
 .itstore-bundle { margin: 30px 0; }
-.itstore-bundle__title { font-size: 18px; font-weight: 800; color: #0b1f33; margin-bottom: 16px; }
+.itstore-bundle__title { font-size: 18px; font-weight: 800; color: #0b1220; margin-bottom: 16px; }
 .itstore-bundle__row { display: flex; flex-wrap: wrap; align-items: stretch; gap: 10px; }
 .itstore-bundle__product {
   flex: 0 0 180px;
@@ -11,14 +11,14 @@
   gap: 8px;
   padding: 14px;
   background: #fff;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e3e7ef;
   border-radius: 12px;
 }
 .itstore-bundle__product img { width: 110px; height: 110px; object-fit: contain; }
-.itstore-bundle__product--main { border-color: #1f6feb; box-shadow: 0 0 0 3px rgba(31,111,235,.12); }
-.itstore-bundle__name { font-size: 13px; font-weight: 600; color: #0f172a; }
-.itstore-bundle__price { font-weight: 800; color: #0b1f33; }
-.itstore-bundle__tag { font-size: 11px; text-transform: uppercase; letter-spacing: .5px; color: #1f6feb; font-weight: 700; }
+.itstore-bundle__product--main { border-color: #2f6fed; box-shadow: 0 0 0 3px rgba(31,111,235,.12); }
+.itstore-bundle__name { font-size: 13px; font-weight: 600; color: #0b1220; }
+.itstore-bundle__price { font-weight: 800; color: #0b1220; }
+.itstore-bundle__tag { font-size: 11px; text-transform: uppercase; letter-spacing: .5px; color: #2f6fed; font-weight: 700; }
 .itstore-bundle__add { margin-top: auto; }
-.itstore-bundle__plus { display: flex; align-items: center; font-size: 24px; font-weight: 700; color: #94a3b8; }
+.itstore-bundle__plus { display: flex; align-items: center; font-size: 24px; font-weight: 700; color: #8b94a8; }
 @media (max-width: 600px) { .itstore-bundle__plus { display: none; } .itstore-bundle__product { flex: 1 1 140px; } }

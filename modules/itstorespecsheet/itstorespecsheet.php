@@ -77,7 +77,15 @@ class Itstorespecsheet extends Module
             $rows[] = ['name' => $f['name'], 'value' => isset($f['value']) ? $f['value'] : ''];
         }
 
-        $this->smarty->assign('itstore_specs', $rows);
+        $this->smarty->assign([
+            'itstore_specs' => $rows,
+            'itstore_specs_sheet_url' => $this->context->link->getModuleLink(
+                $this->name,
+                'sheet',
+                ['id_product' => $idProduct],
+                true
+            ),
+        ]);
         $html = $this->fetch('module:' . $this->name . '/views/templates/hook/specsheet.tpl');
 
         $extra = new ProductExtraContent();

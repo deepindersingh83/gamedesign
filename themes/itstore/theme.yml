@@ -71,14 +71,20 @@ global_settings:
       - itstorebulkpricing
       - itstoreautoreorder
       - itstoreaskquestion
+      - itstoreseo
+      - itstoretopbar
+      - itstoreordertrack
+      - itstorerecent
 
   hooks:
     modules_to_hook:
       displayHeader:
+        - itstoreseo
         - ps_searchbar
         - ps_shoppingcart
         - ps_customeraccountlinks
       displayNav1:
+        - itstoretopbar
         - ps_contactinfo
       displayNav2:
         - ps_customeraccountlinks
@@ -98,6 +104,7 @@ global_settings:
         - itstoretestimonials
         - itstorebrands
         - itstoreblog
+        - itstorerecent
         - itstorepcbuilder
         - ps_banner
         - ps_customtext
@@ -113,6 +120,7 @@ global_settings:
         - itstoreaskquestion
       displayFooterProduct:
         - itstorebundles
+        - itstorerecent
       displayProductListReviews:
         - itstorequickview
         - itstorecompare

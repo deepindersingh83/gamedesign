@@ -1,0 +1,24 @@
+/** IT Store — Recommended & Recently Viewed. */
+.itstore-rec__title { font-size: 18px; font-weight: 800; color: #0b1220; margin: 30px 0 16px; }
+.itstore-rec__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+.itstore-rec__card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px;
+  background: #fff;
+  border: 1px solid #e3e7ef;
+  border-radius: 14px;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, .04);
+  color: #0b1220;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.itstore-rec__card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(16, 24, 40, .12); color: #0b1220; }
+.itstore-rec__media { display: block; height: 140px; background: #f8f9fc; border-radius: 8px; overflow: hidden; }
+.itstore-rec__media img { width: 100%; height: 100%; object-fit: contain; padding: 8px; }
+.itstore-rec__name { font-size: 13px; font-weight: 600; line-height: 1.35; }
+.itstore-rec__price { font-family: "JetBrains Mono", ui-monospace, monospace; font-weight: 800; color: #0b1220; }

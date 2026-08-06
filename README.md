@@ -185,6 +185,12 @@ Notes:
 
 ## Development & verification
 
+> **Verified on PrestaShop 9.1.** The integration workflow booted a live
+> PrestaShop 9.1 + MySQL, installed **all 24 `itstore*` modules** via
+> `bin/console prestashop:module install` (step green), and passed the
+> front-office smoke tests (home, product, category, PC-builder & compare
+> controllers — no HTTP 5xx, no PHP errors). Run `31065110761`.
+
 * No build step is required — the theme relies on the parent `classic` assets
   plus `custom.css`/`custom.js`, which PrestaShop's `FrontController` loads.
 * Module PHP targets PrestaShop 1.7.6 – 9.1.x (`HelperForm`, hook registration,

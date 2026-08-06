@@ -59,13 +59,15 @@ jobs:
 
       - name: Start PrestaShop (auto-install)
         run: |
+          # NB: no PS_ERASE_DB — the MySQL service already created an empty
+          # `prestashop` DB; erasing would drop it and the installer then fails
+          # with "Unknown database 'prestashop'".
           docker run -d --name psweb --network psnet -p 8080:80 \
             -e DB_SERVER=psdb \
             -e DB_NAME=prestashop \
             -e DB_USER=root \
             -e DB_PASSWD="$DB_PASSWD" \
             -e PS_INSTALL_AUTO=1 \
-            -e PS_ERASE_DB=1 \
             -e PS_DEV_MODE=1 \
             -e PS_DEMO_MODE=0 \
             -e PS_DOMAIN=localhost:8080 \

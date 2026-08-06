@@ -47,6 +47,8 @@ global_settings:
       - ps_emailsubscription
       - ps_facetedsearch
       - ps_sharebuttons
+      - blockwishlist
+      - psgdpr
       - itstoreimageslot
       - itstoresupport
       - itstoretrustbar
@@ -75,6 +77,7 @@ global_settings:
       - itstoretopbar
       - itstoreordertrack
       - itstorerecent
+      - itstoresavedcart
 
   hooks:
     modules_to_hook:

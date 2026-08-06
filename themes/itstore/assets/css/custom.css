@@ -266,3 +266,28 @@ img { max-width: 100%; height: auto; }
 @media print {
   #header, #footer, .itstore-trustbar, .support-widget, .itstore-cmp-tray { display: none !important; }
 }
+
+/* ---------- Category page (design banner + about) ---------- */
+.itstore-cathero {
+  background:
+    linear-gradient(90deg, rgba(11, 18, 32, .82), rgba(11, 18, 32, .1)),
+    linear-gradient(120deg, #0b1220, #1a2a4a);
+  color: #fff;
+  padding: 34px 0;
+  margin-bottom: 20px;
+  border-radius: 0 0 14px 14px;
+}
+.itstore-cathero__eyebrow {
+  display: block;
+  font-family: var(--it-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #7fa3f5;
+  margin-bottom: 6px;
+}
+.itstore-cathero__title { font-size: 26px; font-weight: 800; margin: 0; color: #fff; }
+.itstore-catabout { margin: 8px 0 24px; }
+.itstore-catabout summary { cursor: pointer; font-weight: 700; color: var(--it-ink); font-size: 15px; }
+.itstore-catabout__body { color: var(--it-muted); font-size: 14px; line-height: 1.7; margin-top: 10px; }

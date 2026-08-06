@@ -28,8 +28,8 @@ class Itstorecategoriesblock extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('IT Store Category Tiles');
-        $this->description = $this->l('“Shop by category” tiles on the home page, built from your category tree.');
+        $this->displayName = $this->trans('IT Store Category Tiles', [], 'Modules.Itstorecategoriesblock.Admin');
+        $this->description = $this->trans('“Shop by category” tiles on the home page, built from your category tree.', [], 'Modules.Itstorecategoriesblock.Admin');
     }
 
     public function install()
@@ -41,7 +41,7 @@ class Itstorecategoriesblock extends Module
         }
         Configuration::updateValue('ITSTORE_CB_PARENT', (int) Configuration::get('PS_HOME_CATEGORY'));
         Configuration::updateValue('ITSTORE_CB_NB', 6);
-        Configuration::updateValue('ITSTORE_CB_TITLE', $this->l('Shop by category'));
+        Configuration::updateValue('ITSTORE_CB_TITLE', $this->trans('Shop by category', [], 'Modules.Itstorecategoriesblock.Admin'));
 
         return true;
     }
@@ -117,7 +117,7 @@ class Itstorecategoriesblock extends Module
             Configuration::updateValue('ITSTORE_CB_PARENT', (int) Tools::getValue('ITSTORE_CB_PARENT'));
             Configuration::updateValue('ITSTORE_CB_NB', (int) Tools::getValue('ITSTORE_CB_NB'));
             Configuration::updateValue('ITSTORE_CB_TITLE', Tools::getValue('ITSTORE_CB_TITLE'));
-            $output .= $this->displayConfirmation($this->l('Settings saved.'));
+            $output .= $this->displayConfirmation($this->trans('Settings saved.', [], 'Modules.Itstorecategoriesblock.Admin'));
         }
 
         return $output . $this->renderForm();
@@ -126,13 +126,13 @@ class Itstorecategoriesblock extends Module
     protected function renderForm()
     {
         $form = ['form' => [
-            'legend' => ['title' => $this->l('Category tiles'), 'icon' => 'icon-th-large'],
+            'legend' => ['title' => $this->trans('Category tiles', [], 'Modules.Itstorecategoriesblock.Admin'), 'icon' => 'icon-th-large'],
             'input' => [
-                ['type' => 'text', 'label' => $this->l('Block title'), 'name' => 'ITSTORE_CB_TITLE'],
-                ['type' => 'text', 'label' => $this->l('Parent category ID'), 'name' => 'ITSTORE_CB_PARENT', 'class' => 'fixed-width-sm', 'desc' => $this->l('Children of this category are shown. Defaults to the Home category.')],
-                ['type' => 'text', 'label' => $this->l('Number of tiles'), 'name' => 'ITSTORE_CB_NB', 'class' => 'fixed-width-sm'],
+                ['type' => 'text', 'label' => $this->trans('Block title', [], 'Modules.Itstorecategoriesblock.Admin'), 'name' => 'ITSTORE_CB_TITLE'],
+                ['type' => 'text', 'label' => $this->trans('Parent category ID', [], 'Modules.Itstorecategoriesblock.Admin'), 'name' => 'ITSTORE_CB_PARENT', 'class' => 'fixed-width-sm', 'desc' => $this->trans('Children of this category are shown. Defaults to the Home category.', [], 'Modules.Itstorecategoriesblock.Admin')],
+                ['type' => 'text', 'label' => $this->trans('Number of tiles', [], 'Modules.Itstorecategoriesblock.Admin'), 'name' => 'ITSTORE_CB_NB', 'class' => 'fixed-width-sm'],
             ],
-            'submit' => ['title' => $this->l('Save'), 'name' => 'submitItstoreCb'],
+            'submit' => ['title' => $this->trans('Save', [], 'Modules.Itstorecategoriesblock.Admin'), 'name' => 'submitItstoreCb'],
         ]];
 
         $helper = new HelperForm();

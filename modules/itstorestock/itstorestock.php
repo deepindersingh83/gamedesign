@@ -29,8 +29,8 @@ class Itstorestock extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('IT Store Stock & Alerts');
-        $this->description = $this->l('Stock indicator plus back-in-stock email alerts on the product page.');
+        $this->displayName = $this->trans('IT Store Stock & Alerts', [], 'Modules.Itstorestock.Admin');
+        $this->description = $this->trans('Stock indicator plus back-in-stock email alerts on the product page.', [], 'Modules.Itstorestock.Admin');
     }
 
     public function install()
@@ -125,7 +125,7 @@ class Itstorestock extends Module
         $output = '';
         if (Tools::isSubmit('submitItstoreStock')) {
             Configuration::updateValue('ITSTORE_STK_LOW', (int) Tools::getValue('ITSTORE_STK_LOW'));
-            $output .= $this->displayConfirmation($this->l('Settings saved.'));
+            $output .= $this->displayConfirmation($this->trans('Settings saved.', [], 'Modules.Itstorestock.Admin'));
         }
 
         return $output . $this->renderCronInfo() . $this->renderAlerts() . $this->renderForm();
@@ -141,8 +141,8 @@ class Itstorestock extends Module
         );
 
         return '<div class="panel"><div class="panel-heading"><i class="icon-time"></i> '
-            . $this->l('Back-in-stock cron') . '</div>'
-            . '<p>' . $this->l('Call this URL from your server cron (e.g. hourly) to email waiting customers when their product is back in stock:') . '</p>'
+            . $this->trans('Back-in-stock cron', [], 'Modules.Itstorestock.Admin') . '</div>'
+            . '<p>' . $this->trans('Call this URL from your server cron (e.g. hourly) to email waiting customers when their product is back in stock:', [], 'Modules.Itstorestock.Admin') . '</p>'
             . '<pre style="white-space:normal;word-break:break-all">' . htmlspecialchars($url) . '</pre></div>';
     }
 
@@ -174,7 +174,7 @@ class Itstorestock extends Module
             Mail::Send(
                 $idLang,
                 'backinstock',
-                $this->l('Back in stock'),
+                $this->trans('Back in stock', [], 'Modules.Itstorestock.Admin'),
                 [
                     '{product}' => is_array($product->name) ? reset($product->name) : $product->name,
                     '{url}' => $this->context->link->getProductLink($idProduct),
@@ -211,27 +211,27 @@ class Itstorestock extends Module
             $body .= '<tr><td>' . htmlspecialchars($r['email']) . '</td>'
                 . '<td>' . htmlspecialchars((string) $r['name']) . '</td>'
                 . '<td>' . htmlspecialchars($r['date_add']) . '</td>'
-                . '<td>' . ((int) $r['notified'] ? $this->l('Notified') : $this->l('Waiting')) . '</td></tr>';
+                . '<td>' . ((int) $r['notified'] ? $this->trans('Notified', [], 'Modules.Itstorestock.Admin') : $this->trans('Waiting', [], 'Modules.Itstorestock.Admin')) . '</td></tr>';
         }
         if ($body === '') {
-            $body = '<tr><td colspan="4">' . $this->l('No alerts yet.') . '</td></tr>';
+            $body = '<tr><td colspan="4">' . $this->trans('No alerts yet.', [], 'Modules.Itstorestock.Admin') . '</td></tr>';
         }
 
         return '<div class="panel"><div class="panel-heading"><i class="icon-bell"></i> '
-            . $this->l('Back-in-stock alerts') . '</div>'
-            . '<table class="table"><thead><tr><th>' . $this->l('Email') . '</th><th>' . $this->l('Product')
-            . '</th><th>' . $this->l('Requested') . '</th><th>' . $this->l('Status') . '</th></tr></thead><tbody>'
+            . $this->trans('Back-in-stock alerts', [], 'Modules.Itstorestock.Admin') . '</div>'
+            . '<table class="table"><thead><tr><th>' . $this->trans('Email', [], 'Modules.Itstorestock.Admin') . '</th><th>' . $this->trans('Product', [], 'Modules.Itstorestock.Admin')
+            . '</th><th>' . $this->trans('Requested', [], 'Modules.Itstorestock.Admin') . '</th><th>' . $this->trans('Status', [], 'Modules.Itstorestock.Admin') . '</th></tr></thead><tbody>'
             . $body . '</tbody></table></div>';
     }
 
     protected function renderForm()
     {
         $form = ['form' => [
-            'legend' => ['title' => $this->l('Stock settings'), 'icon' => 'icon-cubes'],
+            'legend' => ['title' => $this->trans('Stock settings', [], 'Modules.Itstorestock.Admin'), 'icon' => 'icon-cubes'],
             'input' => [
-                ['type' => 'text', 'label' => $this->l('Low-stock threshold'), 'name' => 'ITSTORE_STK_LOW', 'class' => 'fixed-width-sm', 'desc' => $this->l('Show “Only N left” at or below this quantity.')],
+                ['type' => 'text', 'label' => $this->trans('Low-stock threshold', [], 'Modules.Itstorestock.Admin'), 'name' => 'ITSTORE_STK_LOW', 'class' => 'fixed-width-sm', 'desc' => $this->trans('Show “Only N left” at or below this quantity.', [], 'Modules.Itstorestock.Admin')],
             ],
-            'submit' => ['title' => $this->l('Save'), 'name' => 'submitItstoreStock'],
+            'submit' => ['title' => $this->trans('Save', [], 'Modules.Itstorestock.Admin'), 'name' => 'submitItstoreStock'],
         ]];
 
         $helper = new HelperForm();

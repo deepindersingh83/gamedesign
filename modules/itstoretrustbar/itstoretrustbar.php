@@ -31,18 +31,18 @@ class Itstoretrustbar extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('IT Store Trust Bar');
-        $this->description = $this->l('Site-wide bar of trust / USP points (shipping, warranty, payment, support).');
+        $this->displayName = $this->trans('IT Store Trust Bar', [], 'Modules.Itstoretrustbar.Admin');
+        $this->description = $this->trans('Site-wide bar of trust / USP points (shipping, warranty, payment, support).', [], 'Modules.Itstoretrustbar.Admin');
     }
 
     protected function defaults()
     {
         return [
             'ITSTORE_TB_ENABLED' => 1,
-            'ITSTORE_TB_1_ICON' => 'local_shipping', 'ITSTORE_TB_1_TITLE' => $this->l('Free & fast delivery'), 'ITSTORE_TB_1_TEXT' => $this->l('On orders over $99'),
-            'ITSTORE_TB_2_ICON' => 'verified_user', 'ITSTORE_TB_2_TITLE' => $this->l('Genuine warranty'), 'ITSTORE_TB_2_TEXT' => $this->l('Full manufacturer cover'),
-            'ITSTORE_TB_3_ICON' => 'lock', 'ITSTORE_TB_3_TITLE' => $this->l('Secure payment'), 'ITSTORE_TB_3_TEXT' => $this->l('Encrypted checkout'),
-            'ITSTORE_TB_4_ICON' => 'support_agent', 'ITSTORE_TB_4_TITLE' => $this->l('Expert support'), 'ITSTORE_TB_4_TEXT' => $this->l('Real techs, local team'),
+            'ITSTORE_TB_1_ICON' => 'local_shipping', 'ITSTORE_TB_1_TITLE' => $this->trans('Free & fast delivery', [], 'Modules.Itstoretrustbar.Admin'), 'ITSTORE_TB_1_TEXT' => $this->trans('On orders over $99', [], 'Modules.Itstoretrustbar.Admin'),
+            'ITSTORE_TB_2_ICON' => 'verified_user', 'ITSTORE_TB_2_TITLE' => $this->trans('Genuine warranty', [], 'Modules.Itstoretrustbar.Admin'), 'ITSTORE_TB_2_TEXT' => $this->trans('Full manufacturer cover', [], 'Modules.Itstoretrustbar.Admin'),
+            'ITSTORE_TB_3_ICON' => 'lock', 'ITSTORE_TB_3_TITLE' => $this->trans('Secure payment', [], 'Modules.Itstoretrustbar.Admin'), 'ITSTORE_TB_3_TEXT' => $this->trans('Encrypted checkout', [], 'Modules.Itstoretrustbar.Admin'),
+            'ITSTORE_TB_4_ICON' => 'support_agent', 'ITSTORE_TB_4_TITLE' => $this->trans('Expert support', [], 'Modules.Itstoretrustbar.Admin'), 'ITSTORE_TB_4_TEXT' => $this->trans('Real techs, local team', [], 'Modules.Itstoretrustbar.Admin'),
         ];
     }
 
@@ -116,7 +116,7 @@ class Itstoretrustbar extends Module
                 Configuration::updateValue('ITSTORE_TB_' . $i . '_TITLE', Tools::getValue('ITSTORE_TB_' . $i . '_TITLE'));
                 Configuration::updateValue('ITSTORE_TB_' . $i . '_TEXT', Tools::getValue('ITSTORE_TB_' . $i . '_TEXT'));
             }
-            $output .= $this->displayConfirmation($this->l('Settings saved.'));
+            $output .= $this->displayConfirmation($this->trans('Settings saved.', [], 'Modules.Itstoretrustbar.Admin'));
         }
 
         return $output . $this->renderForm();
@@ -125,22 +125,22 @@ class Itstoretrustbar extends Module
     protected function renderForm()
     {
         $inputs = [[
-            'type' => 'switch', 'label' => $this->l('Enable trust bar'), 'name' => 'ITSTORE_TB_ENABLED', 'is_bool' => true,
+            'type' => 'switch', 'label' => $this->trans('Enable trust bar', [], 'Modules.Itstoretrustbar.Admin'), 'name' => 'ITSTORE_TB_ENABLED', 'is_bool' => true,
             'values' => [
-                ['id' => 'tb_on', 'value' => 1, 'label' => $this->l('Yes')],
-                ['id' => 'tb_off', 'value' => 0, 'label' => $this->l('No')],
+                ['id' => 'tb_on', 'value' => 1, 'label' => $this->trans('Yes', [], 'Modules.Itstoretrustbar.Admin')],
+                ['id' => 'tb_off', 'value' => 0, 'label' => $this->trans('No', [], 'Modules.Itstoretrustbar.Admin')],
             ],
         ]];
         for ($i = 1; $i <= self::ITEMS; $i++) {
-            $inputs[] = ['type' => 'text', 'label' => sprintf($this->l('Item %d — icon'), $i), 'name' => 'ITSTORE_TB_' . $i . '_ICON', 'desc' => $this->l('Material Symbols name, e.g. local_shipping, lock, support_agent.'), 'class' => 'fixed-width-lg'];
-            $inputs[] = ['type' => 'text', 'label' => sprintf($this->l('Item %d — title'), $i), 'name' => 'ITSTORE_TB_' . $i . '_TITLE'];
-            $inputs[] = ['type' => 'text', 'label' => sprintf($this->l('Item %d — text'), $i), 'name' => 'ITSTORE_TB_' . $i . '_TEXT'];
+            $inputs[] = ['type' => 'text', 'label' => sprintf($this->trans('Item %d — icon', [], 'Modules.Itstoretrustbar.Admin'), $i), 'name' => 'ITSTORE_TB_' . $i . '_ICON', 'desc' => $this->trans('Material Symbols name, e.g. local_shipping, lock, support_agent.', [], 'Modules.Itstoretrustbar.Admin'), 'class' => 'fixed-width-lg'];
+            $inputs[] = ['type' => 'text', 'label' => sprintf($this->trans('Item %d — title', [], 'Modules.Itstoretrustbar.Admin'), $i), 'name' => 'ITSTORE_TB_' . $i . '_TITLE'];
+            $inputs[] = ['type' => 'text', 'label' => sprintf($this->trans('Item %d — text', [], 'Modules.Itstoretrustbar.Admin'), $i), 'name' => 'ITSTORE_TB_' . $i . '_TEXT'];
         }
 
         $form = ['form' => [
-            'legend' => ['title' => $this->l('Trust bar items'), 'icon' => 'icon-shield'],
+            'legend' => ['title' => $this->trans('Trust bar items', [], 'Modules.Itstoretrustbar.Admin'), 'icon' => 'icon-shield'],
             'input' => $inputs,
-            'submit' => ['title' => $this->l('Save'), 'name' => 'submitItstoreTrustbar'],
+            'submit' => ['title' => $this->trans('Save', [], 'Modules.Itstoretrustbar.Admin'), 'name' => 'submitItstoreTrustbar'],
         ]];
 
         $helper = new HelperForm();

@@ -30,17 +30,17 @@ class Itstorewarranty extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('IT Store Warranty');
-        $this->description = $this->l('Extended-warranty upsell tiers on the product page.');
+        $this->displayName = $this->trans('IT Store Warranty', [], 'Modules.Itstorewarranty.Admin');
+        $this->description = $this->trans('Extended-warranty upsell tiers on the product page.', [], 'Modules.Itstorewarranty.Admin');
     }
 
     protected function defaults()
     {
         return [
             'ITSTORE_WR_ENABLED' => 1,
-            'ITSTORE_WR_1_LABEL' => $this->l('+1 year cover'), 'ITSTORE_WR_1_PRICE' => '29', 'ITSTORE_WR_1_PID' => 0,
-            'ITSTORE_WR_2_LABEL' => $this->l('+2 years cover'), 'ITSTORE_WR_2_PRICE' => '49', 'ITSTORE_WR_2_PID' => 0,
-            'ITSTORE_WR_3_LABEL' => $this->l('+3 years cover'), 'ITSTORE_WR_3_PRICE' => '69', 'ITSTORE_WR_3_PID' => 0,
+            'ITSTORE_WR_1_LABEL' => $this->trans('+1 year cover', [], 'Modules.Itstorewarranty.Admin'), 'ITSTORE_WR_1_PRICE' => '29', 'ITSTORE_WR_1_PID' => 0,
+            'ITSTORE_WR_2_LABEL' => $this->trans('+2 years cover', [], 'Modules.Itstorewarranty.Admin'), 'ITSTORE_WR_2_PRICE' => '49', 'ITSTORE_WR_2_PID' => 0,
+            'ITSTORE_WR_3_LABEL' => $this->trans('+3 years cover', [], 'Modules.Itstorewarranty.Admin'), 'ITSTORE_WR_3_PRICE' => '69', 'ITSTORE_WR_3_PID' => 0,
         ];
     }
 
@@ -126,7 +126,7 @@ class Itstorewarranty extends Module
                 Configuration::updateValue('ITSTORE_WR_' . $i . '_PRICE', Tools::getValue('ITSTORE_WR_' . $i . '_PRICE'));
                 Configuration::updateValue('ITSTORE_WR_' . $i . '_PID', (int) Tools::getValue('ITSTORE_WR_' . $i . '_PID'));
             }
-            $output .= $this->displayConfirmation($this->l('Settings saved.'));
+            $output .= $this->displayConfirmation($this->trans('Settings saved.', [], 'Modules.Itstorewarranty.Admin'));
         }
 
         return $output . $this->renderForm();
@@ -135,22 +135,22 @@ class Itstorewarranty extends Module
     protected function renderForm()
     {
         $inputs = [[
-            'type' => 'switch', 'label' => $this->l('Enabled'), 'name' => 'ITSTORE_WR_ENABLED', 'is_bool' => true,
+            'type' => 'switch', 'label' => $this->trans('Enabled', [], 'Modules.Itstorewarranty.Admin'), 'name' => 'ITSTORE_WR_ENABLED', 'is_bool' => true,
             'values' => [
-                ['id' => 'wr_on', 'value' => 1, 'label' => $this->l('Yes')],
-                ['id' => 'wr_off', 'value' => 0, 'label' => $this->l('No')],
+                ['id' => 'wr_on', 'value' => 1, 'label' => $this->trans('Yes', [], 'Modules.Itstorewarranty.Admin')],
+                ['id' => 'wr_off', 'value' => 0, 'label' => $this->trans('No', [], 'Modules.Itstorewarranty.Admin')],
             ],
         ]];
         for ($i = 1; $i <= self::TIERS; $i++) {
-            $inputs[] = ['type' => 'text', 'label' => sprintf($this->l('Tier %d — label'), $i), 'name' => 'ITSTORE_WR_' . $i . '_LABEL'];
-            $inputs[] = ['type' => 'text', 'label' => sprintf($this->l('Tier %d — price'), $i), 'name' => 'ITSTORE_WR_' . $i . '_PRICE', 'class' => 'fixed-width-sm'];
-            $inputs[] = ['type' => 'text', 'label' => sprintf($this->l('Tier %d — product ID'), $i), 'name' => 'ITSTORE_WR_' . $i . '_PID', 'class' => 'fixed-width-sm', 'desc' => $this->l('Optional: a warranty product added to cart when chosen.')];
+            $inputs[] = ['type' => 'text', 'label' => sprintf($this->trans('Tier %d — label', [], 'Modules.Itstorewarranty.Admin'), $i), 'name' => 'ITSTORE_WR_' . $i . '_LABEL'];
+            $inputs[] = ['type' => 'text', 'label' => sprintf($this->trans('Tier %d — price', [], 'Modules.Itstorewarranty.Admin'), $i), 'name' => 'ITSTORE_WR_' . $i . '_PRICE', 'class' => 'fixed-width-sm'];
+            $inputs[] = ['type' => 'text', 'label' => sprintf($this->trans('Tier %d — product ID', [], 'Modules.Itstorewarranty.Admin'), $i), 'name' => 'ITSTORE_WR_' . $i . '_PID', 'class' => 'fixed-width-sm', 'desc' => $this->trans('Optional: a warranty product added to cart when chosen.', [], 'Modules.Itstorewarranty.Admin')];
         }
 
         $form = ['form' => [
-            'legend' => ['title' => $this->l('Warranty tiers'), 'icon' => 'icon-shield'],
+            'legend' => ['title' => $this->trans('Warranty tiers', [], 'Modules.Itstorewarranty.Admin'), 'icon' => 'icon-shield'],
             'input' => $inputs,
-            'submit' => ['title' => $this->l('Save'), 'name' => 'submitItstoreWr'],
+            'submit' => ['title' => $this->trans('Save', [], 'Modules.Itstorewarranty.Admin'), 'name' => 'submitItstoreWr'],
         ]];
 
         $helper = new HelperForm();

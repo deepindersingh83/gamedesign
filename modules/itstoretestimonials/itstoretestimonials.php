@@ -29,20 +29,20 @@ class Itstoretestimonials extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('IT Store Testimonials');
-        $this->description = $this->l('“What Our Customers Say” testimonials grid.');
+        $this->displayName = $this->trans('IT Store Testimonials', [], 'Modules.Itstoretestimonials.Admin');
+        $this->description = $this->trans('“What Our Customers Say” testimonials grid.', [], 'Modules.Itstoretestimonials.Admin');
     }
 
     protected function defaults()
     {
         return [
-            'ITSTORE_TS_TITLE' => $this->l('What Our Customers Say'),
-            'ITSTORE_TS_1_TEXT' => $this->l('Kitted out our whole new office — 40 desktops delivered and set up in two days. Faultless.'),
-            'ITSTORE_TS_1_NAME' => 'Priya N.', 'ITSTORE_TS_1_ROLE' => $this->l('IT Manager, Meridian Group'), 'ITSTORE_TS_1_IMG' => '',
-            'ITSTORE_TS_2_TEXT' => $this->l('My gaming build arrived cable-managed and stress-tested. Runs cool and quiet under load.'),
-            'ITSTORE_TS_2_NAME' => 'Jordan R.', 'ITSTORE_TS_2_ROLE' => $this->l('Verified buyer'), 'ITSTORE_TS_2_IMG' => '',
-            'ITSTORE_TS_3_TEXT' => $this->l('The bulk pricing and same-day dispatch make these the only supplier we use now.'),
-            'ITSTORE_TS_3_NAME' => 'Sam K.', 'ITSTORE_TS_3_ROLE' => $this->l('Operations, Northwind IT'), 'ITSTORE_TS_3_IMG' => '',
+            'ITSTORE_TS_TITLE' => $this->trans('What Our Customers Say', [], 'Modules.Itstoretestimonials.Admin'),
+            'ITSTORE_TS_1_TEXT' => $this->trans('Kitted out our whole new office — 40 desktops delivered and set up in two days. Faultless.', [], 'Modules.Itstoretestimonials.Admin'),
+            'ITSTORE_TS_1_NAME' => 'Priya N.', 'ITSTORE_TS_1_ROLE' => $this->trans('IT Manager, Meridian Group', [], 'Modules.Itstoretestimonials.Admin'), 'ITSTORE_TS_1_IMG' => '',
+            'ITSTORE_TS_2_TEXT' => $this->trans('My gaming build arrived cable-managed and stress-tested. Runs cool and quiet under load.', [], 'Modules.Itstoretestimonials.Admin'),
+            'ITSTORE_TS_2_NAME' => 'Jordan R.', 'ITSTORE_TS_2_ROLE' => $this->trans('Verified buyer', [], 'Modules.Itstoretestimonials.Admin'), 'ITSTORE_TS_2_IMG' => '',
+            'ITSTORE_TS_3_TEXT' => $this->trans('The bulk pricing and same-day dispatch make these the only supplier we use now.', [], 'Modules.Itstoretestimonials.Admin'),
+            'ITSTORE_TS_3_NAME' => 'Sam K.', 'ITSTORE_TS_3_ROLE' => $this->trans('Operations, Northwind IT', [], 'Modules.Itstoretestimonials.Admin'), 'ITSTORE_TS_3_IMG' => '',
             'ITSTORE_TS_4_TEXT' => '', 'ITSTORE_TS_4_NAME' => '', 'ITSTORE_TS_4_ROLE' => '', 'ITSTORE_TS_4_IMG' => '',
             'ITSTORE_TS_5_TEXT' => '', 'ITSTORE_TS_5_NAME' => '', 'ITSTORE_TS_5_ROLE' => '', 'ITSTORE_TS_5_IMG' => '',
             'ITSTORE_TS_6_TEXT' => '', 'ITSTORE_TS_6_NAME' => '', 'ITSTORE_TS_6_ROLE' => '', 'ITSTORE_TS_6_IMG' => '',
@@ -116,7 +116,7 @@ class Itstoretestimonials extends Module
             foreach (array_keys($this->defaults()) as $k) {
                 Configuration::updateValue($k, Tools::getValue($k));
             }
-            $output .= $this->displayConfirmation($this->l('Settings saved.'));
+            $output .= $this->displayConfirmation($this->trans('Settings saved.', [], 'Modules.Itstoretestimonials.Admin'));
         }
 
         return $output . $this->renderForm();
@@ -124,18 +124,18 @@ class Itstoretestimonials extends Module
 
     protected function renderForm()
     {
-        $fields = [['type' => 'text', 'label' => $this->l('Block title'), 'name' => 'ITSTORE_TS_TITLE']];
+        $fields = [['type' => 'text', 'label' => $this->trans('Block title', [], 'Modules.Itstoretestimonials.Admin'), 'name' => 'ITSTORE_TS_TITLE']];
         for ($i = 1; $i <= self::N; $i++) {
-            $fields[] = ['type' => 'textarea', 'label' => sprintf($this->l('Testimonial %d — quote'), $i), 'name' => 'ITSTORE_TS_' . $i . '_TEXT'];
-            $fields[] = ['type' => 'text', 'label' => sprintf($this->l('Testimonial %d — name'), $i), 'name' => 'ITSTORE_TS_' . $i . '_NAME'];
-            $fields[] = ['type' => 'text', 'label' => sprintf($this->l('Testimonial %d — role'), $i), 'name' => 'ITSTORE_TS_' . $i . '_ROLE'];
-            $fields[] = ['type' => 'text', 'label' => sprintf($this->l('Testimonial %d — avatar URL'), $i), 'name' => 'ITSTORE_TS_' . $i . '_IMG'];
+            $fields[] = ['type' => 'textarea', 'label' => sprintf($this->trans('Testimonial %d — quote', [], 'Modules.Itstoretestimonials.Admin'), $i), 'name' => 'ITSTORE_TS_' . $i . '_TEXT'];
+            $fields[] = ['type' => 'text', 'label' => sprintf($this->trans('Testimonial %d — name', [], 'Modules.Itstoretestimonials.Admin'), $i), 'name' => 'ITSTORE_TS_' . $i . '_NAME'];
+            $fields[] = ['type' => 'text', 'label' => sprintf($this->trans('Testimonial %d — role', [], 'Modules.Itstoretestimonials.Admin'), $i), 'name' => 'ITSTORE_TS_' . $i . '_ROLE'];
+            $fields[] = ['type' => 'text', 'label' => sprintf($this->trans('Testimonial %d — avatar URL', [], 'Modules.Itstoretestimonials.Admin'), $i), 'name' => 'ITSTORE_TS_' . $i . '_IMG'];
         }
 
         $form = ['form' => [
-            'legend' => ['title' => $this->l('Testimonials'), 'icon' => 'icon-quote-left'],
+            'legend' => ['title' => $this->trans('Testimonials', [], 'Modules.Itstoretestimonials.Admin'), 'icon' => 'icon-quote-left'],
             'input' => $fields,
-            'submit' => ['title' => $this->l('Save'), 'name' => 'submitItstoreTs'],
+            'submit' => ['title' => $this->trans('Save', [], 'Modules.Itstoretestimonials.Admin'), 'name' => 'submitItstoreTs'],
         ]];
 
         $helper = new HelperForm();

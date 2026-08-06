@@ -29,8 +29,8 @@ class Itstorerecent extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('IT Store Recommended & Recently Viewed');
-        $this->description = $this->l('“Recommended For You” best-sellers block and a “Recently Viewed” strip.');
+        $this->displayName = $this->trans('IT Store Recommended & Recently Viewed', [], 'Modules.Itstorerecent.Admin');
+        $this->description = $this->trans('“Recommended For You” best-sellers block and a “Recently Viewed” strip.', [], 'Modules.Itstorerecent.Admin');
     }
 
     public function install()

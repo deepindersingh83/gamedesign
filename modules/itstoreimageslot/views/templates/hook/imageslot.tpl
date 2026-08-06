@@ -29,10 +29,10 @@
       </div>
 
       {if count($itstore_slides) > 1}
-        <button class="image-slot__nav image-slot__nav--prev" type="button" aria-label="{l s='Previous slide' mod='itstoreimageslot'}">
+        <button class="image-slot__nav image-slot__nav--prev" type="button" aria-label="{l s='Previous slide' d='Modules.Itstoreimageslot.Shop'}">
           <span aria-hidden="true">&#8249;</span>
         </button>
-        <button class="image-slot__nav image-slot__nav--next" type="button" aria-label="{l s='Next slide' mod='itstoreimageslot'}">
+        <button class="image-slot__nav image-slot__nav--next" type="button" aria-label="{l s='Next slide' d='Modules.Itstoreimageslot.Shop'}">
           <span aria-hidden="true">&#8250;</span>
         </button>
         <div class="image-slot__dots" role="tablist"></div>

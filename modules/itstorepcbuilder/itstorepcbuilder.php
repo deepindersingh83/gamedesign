@@ -28,21 +28,21 @@ class Itstorepcbuilder extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('IT Store PC Builder');
-        $this->description = $this->l('Guided custom-PC builder mapping component slots to categories.');
+        $this->displayName = $this->trans('IT Store PC Builder', [], 'Modules.Itstorepcbuilder.Admin');
+        $this->description = $this->trans('Guided custom-PC builder mapping component slots to categories.', [], 'Modules.Itstorepcbuilder.Admin');
     }
 
     /** Component slots: key => label. */
     public function slots()
     {
         return [
-            'CPU' => $this->l('Processor (CPU)'),
-            'MB' => $this->l('Motherboard'),
-            'RAM' => $this->l('Memory (RAM)'),
-            'GPU' => $this->l('Graphics card'),
-            'STO' => $this->l('Storage'),
-            'PSU' => $this->l('Power supply'),
-            'CASE' => $this->l('Case'),
+            'CPU' => $this->trans('Processor (CPU)', [], 'Modules.Itstorepcbuilder.Admin'),
+            'MB' => $this->trans('Motherboard', [], 'Modules.Itstorepcbuilder.Admin'),
+            'RAM' => $this->trans('Memory (RAM)', [], 'Modules.Itstorepcbuilder.Admin'),
+            'GPU' => $this->trans('Graphics card', [], 'Modules.Itstorepcbuilder.Admin'),
+            'STO' => $this->trans('Storage', [], 'Modules.Itstorepcbuilder.Admin'),
+            'PSU' => $this->trans('Power supply', [], 'Modules.Itstorepcbuilder.Admin'),
+            'CASE' => $this->trans('Case', [], 'Modules.Itstorepcbuilder.Admin'),
         ];
     }
 
@@ -56,7 +56,7 @@ class Itstorepcbuilder extends Module
         foreach (array_keys($this->slots()) as $k) {
             Configuration::updateValue('ITSTORE_PB_' . $k, 0);
         }
-        Configuration::updateValue('ITSTORE_PB_CTA', $this->l('Build your own PC'));
+        Configuration::updateValue('ITSTORE_PB_CTA', $this->trans('Build your own PC', [], 'Modules.Itstorepcbuilder.Admin'));
         Configuration::updateValue('ITSTORE_PB_COMPAT', 'Socket');
 
         return true;
@@ -107,7 +107,7 @@ class Itstorepcbuilder extends Module
             }
             Configuration::updateValue('ITSTORE_PB_CTA', Tools::getValue('ITSTORE_PB_CTA'));
             Configuration::updateValue('ITSTORE_PB_COMPAT', Tools::getValue('ITSTORE_PB_COMPAT'));
-            $output .= $this->displayConfirmation($this->l('Settings saved.'));
+            $output .= $this->displayConfirmation($this->trans('Settings saved.', [], 'Modules.Itstorepcbuilder.Admin'));
         }
 
         return $output . $this->renderForm();
@@ -116,22 +116,22 @@ class Itstorepcbuilder extends Module
     protected function renderForm()
     {
         $inputs = [
-            ['type' => 'text', 'label' => $this->l('Home CTA text'), 'name' => 'ITSTORE_PB_CTA'],
-            ['type' => 'text', 'label' => $this->l('Compatibility feature'), 'name' => 'ITSTORE_PB_COMPAT', 'desc' => $this->l('Feature name compared between CPU and Motherboard (e.g. Socket). Leave empty to disable.'), 'class' => 'fixed-width-lg'],
+            ['type' => 'text', 'label' => $this->trans('Home CTA text', [], 'Modules.Itstorepcbuilder.Admin'), 'name' => 'ITSTORE_PB_CTA'],
+            ['type' => 'text', 'label' => $this->trans('Compatibility feature', [], 'Modules.Itstorepcbuilder.Admin'), 'name' => 'ITSTORE_PB_COMPAT', 'desc' => $this->trans('Feature name compared between CPU and Motherboard (e.g. Socket). Leave empty to disable.', [], 'Modules.Itstorepcbuilder.Admin'), 'class' => 'fixed-width-lg'],
         ];
         foreach ($this->slots() as $k => $label) {
             $inputs[] = [
                 'type' => 'text',
-                'label' => sprintf($this->l('%s — category ID'), $label),
+                'label' => sprintf($this->trans('%s — category ID', [], 'Modules.Itstorepcbuilder.Admin'), $label),
                 'name' => 'ITSTORE_PB_' . $k,
                 'class' => 'fixed-width-sm',
             ];
         }
 
         $form = ['form' => [
-            'legend' => ['title' => $this->l('PC builder slots'), 'icon' => 'icon-wrench'],
+            'legend' => ['title' => $this->trans('PC builder slots', [], 'Modules.Itstorepcbuilder.Admin'), 'icon' => 'icon-wrench'],
             'input' => $inputs,
-            'submit' => ['title' => $this->l('Save'), 'name' => 'submitItstorePb'],
+            'submit' => ['title' => $this->trans('Save', [], 'Modules.Itstorepcbuilder.Admin'), 'name' => 'submitItstorePb'],
         ]];
 
         $helper = new HelperForm();

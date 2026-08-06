@@ -1,7 +1,7 @@
 {**
  * IT Store — department mega-menu.
  *}
-<nav class="itstore-mm" aria-label="{l s='Departments' mod='itstoremegamenu'}">
+<nav class="itstore-mm" aria-label="{l s='Departments' d='Modules.Itstoremegamenu.Shop'}">
   <div class="container">
     <ul class="itstore-mm__bar">
       {foreach from=$itstore_mm_departments item=dep}

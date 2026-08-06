@@ -28,8 +28,8 @@ class Itstorequickview extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('IT Store Quick View');
-        $this->description = $this->l('Quick-view modal button on product listings.');
+        $this->displayName = $this->trans('IT Store Quick View', [], 'Modules.Itstorequickview.Admin');
+        $this->description = $this->trans('Quick-view modal button on product listings.', [], 'Modules.Itstorequickview.Admin');
     }
 
     public function install()

@@ -28,18 +28,18 @@ class Itstorefleetdeals extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('IT Store Fleet Deals');
-        $this->description = $this->l('Business Fleet Deals + Clearance promo band with a Request-Quote form.');
+        $this->displayName = $this->trans('IT Store Fleet Deals', [], 'Modules.Itstorefleetdeals.Admin');
+        $this->description = $this->trans('Business Fleet Deals + Clearance promo band with a Request-Quote form.', [], 'Modules.Itstorefleetdeals.Admin');
     }
 
     protected function defaults()
     {
         return [
-            'ITSTORE_FD_EYEBROW' => $this->l('Business Fleet Deals'),
-            'ITSTORE_FD_TITLE' => $this->l('Buy 10+ desktops, save up to 15%'),
-            'ITSTORE_FD_SUB' => $this->l('Instant bulk pricing tiers on desktops, laptops & monitors.'),
-            'ITSTORE_FD_CL_EYEBROW' => $this->l('Clearance'),
-            'ITSTORE_FD_CL_TITLE' => $this->l('Up to 30% off networking gear'),
+            'ITSTORE_FD_EYEBROW' => $this->trans('Business Fleet Deals', [], 'Modules.Itstorefleetdeals.Admin'),
+            'ITSTORE_FD_TITLE' => $this->trans('Buy 10+ desktops, save up to 15%', [], 'Modules.Itstorefleetdeals.Admin'),
+            'ITSTORE_FD_SUB' => $this->trans('Instant bulk pricing tiers on desktops, laptops & monitors.', [], 'Modules.Itstorefleetdeals.Admin'),
+            'ITSTORE_FD_CL_EYEBROW' => $this->trans('Clearance', [], 'Modules.Itstorefleetdeals.Admin'),
+            'ITSTORE_FD_CL_TITLE' => $this->trans('Up to 30% off networking gear', [], 'Modules.Itstorefleetdeals.Admin'),
             'ITSTORE_FD_CL_LINK' => '',
         ];
     }
@@ -113,7 +113,7 @@ class Itstorefleetdeals extends Module
             foreach (array_keys($this->defaults()) as $k) {
                 Configuration::updateValue($k, Tools::getValue($k));
             }
-            $output .= $this->displayConfirmation($this->l('Settings saved.'));
+            $output .= $this->displayConfirmation($this->trans('Settings saved.', [], 'Modules.Itstorefleetdeals.Admin'));
         }
 
         return $output . $this->renderQuotes() . $this->renderForm();
@@ -133,13 +133,13 @@ class Itstorefleetdeals extends Module
                 . '<td>' . htmlspecialchars(Tools::substr((string) $r['details'], 0, 80)) . '</td></tr>';
         }
         if ($body === '') {
-            $body = '<tr><td colspan="5">' . $this->l('No quote requests yet.') . '</td></tr>';
+            $body = '<tr><td colspan="5">' . $this->trans('No quote requests yet.', [], 'Modules.Itstorefleetdeals.Admin') . '</td></tr>';
         }
 
         return '<div class="panel"><div class="panel-heading"><i class="icon-file-text"></i> '
-            . $this->l('Quote requests') . '</div><table class="table"><thead><tr><th>'
-            . $this->l('Date') . '</th><th>' . $this->l('Name') . '</th><th>' . $this->l('Company')
-            . '</th><th>' . $this->l('Email') . '</th><th>' . $this->l('Details') . '</th></tr></thead><tbody>'
+            . $this->trans('Quote requests', [], 'Modules.Itstorefleetdeals.Admin') . '</div><table class="table"><thead><tr><th>'
+            . $this->trans('Date', [], 'Modules.Itstorefleetdeals.Admin') . '</th><th>' . $this->trans('Name', [], 'Modules.Itstorefleetdeals.Admin') . '</th><th>' . $this->trans('Company', [], 'Modules.Itstorefleetdeals.Admin')
+            . '</th><th>' . $this->trans('Email', [], 'Modules.Itstorefleetdeals.Admin') . '</th><th>' . $this->trans('Details', [], 'Modules.Itstorefleetdeals.Admin') . '</th></tr></thead><tbody>'
             . $body . '</tbody></table></div>';
     }
 
@@ -147,20 +147,20 @@ class Itstorefleetdeals extends Module
     {
         $fields = [];
         foreach ([
-            'ITSTORE_FD_EYEBROW' => $this->l('Fleet — eyebrow'),
-            'ITSTORE_FD_TITLE' => $this->l('Fleet — title'),
-            'ITSTORE_FD_SUB' => $this->l('Fleet — subtitle'),
-            'ITSTORE_FD_CL_EYEBROW' => $this->l('Clearance — eyebrow'),
-            'ITSTORE_FD_CL_TITLE' => $this->l('Clearance — title'),
-            'ITSTORE_FD_CL_LINK' => $this->l('Clearance — link'),
+            'ITSTORE_FD_EYEBROW' => $this->trans('Fleet — eyebrow', [], 'Modules.Itstorefleetdeals.Admin'),
+            'ITSTORE_FD_TITLE' => $this->trans('Fleet — title', [], 'Modules.Itstorefleetdeals.Admin'),
+            'ITSTORE_FD_SUB' => $this->trans('Fleet — subtitle', [], 'Modules.Itstorefleetdeals.Admin'),
+            'ITSTORE_FD_CL_EYEBROW' => $this->trans('Clearance — eyebrow', [], 'Modules.Itstorefleetdeals.Admin'),
+            'ITSTORE_FD_CL_TITLE' => $this->trans('Clearance — title', [], 'Modules.Itstorefleetdeals.Admin'),
+            'ITSTORE_FD_CL_LINK' => $this->trans('Clearance — link', [], 'Modules.Itstorefleetdeals.Admin'),
         ] as $name => $label) {
             $fields[] = ['type' => 'text', 'label' => $label, 'name' => $name];
         }
 
         $form = ['form' => [
-            'legend' => ['title' => $this->l('Fleet deals band'), 'icon' => 'icon-briefcase'],
+            'legend' => ['title' => $this->trans('Fleet deals band', [], 'Modules.Itstorefleetdeals.Admin'), 'icon' => 'icon-briefcase'],
             'input' => $fields,
-            'submit' => ['title' => $this->l('Save'), 'name' => 'submitItstoreFd'],
+            'submit' => ['title' => $this->trans('Save', [], 'Modules.Itstorefleetdeals.Admin'), 'name' => 'submitItstoreFd'],
         ]];
 
         $helper = new HelperForm();

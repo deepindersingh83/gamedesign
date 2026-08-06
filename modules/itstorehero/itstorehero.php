@@ -28,8 +28,8 @@ class Itstorehero extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('IT Store Hero');
-        $this->description = $this->l('Dark gradient home hero with a Business / Gamer audience toggle.');
+        $this->displayName = $this->trans('IT Store Hero', [], 'Modules.Itstorehero.Admin');
+        $this->description = $this->trans('Dark gradient home hero with a Business / Gamer audience toggle.', [], 'Modules.Itstorehero.Admin');
     }
 
     protected function defaults()
@@ -37,17 +37,17 @@ class Itstorehero extends Module
         return [
             'ITSTORE_HERO_BULK_LINK' => '',
             // Business view
-            'ITSTORE_HERO_B_EYEBROW' => $this->l('Deal of the Month'),
-            'ITSTORE_HERO_B_TITLE' => $this->l('Outfit your whole office in one order'),
-            'ITSTORE_HERO_B_SUB' => $this->l('Business desktops, laptops and network kits — pre-configured, bulk-priced and dispatched same day.'),
-            'ITSTORE_HERO_B_CTA' => $this->l('Shop business gear'),
+            'ITSTORE_HERO_B_EYEBROW' => $this->trans('Deal of the Month', [], 'Modules.Itstorehero.Admin'),
+            'ITSTORE_HERO_B_TITLE' => $this->trans('Outfit your whole office in one order', [], 'Modules.Itstorehero.Admin'),
+            'ITSTORE_HERO_B_SUB' => $this->trans('Business desktops, laptops and network kits — pre-configured, bulk-priced and dispatched same day.', [], 'Modules.Itstorehero.Admin'),
+            'ITSTORE_HERO_B_CTA' => $this->trans('Shop business gear', [], 'Modules.Itstorehero.Admin'),
             'ITSTORE_HERO_B_LINK' => '',
             'ITSTORE_HERO_B_IMG' => 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1200&q=80',
             // Gamer / home view
-            'ITSTORE_HERO_G_EYEBROW' => $this->l('Build of the Month'),
-            'ITSTORE_HERO_G_TITLE' => $this->l('Build your dream rig'),
-            'ITSTORE_HERO_G_SUB' => $this->l('RTX-ready desktops, high-refresh monitors and the components to push every frame.'),
-            'ITSTORE_HERO_G_CTA' => $this->l('Shop gaming'),
+            'ITSTORE_HERO_G_EYEBROW' => $this->trans('Build of the Month', [], 'Modules.Itstorehero.Admin'),
+            'ITSTORE_HERO_G_TITLE' => $this->trans('Build your dream rig', [], 'Modules.Itstorehero.Admin'),
+            'ITSTORE_HERO_G_SUB' => $this->trans('RTX-ready desktops, high-refresh monitors and the components to push every frame.', [], 'Modules.Itstorehero.Admin'),
+            'ITSTORE_HERO_G_CTA' => $this->trans('Shop gaming', [], 'Modules.Itstorehero.Admin'),
             'ITSTORE_HERO_G_LINK' => '',
             'ITSTORE_HERO_G_IMG' => 'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=1200&q=80',
         ];
@@ -123,7 +123,7 @@ class Itstorehero extends Module
             foreach (array_keys($this->defaults()) as $k) {
                 Configuration::updateValue($k, Tools::getValue($k));
             }
-            $output .= $this->displayConfirmation($this->l('Settings saved.'));
+            $output .= $this->displayConfirmation($this->trans('Settings saved.', [], 'Modules.Itstorehero.Admin'));
         }
 
         return $output . $this->renderForm();
@@ -135,25 +135,25 @@ class Itstorehero extends Module
             return ['type' => 'text', 'label' => $label, 'name' => $name];
         };
         $inputs = [
-            $mk('ITSTORE_HERO_BULK_LINK', $this->l('“Get Bulk Quote” link')),
-            $mk('ITSTORE_HERO_B_EYEBROW', $this->l('Business — eyebrow')),
-            $mk('ITSTORE_HERO_B_TITLE', $this->l('Business — title')),
-            $mk('ITSTORE_HERO_B_SUB', $this->l('Business — subtitle')),
-            $mk('ITSTORE_HERO_B_CTA', $this->l('Business — CTA text')),
-            $mk('ITSTORE_HERO_B_LINK', $this->l('Business — CTA link')),
-            $mk('ITSTORE_HERO_B_IMG', $this->l('Business — image URL')),
-            $mk('ITSTORE_HERO_G_EYEBROW', $this->l('Gamer — eyebrow')),
-            $mk('ITSTORE_HERO_G_TITLE', $this->l('Gamer — title')),
-            $mk('ITSTORE_HERO_G_SUB', $this->l('Gamer — subtitle')),
-            $mk('ITSTORE_HERO_G_CTA', $this->l('Gamer — CTA text')),
-            $mk('ITSTORE_HERO_G_LINK', $this->l('Gamer — CTA link')),
-            $mk('ITSTORE_HERO_G_IMG', $this->l('Gamer — image URL')),
+            $mk('ITSTORE_HERO_BULK_LINK', $this->trans('“Get Bulk Quote” link', [], 'Modules.Itstorehero.Admin')),
+            $mk('ITSTORE_HERO_B_EYEBROW', $this->trans('Business — eyebrow', [], 'Modules.Itstorehero.Admin')),
+            $mk('ITSTORE_HERO_B_TITLE', $this->trans('Business — title', [], 'Modules.Itstorehero.Admin')),
+            $mk('ITSTORE_HERO_B_SUB', $this->trans('Business — subtitle', [], 'Modules.Itstorehero.Admin')),
+            $mk('ITSTORE_HERO_B_CTA', $this->trans('Business — CTA text', [], 'Modules.Itstorehero.Admin')),
+            $mk('ITSTORE_HERO_B_LINK', $this->trans('Business — CTA link', [], 'Modules.Itstorehero.Admin')),
+            $mk('ITSTORE_HERO_B_IMG', $this->trans('Business — image URL', [], 'Modules.Itstorehero.Admin')),
+            $mk('ITSTORE_HERO_G_EYEBROW', $this->trans('Gamer — eyebrow', [], 'Modules.Itstorehero.Admin')),
+            $mk('ITSTORE_HERO_G_TITLE', $this->trans('Gamer — title', [], 'Modules.Itstorehero.Admin')),
+            $mk('ITSTORE_HERO_G_SUB', $this->trans('Gamer — subtitle', [], 'Modules.Itstorehero.Admin')),
+            $mk('ITSTORE_HERO_G_CTA', $this->trans('Gamer — CTA text', [], 'Modules.Itstorehero.Admin')),
+            $mk('ITSTORE_HERO_G_LINK', $this->trans('Gamer — CTA link', [], 'Modules.Itstorehero.Admin')),
+            $mk('ITSTORE_HERO_G_IMG', $this->trans('Gamer — image URL', [], 'Modules.Itstorehero.Admin')),
         ];
 
         $form = ['form' => [
-            'legend' => ['title' => $this->l('Hero'), 'icon' => 'icon-picture'],
+            'legend' => ['title' => $this->trans('Hero', [], 'Modules.Itstorehero.Admin'), 'icon' => 'icon-picture'],
             'input' => $inputs,
-            'submit' => ['title' => $this->l('Save'), 'name' => 'submitItstoreHero'],
+            'submit' => ['title' => $this->trans('Save', [], 'Modules.Itstorehero.Admin'), 'name' => 'submitItstoreHero'],
         ]];
 
         $helper = new HelperForm();

@@ -28,8 +28,8 @@ class Itstoremegamenu extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('IT Store Mega Menu');
-        $this->description = $this->l('Department mega-menu built from your category tree, with a promo panel.');
+        $this->displayName = $this->trans('IT Store Mega Menu', [], 'Modules.Itstoremegamenu.Admin');
+        $this->description = $this->trans('Department mega-menu built from your category tree, with a promo panel.', [], 'Modules.Itstoremegamenu.Admin');
     }
 
     protected function defaults()
@@ -37,8 +37,8 @@ class Itstoremegamenu extends Module
         return [
             'ITSTORE_MM_ROOT' => 0,
             'ITSTORE_MM_DEPTH' => 8,
-            'ITSTORE_MM_PROMO_TITLE' => $this->l('Build your own PC'),
-            'ITSTORE_MM_PROMO_TEXT' => $this->l('Pick your parts, we assemble & test.'),
+            'ITSTORE_MM_PROMO_TITLE' => $this->trans('Build your own PC', [], 'Modules.Itstoremegamenu.Admin'),
+            'ITSTORE_MM_PROMO_TEXT' => $this->trans('Pick your parts, we assemble & test.', [], 'Modules.Itstoremegamenu.Admin'),
             'ITSTORE_MM_PROMO_URL' => '',
             'ITSTORE_MM_PROMO_IMG' => '',
         ];
@@ -145,7 +145,7 @@ class Itstoremegamenu extends Module
         if (Tools::isSubmit('submitItstoreMm')) {
             $url = trim(Tools::getValue('ITSTORE_MM_PROMO_URL'));
             if ($url !== '' && !Validate::isUrlOrEmpty($url)) {
-                $output .= $this->displayError($this->l('The promo URL is not valid.'));
+                $output .= $this->displayError($this->trans('The promo URL is not valid.', [], 'Modules.Itstoremegamenu.Admin'));
             } else {
                 Configuration::updateValue('ITSTORE_MM_ROOT', (int) Tools::getValue('ITSTORE_MM_ROOT'));
                 Configuration::updateValue('ITSTORE_MM_DEPTH', (int) Tools::getValue('ITSTORE_MM_DEPTH'));
@@ -153,7 +153,7 @@ class Itstoremegamenu extends Module
                 Configuration::updateValue('ITSTORE_MM_PROMO_TEXT', Tools::getValue('ITSTORE_MM_PROMO_TEXT'));
                 Configuration::updateValue('ITSTORE_MM_PROMO_URL', $url);
                 Configuration::updateValue('ITSTORE_MM_PROMO_IMG', Tools::getValue('ITSTORE_MM_PROMO_IMG'));
-                $output .= $this->displayConfirmation($this->l('Settings saved.'));
+                $output .= $this->displayConfirmation($this->trans('Settings saved.', [], 'Modules.Itstoremegamenu.Admin'));
             }
         }
 
@@ -163,16 +163,16 @@ class Itstoremegamenu extends Module
     protected function renderForm()
     {
         $form = ['form' => [
-            'legend' => ['title' => $this->l('Mega menu'), 'icon' => 'icon-sitemap'],
+            'legend' => ['title' => $this->trans('Mega menu', [], 'Modules.Itstoremegamenu.Admin'), 'icon' => 'icon-sitemap'],
             'input' => [
-                ['type' => 'text', 'label' => $this->l('Root category ID'), 'name' => 'ITSTORE_MM_ROOT', 'class' => 'fixed-width-sm', 'desc' => $this->l('Departments = children of this category. Defaults to Home.')],
-                ['type' => 'text', 'label' => $this->l('Max departments'), 'name' => 'ITSTORE_MM_DEPTH', 'class' => 'fixed-width-sm'],
-                ['type' => 'text', 'label' => $this->l('Promo title'), 'name' => 'ITSTORE_MM_PROMO_TITLE'],
-                ['type' => 'text', 'label' => $this->l('Promo text'), 'name' => 'ITSTORE_MM_PROMO_TEXT'],
-                ['type' => 'text', 'label' => $this->l('Promo image URL'), 'name' => 'ITSTORE_MM_PROMO_IMG'],
-                ['type' => 'text', 'label' => $this->l('Promo link URL'), 'name' => 'ITSTORE_MM_PROMO_URL'],
+                ['type' => 'text', 'label' => $this->trans('Root category ID', [], 'Modules.Itstoremegamenu.Admin'), 'name' => 'ITSTORE_MM_ROOT', 'class' => 'fixed-width-sm', 'desc' => $this->trans('Departments = children of this category. Defaults to Home.', [], 'Modules.Itstoremegamenu.Admin')],
+                ['type' => 'text', 'label' => $this->trans('Max departments', [], 'Modules.Itstoremegamenu.Admin'), 'name' => 'ITSTORE_MM_DEPTH', 'class' => 'fixed-width-sm'],
+                ['type' => 'text', 'label' => $this->trans('Promo title', [], 'Modules.Itstoremegamenu.Admin'), 'name' => 'ITSTORE_MM_PROMO_TITLE'],
+                ['type' => 'text', 'label' => $this->trans('Promo text', [], 'Modules.Itstoremegamenu.Admin'), 'name' => 'ITSTORE_MM_PROMO_TEXT'],
+                ['type' => 'text', 'label' => $this->trans('Promo image URL', [], 'Modules.Itstoremegamenu.Admin'), 'name' => 'ITSTORE_MM_PROMO_IMG'],
+                ['type' => 'text', 'label' => $this->trans('Promo link URL', [], 'Modules.Itstoremegamenu.Admin'), 'name' => 'ITSTORE_MM_PROMO_URL'],
             ],
-            'submit' => ['title' => $this->l('Save'), 'name' => 'submitItstoreMm'],
+            'submit' => ['title' => $this->trans('Save', [], 'Modules.Itstoremegamenu.Admin'), 'name' => 'submitItstoreMm'],
         ]];
 
         $helper = new HelperForm();

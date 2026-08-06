@@ -5,8 +5,8 @@
   <div class="itstore-hero2__inner">
     <div class="itstore-hero2__copy">
       <div class="itstore-hero2__toggle" role="tablist">
-        <button type="button" class="itstore-hero2__tab is-active" data-hero-view="business" role="tab" aria-selected="true">{l s='For Business' mod='itstorehero'}</button>
-        <button type="button" class="itstore-hero2__tab" data-hero-view="gamer" role="tab" aria-selected="false">{l s='For Gamers & Home' mod='itstorehero'}</button>
+        <button type="button" class="itstore-hero2__tab is-active" data-hero-view="business" role="tab" aria-selected="true">{l s='For Business' d='Modules.Itstorehero.Shop'}</button>
+        <button type="button" class="itstore-hero2__tab" data-hero-view="gamer" role="tab" aria-selected="false">{l s='For Gamers & Home' d='Modules.Itstorehero.Shop'}</button>
       </div>
 
       <div class="itstore-hero2__panel is-active" data-hero-panel="business">
@@ -15,7 +15,7 @@
         <p class="itstore-hero2__sub">{$hero_business.sub|escape:'html':'UTF-8'}</p>
         <div class="itstore-hero2__actions">
           <a class="btn btn-primary itstore-hero2__cta" href="{$hero_business.link|escape:'html':'UTF-8'}">{$hero_business.cta|escape:'html':'UTF-8'}</a>
-          <a class="itstore-hero2__quote" href="{$hero_bulk_link|escape:'html':'UTF-8'}">{l s='Get Bulk Quote' mod='itstorehero'}</a>
+          <a class="itstore-hero2__quote" href="{$hero_bulk_link|escape:'html':'UTF-8'}">{l s='Get Bulk Quote' d='Modules.Itstorehero.Shop'}</a>
         </div>
       </div>
       <div class="itstore-hero2__panel" data-hero-panel="gamer">
@@ -24,7 +24,7 @@
         <p class="itstore-hero2__sub">{$hero_gamer.sub|escape:'html':'UTF-8'}</p>
         <div class="itstore-hero2__actions">
           <a class="btn btn-primary itstore-hero2__cta" href="{$hero_gamer.link|escape:'html':'UTF-8'}">{$hero_gamer.cta|escape:'html':'UTF-8'}</a>
-          <a class="itstore-hero2__quote" href="{$hero_bulk_link|escape:'html':'UTF-8'}">{l s='Get Bulk Quote' mod='itstorehero'}</a>
+          <a class="itstore-hero2__quote" href="{$hero_bulk_link|escape:'html':'UTF-8'}">{l s='Get Bulk Quote' d='Modules.Itstorehero.Shop'}</a>
         </div>
       </div>
     </div>

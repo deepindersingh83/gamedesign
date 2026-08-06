@@ -28,9 +28,9 @@ class Itstoreimageslot extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('IT Store Image Slot');
-        $this->description = $this->l('Responsive hero image slider for the IT Store home page.');
-        $this->confirmUninstall = $this->l('Are you sure you want to uninstall the Image Slot? All slides will be removed.');
+        $this->displayName = $this->trans('IT Store Image Slot', [], 'Modules.Itstoreimageslot.Admin');
+        $this->description = $this->trans('Responsive hero image slider for the IT Store home page.', [], 'Modules.Itstoreimageslot.Admin');
+        $this->confirmUninstall = $this->trans('Are you sure you want to uninstall the Image Slot? All slides will be removed.', [], 'Modules.Itstoreimageslot.Admin');
     }
 
     /**
@@ -80,26 +80,26 @@ class Itstoreimageslot extends Module
         $demo = [
             [
                 'image' => 'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=1600&q=80',
-                'title' => $this->l('Build Your Dream Rig'),
-                'subtitle' => $this->l('Custom PCs, components & peripherals'),
-                'caption' => $this->l('Hand-picked hardware from the brands you trust.'),
-                'btn_text' => $this->l('Shop components'),
+                'title' => $this->trans('Build Your Dream Rig', [], 'Modules.Itstoreimageslot.Admin'),
+                'subtitle' => $this->trans('Custom PCs, components & peripherals', [], 'Modules.Itstoreimageslot.Admin'),
+                'caption' => $this->trans('Hand-picked hardware from the brands you trust.', [], 'Modules.Itstoreimageslot.Admin'),
+                'btn_text' => $this->trans('Shop components', [], 'Modules.Itstoreimageslot.Admin'),
                 'btn_link' => $this->context->link->getPageLink('category', true, null, 'id_category=2'),
             ],
             [
                 'image' => 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1600&q=80',
-                'title' => $this->l('Laptops for Work & Play'),
-                'subtitle' => $this->l('Ultrabooks, gaming & business laptops'),
-                'caption' => $this->l('Next-day delivery on in-stock machines.'),
-                'btn_text' => $this->l('Browse laptops'),
+                'title' => $this->trans('Laptops for Work & Play', [], 'Modules.Itstoreimageslot.Admin'),
+                'subtitle' => $this->trans('Ultrabooks, gaming & business laptops', [], 'Modules.Itstoreimageslot.Admin'),
+                'caption' => $this->trans('Next-day delivery on in-stock machines.', [], 'Modules.Itstoreimageslot.Admin'),
+                'btn_text' => $this->trans('Browse laptops', [], 'Modules.Itstoreimageslot.Admin'),
                 'btn_link' => $this->context->link->getPageLink('category', true, null, 'id_category=3'),
             ],
             [
                 'image' => 'https://images.unsplash.com/photo-1591405351990-4726e331f141?auto=format&fit=crop&w=1600&q=80',
-                'title' => $this->l('Networking & Smart Office'),
-                'subtitle' => $this->l('Routers, switches & Wi-Fi 6E'),
-                'caption' => $this->l('Set up a faster, more reliable network today.'),
-                'btn_text' => $this->l('Explore networking'),
+                'title' => $this->trans('Networking & Smart Office', [], 'Modules.Itstoreimageslot.Admin'),
+                'subtitle' => $this->trans('Routers, switches & Wi-Fi 6E', [], 'Modules.Itstoreimageslot.Admin'),
+                'caption' => $this->trans('Set up a faster, more reliable network today.', [], 'Modules.Itstoreimageslot.Admin'),
+                'btn_text' => $this->trans('Explore networking', [], 'Modules.Itstoreimageslot.Admin'),
                 'btn_link' => $this->context->link->getPageLink('category', true, null, 'id_category=4'),
             ],
         ];
@@ -183,14 +183,14 @@ class Itstoreimageslot extends Module
         } elseif (Tools::isSubmit('deleteItstoreSlide')) {
             $id = (int) Tools::getValue('id_itstore_slide');
             Db::getInstance()->delete('itstore_slide', 'id_itstore_slide = ' . $id);
-            $output .= $this->displayConfirmation($this->l('Slide deleted.'));
+            $output .= $this->displayConfirmation($this->trans('Slide deleted.', [], 'Modules.Itstoreimageslot.Admin'));
         } elseif (Tools::isSubmit('toggleItstoreSlide')) {
             $id = (int) Tools::getValue('id_itstore_slide');
             Db::getInstance()->execute(
                 'UPDATE `' . _DB_PREFIX_ . 'itstore_slide`
                  SET `active` = 1 - `active` WHERE `id_itstore_slide` = ' . $id
             );
-            $output .= $this->displayConfirmation($this->l('Slide updated.'));
+            $output .= $this->displayConfirmation($this->trans('Slide updated.', [], 'Modules.Itstoreimageslot.Admin'));
         }
 
         return $output . $this->renderSlidesList() . $this->renderSlideForm();
@@ -202,10 +202,10 @@ class Itstoreimageslot extends Module
         $btnLink = trim(Tools::getValue('btn_link'));
 
         if ($image !== '' && !Validate::isCleanHtml($image)) {
-            return $this->displayError($this->l('The image URL is not valid.'));
+            return $this->displayError($this->trans('The image URL is not valid.', [], 'Modules.Itstoreimageslot.Admin'));
         }
         if ($btnLink !== '' && !Validate::isUrlOrEmpty($btnLink)) {
-            return $this->displayError($this->l('The button link is not valid.'));
+            return $this->displayError($this->trans('The button link is not valid.', [], 'Modules.Itstoreimageslot.Admin'));
         }
 
         $data = [
@@ -224,12 +224,12 @@ class Itstoreimageslot extends Module
         if ($id > 0) {
             Db::getInstance()->update('itstore_slide', $data, 'id_itstore_slide = ' . $id);
 
-            return $this->displayConfirmation($this->l('Slide saved.'));
+            return $this->displayConfirmation($this->trans('Slide saved.', [], 'Modules.Itstoreimageslot.Admin'));
         }
 
         Db::getInstance()->insert('itstore_slide', $data);
 
-        return $this->displayConfirmation($this->l('Slide added.'));
+        return $this->displayConfirmation($this->trans('Slide added.', [], 'Modules.Itstoreimageslot.Admin'));
     }
 
     protected function renderSlidesList()
@@ -251,28 +251,28 @@ class Itstoreimageslot extends Module
                 . '<td>' . (int) $s['position'] . '</td>'
                 . '<td><img src="' . htmlspecialchars($s['image']) . '" alt="" style="max-height:40px;border-radius:4px"></td>'
                 . '<td>' . htmlspecialchars($s['title']) . '</td>'
-                . '<td>' . ($s['active'] ? '<span class="badge badge-success">' . $this->l('On') . '</span>'
-                    : '<span class="badge badge-danger">' . $this->l('Off') . '</span>') . '</td>'
+                . '<td>' . ($s['active'] ? '<span class="badge badge-success">' . $this->trans('On', [], 'Modules.Itstoreimageslot.Admin') . '</span>'
+                    : '<span class="badge badge-danger">' . $this->trans('Off', [], 'Modules.Itstoreimageslot.Admin') . '</span>') . '</td>'
                 . '<td class="text-right">'
                 . '<a class="btn btn-default btn-xs" href="' . $base . '&toggleItstoreSlide&id_itstore_slide=' . (int) $s['id_itstore_slide'] . '">'
-                . '<i class="icon-refresh"></i> ' . $this->l('Toggle') . '</a> '
+                . '<i class="icon-refresh"></i> ' . $this->trans('Toggle', [], 'Modules.Itstoreimageslot.Admin') . '</a> '
                 . '<a class="btn btn-default btn-xs" href="' . $base . '&editItstoreSlide&id_itstore_slide=' . (int) $s['id_itstore_slide'] . '">'
-                . '<i class="icon-pencil"></i> ' . $this->l('Edit') . '</a> '
-                . '<a class="btn btn-danger btn-xs" onclick="return confirm(\'' . $this->l('Delete this slide?') . '\')" '
+                . '<i class="icon-pencil"></i> ' . $this->trans('Edit', [], 'Modules.Itstoreimageslot.Admin') . '</a> '
+                . '<a class="btn btn-danger btn-xs" onclick="return confirm(\'' . $this->trans('Delete this slide?', [], 'Modules.Itstoreimageslot.Admin') . '\')" '
                 . 'href="' . $base . '&deleteItstoreSlide&id_itstore_slide=' . (int) $s['id_itstore_slide'] . '">'
-                . '<i class="icon-trash"></i> ' . $this->l('Delete') . '</a>'
+                . '<i class="icon-trash"></i> ' . $this->trans('Delete', [], 'Modules.Itstoreimageslot.Admin') . '</a>'
                 . '</td></tr>';
         }
 
         if ($rows === '') {
-            $rows = '<tr><td colspan="5">' . $this->l('No slides yet — add one below.') . '</td></tr>';
+            $rows = '<tr><td colspan="5">' . $this->trans('No slides yet — add one below.', [], 'Modules.Itstoreimageslot.Admin') . '</td></tr>';
         }
 
         return '<div class="panel"><div class="panel-heading"><i class="icon-picture"></i> '
-            . $this->l('Hero slides') . '</div>'
+            . $this->trans('Hero slides', [], 'Modules.Itstoreimageslot.Admin') . '</div>'
             . '<table class="table"><thead><tr>'
-            . '<th>' . $this->l('#') . '</th><th>' . $this->l('Image') . '</th><th>' . $this->l('Title') . '</th>'
-            . '<th>' . $this->l('Status') . '</th><th class="text-right">' . $this->l('Actions') . '</th>'
+            . '<th>' . $this->trans('#', [], 'Modules.Itstoreimageslot.Admin') . '</th><th>' . $this->trans('Image', [], 'Modules.Itstoreimageslot.Admin') . '</th><th>' . $this->trans('Title', [], 'Modules.Itstoreimageslot.Admin') . '</th>'
+            . '<th>' . $this->trans('Status', [], 'Modules.Itstoreimageslot.Admin') . '</th><th class="text-right">' . $this->trans('Actions', [], 'Modules.Itstoreimageslot.Admin') . '</th>'
             . '</tr></thead><tbody>' . $rows . '</tbody></table></div>';
     }
 
@@ -290,24 +290,24 @@ class Itstoreimageslot extends Module
             ['type' => 'hidden', 'name' => 'id_itstore_slide'],
             [
                 'type' => 'text',
-                'label' => $this->l('Image URL'),
+                'label' => $this->trans('Image URL', [], 'Modules.Itstoreimageslot.Admin'),
                 'name' => 'image',
-                'desc' => $this->l('Full URL or path to the slide background image (recommended 1600×640).'),
+                'desc' => $this->trans('Full URL or path to the slide background image (recommended 1600×640).', [], 'Modules.Itstoreimageslot.Admin'),
             ],
-            ['type' => 'text', 'label' => $this->l('Title'), 'name' => 'title'],
-            ['type' => 'text', 'label' => $this->l('Subtitle'), 'name' => 'subtitle'],
-            ['type' => 'textarea', 'label' => $this->l('Caption'), 'name' => 'caption'],
-            ['type' => 'text', 'label' => $this->l('Button text'), 'name' => 'btn_text'],
-            ['type' => 'text', 'label' => $this->l('Button link'), 'name' => 'btn_link'],
-            ['type' => 'text', 'label' => $this->l('Position'), 'name' => 'position', 'class' => 'fixed-width-sm'],
+            ['type' => 'text', 'label' => $this->trans('Title', [], 'Modules.Itstoreimageslot.Admin'), 'name' => 'title'],
+            ['type' => 'text', 'label' => $this->trans('Subtitle', [], 'Modules.Itstoreimageslot.Admin'), 'name' => 'subtitle'],
+            ['type' => 'textarea', 'label' => $this->trans('Caption', [], 'Modules.Itstoreimageslot.Admin'), 'name' => 'caption'],
+            ['type' => 'text', 'label' => $this->trans('Button text', [], 'Modules.Itstoreimageslot.Admin'), 'name' => 'btn_text'],
+            ['type' => 'text', 'label' => $this->trans('Button link', [], 'Modules.Itstoreimageslot.Admin'), 'name' => 'btn_link'],
+            ['type' => 'text', 'label' => $this->trans('Position', [], 'Modules.Itstoreimageslot.Admin'), 'name' => 'position', 'class' => 'fixed-width-sm'],
             [
                 'type' => 'switch',
-                'label' => $this->l('Active'),
+                'label' => $this->trans('Active', [], 'Modules.Itstoreimageslot.Admin'),
                 'name' => 'active',
                 'is_bool' => true,
                 'values' => [
-                    ['id' => 'active_on', 'value' => 1, 'label' => $this->l('Yes')],
-                    ['id' => 'active_off', 'value' => 0, 'label' => $this->l('No')],
+                    ['id' => 'active_on', 'value' => 1, 'label' => $this->trans('Yes', [], 'Modules.Itstoreimageslot.Admin')],
+                    ['id' => 'active_off', 'value' => 0, 'label' => $this->trans('No', [], 'Modules.Itstoreimageslot.Admin')],
                 ],
             ],
         ];
@@ -315,11 +315,11 @@ class Itstoreimageslot extends Module
         $form = [
             'form' => [
                 'legend' => [
-                    'title' => empty($edit) ? $this->l('Add a slide') : $this->l('Edit slide'),
+                    'title' => empty($edit) ? $this->trans('Add a slide', [], 'Modules.Itstoreimageslot.Admin') : $this->trans('Edit slide', [], 'Modules.Itstoreimageslot.Admin'),
                     'icon' => 'icon-plus',
                 ],
                 'input' => $fields,
-                'submit' => ['title' => $this->l('Save'), 'name' => 'submitItstoreSlide'],
+                'submit' => ['title' => $this->trans('Save', [], 'Modules.Itstoreimageslot.Admin'), 'name' => 'submitItstoreSlide'],
             ],
         ];
 

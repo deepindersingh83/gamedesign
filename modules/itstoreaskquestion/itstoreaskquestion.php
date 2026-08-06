@@ -30,8 +30,8 @@ class Itstoreaskquestion extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('IT Store Ask a Question');
-        $this->description = $this->l('Product Q&A tab with an “Ask a Question” form and back-office answers.');
+        $this->displayName = $this->trans('IT Store Ask a Question', [], 'Modules.Itstoreaskquestion.Admin');
+        $this->description = $this->trans('Product Q&A tab with an “Ask a Question” form and back-office answers.', [], 'Modules.Itstoreaskquestion.Admin');
     }
 
     public function install()
@@ -106,7 +106,7 @@ class Itstoreaskquestion extends Module
         $html = $this->fetch('module:' . $this->name . '/views/templates/hook/askquestion.tpl');
 
         $extra = new ProductExtraContent();
-        $extra->setTitle($this->l('Q&A') . ($qas ? ' (' . count($qas) . ')' : ''))
+        $extra->setTitle($this->trans('Q&A', [], 'Modules.Itstoreaskquestion.Admin') . ($qas ? ' (' . count($qas) . ')' : ''))
             ->setContent($html);
 
         return [$extra];
@@ -121,10 +121,10 @@ class Itstoreaskquestion extends Module
                 'answer' => pSQL(Tools::getValue('answer'), true),
                 'approved' => 1,
             ], 'id_question = ' . $id);
-            $output .= $this->displayConfirmation($this->l('Answer published.'));
+            $output .= $this->displayConfirmation($this->trans('Answer published.', [], 'Modules.Itstoreaskquestion.Admin'));
         } elseif (Tools::isSubmit('deleteQ')) {
             Db::getInstance()->delete('itstore_question', 'id_question = ' . (int) Tools::getValue('id_question'));
-            $output .= $this->displayConfirmation($this->l('Question deleted.'));
+            $output .= $this->displayConfirmation($this->trans('Question deleted.', [], 'Modules.Itstoreaskquestion.Admin'));
         }
 
         return $output . $this->renderList();
@@ -148,7 +148,7 @@ class Itstoreaskquestion extends Module
         $body = '';
         foreach (array_slice($rows, 0, 200) as $r) {
             $answer = htmlspecialchars((string) $r['answer']);
-            $status = (int) $r['approved'] ? $this->l('Published') : '<strong>' . $this->l('Pending') . '</strong>';
+            $status = (int) $r['approved'] ? $this->trans('Published', [], 'Modules.Itstoreaskquestion.Admin') : '<strong>' . $this->trans('Pending', [], 'Modules.Itstoreaskquestion.Admin') . '</strong>';
             $body .= '<tr>'
                 . '<td>' . htmlspecialchars((string) $r['name']) . '</td>'
                 . '<td>' . htmlspecialchars($r['question']) . '<div class="help-block">' . $status . '</div></td>'
@@ -157,17 +157,17 @@ class Itstoreaskquestion extends Module
                 . '<input type="hidden" name="id_question" value="' . (int) $r['id_question'] . '">'
                 . '<textarea name="answer" class="form-control" rows="2">' . $answer . '</textarea>'
                 . '<div style="margin-top:6px">'
-                . '<button class="btn btn-success btn-xs" name="answerQ" value="1">' . $this->l('Publish answer') . '</button> '
-                . '<button class="btn btn-danger btn-xs" name="deleteQ" value="1" onclick="return confirm(\'' . $this->l('Delete?') . '\')">' . $this->l('Delete') . '</button>'
+                . '<button class="btn btn-success btn-xs" name="answerQ" value="1">' . $this->trans('Publish answer', [], 'Modules.Itstoreaskquestion.Admin') . '</button> '
+                . '<button class="btn btn-danger btn-xs" name="deleteQ" value="1" onclick="return confirm(\'' . $this->trans('Delete?', [], 'Modules.Itstoreaskquestion.Admin') . '\')">' . $this->trans('Delete', [], 'Modules.Itstoreaskquestion.Admin') . '</button>'
                 . '</div></form></td>'
                 . '</tr>';
         }
         if ($body === '') {
-            $body = '<tr><td colspan="3">' . $this->l('No questions yet.') . '</td></tr>';
+            $body = '<tr><td colspan="3">' . $this->trans('No questions yet.', [], 'Modules.Itstoreaskquestion.Admin') . '</td></tr>';
         }
 
-        return '<div class="panel"><div class="panel-heading"><i class="icon-question"></i> ' . $this->l('Product questions') . '</div>'
-            . '<table class="table"><thead><tr><th>' . $this->l('Product') . '</th><th>' . $this->l('Question')
-            . '</th><th>' . $this->l('Answer / actions') . '</th></tr></thead><tbody>' . $body . '</tbody></table></div>';
+        return '<div class="panel"><div class="panel-heading"><i class="icon-question"></i> ' . $this->trans('Product questions', [], 'Modules.Itstoreaskquestion.Admin') . '</div>'
+            . '<table class="table"><thead><tr><th>' . $this->trans('Product', [], 'Modules.Itstoreaskquestion.Admin') . '</th><th>' . $this->trans('Question', [], 'Modules.Itstoreaskquestion.Admin')
+            . '</th><th>' . $this->trans('Answer / actions', [], 'Modules.Itstoreaskquestion.Admin') . '</th></tr></thead><tbody>' . $body . '</tbody></table></div>';
     }
 }

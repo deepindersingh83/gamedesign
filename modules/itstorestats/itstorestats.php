@@ -29,17 +29,17 @@ class Itstorestats extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('IT Store Stats');
-        $this->description = $this->l('Trust / proof-point stats band for the home page.');
+        $this->displayName = $this->trans('IT Store Stats', [], 'Modules.Itstorestats.Admin');
+        $this->description = $this->trans('Trust / proof-point stats band for the home page.', [], 'Modules.Itstorestats.Admin');
     }
 
     protected function defaults()
     {
         return [
-            'ITSTORE_ST_1_VALUE' => '4.9★', 'ITSTORE_ST_1_LABEL' => $this->l('from 3,200+ verified reviews'),
-            'ITSTORE_ST_2_VALUE' => '18k+', 'ITSTORE_ST_2_LABEL' => $this->l('businesses & gamers supplied'),
-            'ITSTORE_ST_3_VALUE' => $this->l('Same-Day'), 'ITSTORE_ST_3_LABEL' => $this->l('dispatch before 1pm AEST'),
-            'ITSTORE_ST_4_VALUE' => $this->l('3-Year'), 'ITSTORE_ST_4_LABEL' => $this->l('warranty on desktops & servers'),
+            'ITSTORE_ST_1_VALUE' => '4.9★', 'ITSTORE_ST_1_LABEL' => $this->trans('from 3,200+ verified reviews', [], 'Modules.Itstorestats.Admin'),
+            'ITSTORE_ST_2_VALUE' => '18k+', 'ITSTORE_ST_2_LABEL' => $this->trans('businesses & gamers supplied', [], 'Modules.Itstorestats.Admin'),
+            'ITSTORE_ST_3_VALUE' => $this->trans('Same-Day', [], 'Modules.Itstorestats.Admin'), 'ITSTORE_ST_3_LABEL' => $this->trans('dispatch before 1pm AEST', [], 'Modules.Itstorestats.Admin'),
+            'ITSTORE_ST_4_VALUE' => $this->trans('3-Year', [], 'Modules.Itstorestats.Admin'), 'ITSTORE_ST_4_LABEL' => $this->trans('warranty on desktops & servers', [], 'Modules.Itstorestats.Admin'),
         ];
     }
 
@@ -105,7 +105,7 @@ class Itstorestats extends Module
             foreach (array_keys($this->defaults()) as $k) {
                 Configuration::updateValue($k, Tools::getValue($k));
             }
-            $output .= $this->displayConfirmation($this->l('Settings saved.'));
+            $output .= $this->displayConfirmation($this->trans('Settings saved.', [], 'Modules.Itstorestats.Admin'));
         }
 
         return $output . $this->renderForm();
@@ -115,14 +115,14 @@ class Itstorestats extends Module
     {
         $fields = [];
         for ($i = 1; $i <= self::N; $i++) {
-            $fields[] = ['type' => 'text', 'label' => sprintf($this->l('Stat %d — value'), $i), 'name' => 'ITSTORE_ST_' . $i . '_VALUE', 'class' => 'fixed-width-sm'];
-            $fields[] = ['type' => 'text', 'label' => sprintf($this->l('Stat %d — label'), $i), 'name' => 'ITSTORE_ST_' . $i . '_LABEL'];
+            $fields[] = ['type' => 'text', 'label' => sprintf($this->trans('Stat %d — value', [], 'Modules.Itstorestats.Admin'), $i), 'name' => 'ITSTORE_ST_' . $i . '_VALUE', 'class' => 'fixed-width-sm'];
+            $fields[] = ['type' => 'text', 'label' => sprintf($this->trans('Stat %d — label', [], 'Modules.Itstorestats.Admin'), $i), 'name' => 'ITSTORE_ST_' . $i . '_LABEL'];
         }
 
         $form = ['form' => [
-            'legend' => ['title' => $this->l('Stats band'), 'icon' => 'icon-bar-chart'],
+            'legend' => ['title' => $this->trans('Stats band', [], 'Modules.Itstorestats.Admin'), 'icon' => 'icon-bar-chart'],
             'input' => $fields,
-            'submit' => ['title' => $this->l('Save'), 'name' => 'submitItstoreStats'],
+            'submit' => ['title' => $this->trans('Save', [], 'Modules.Itstorestats.Admin'), 'name' => 'submitItstoreStats'],
         ]];
 
         $helper = new HelperForm();

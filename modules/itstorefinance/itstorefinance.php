@@ -28,8 +28,8 @@ class Itstorefinance extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('IT Store Finance');
-        $this->description = $this->l('“From $x/month” finance messaging on the product page.');
+        $this->displayName = $this->trans('IT Store Finance', [], 'Modules.Itstorefinance.Admin');
+        $this->description = $this->trans('“From $x/month” finance messaging on the product page.', [], 'Modules.Itstorefinance.Admin');
     }
 
     protected function defaults()
@@ -39,7 +39,7 @@ class Itstorefinance extends Module
             'ITSTORE_FIN_MONTHS' => 12,
             'ITSTORE_FIN_APR' => 0,
             'ITSTORE_FIN_MIN' => 100,
-            'ITSTORE_FIN_PROVIDER' => $this->l('Finance available'),
+            'ITSTORE_FIN_PROVIDER' => $this->trans('Finance available', [], 'Modules.Itstorefinance.Admin'),
             'ITSTORE_FIN_URL' => '',
         ];
     }
@@ -154,7 +154,7 @@ class Itstorefinance extends Module
         if (Tools::isSubmit('submitItstoreFin')) {
             $url = trim(Tools::getValue('ITSTORE_FIN_URL'));
             if ($url !== '' && !Validate::isUrlOrEmpty($url)) {
-                $output .= $this->displayError($this->l('The provider URL is not valid.'));
+                $output .= $this->displayError($this->trans('The provider URL is not valid.', [], 'Modules.Itstorefinance.Admin'));
             } else {
                 Configuration::updateValue('ITSTORE_FIN_ENABLED', (int) Tools::getValue('ITSTORE_FIN_ENABLED'));
                 Configuration::updateValue('ITSTORE_FIN_MONTHS', (int) Tools::getValue('ITSTORE_FIN_MONTHS'));
@@ -162,7 +162,7 @@ class Itstorefinance extends Module
                 Configuration::updateValue('ITSTORE_FIN_MIN', (float) Tools::getValue('ITSTORE_FIN_MIN'));
                 Configuration::updateValue('ITSTORE_FIN_PROVIDER', Tools::getValue('ITSTORE_FIN_PROVIDER'));
                 Configuration::updateValue('ITSTORE_FIN_URL', $url);
-                $output .= $this->displayConfirmation($this->l('Settings saved.'));
+                $output .= $this->displayConfirmation($this->trans('Settings saved.', [], 'Modules.Itstorefinance.Admin'));
             }
         }
 
@@ -172,22 +172,22 @@ class Itstorefinance extends Module
     protected function renderForm()
     {
         $form = ['form' => [
-            'legend' => ['title' => $this->l('Finance messaging'), 'icon' => 'icon-credit-card'],
+            'legend' => ['title' => $this->trans('Finance messaging', [], 'Modules.Itstorefinance.Admin'), 'icon' => 'icon-credit-card'],
             'input' => [
                 [
-                    'type' => 'switch', 'label' => $this->l('Enabled'), 'name' => 'ITSTORE_FIN_ENABLED', 'is_bool' => true,
+                    'type' => 'switch', 'label' => $this->trans('Enabled', [], 'Modules.Itstorefinance.Admin'), 'name' => 'ITSTORE_FIN_ENABLED', 'is_bool' => true,
                     'values' => [
-                        ['id' => 'fin_on', 'value' => 1, 'label' => $this->l('Yes')],
-                        ['id' => 'fin_off', 'value' => 0, 'label' => $this->l('No')],
+                        ['id' => 'fin_on', 'value' => 1, 'label' => $this->trans('Yes', [], 'Modules.Itstorefinance.Admin')],
+                        ['id' => 'fin_off', 'value' => 0, 'label' => $this->trans('No', [], 'Modules.Itstorefinance.Admin')],
                     ],
                 ],
-                ['type' => 'text', 'label' => $this->l('Term (months)'), 'name' => 'ITSTORE_FIN_MONTHS', 'class' => 'fixed-width-sm'],
-                ['type' => 'text', 'label' => $this->l('APR %'), 'name' => 'ITSTORE_FIN_APR', 'class' => 'fixed-width-sm', 'desc' => $this->l('Set 0 for interest-free.')],
-                ['type' => 'text', 'label' => $this->l('Minimum price'), 'name' => 'ITSTORE_FIN_MIN', 'class' => 'fixed-width-sm'],
-                ['type' => 'text', 'label' => $this->l('Provider label'), 'name' => 'ITSTORE_FIN_PROVIDER'],
-                ['type' => 'text', 'label' => $this->l('Provider URL'), 'name' => 'ITSTORE_FIN_URL'],
+                ['type' => 'text', 'label' => $this->trans('Term (months)', [], 'Modules.Itstorefinance.Admin'), 'name' => 'ITSTORE_FIN_MONTHS', 'class' => 'fixed-width-sm'],
+                ['type' => 'text', 'label' => $this->trans('APR %', [], 'Modules.Itstorefinance.Admin'), 'name' => 'ITSTORE_FIN_APR', 'class' => 'fixed-width-sm', 'desc' => $this->trans('Set 0 for interest-free.', [], 'Modules.Itstorefinance.Admin')],
+                ['type' => 'text', 'label' => $this->trans('Minimum price', [], 'Modules.Itstorefinance.Admin'), 'name' => 'ITSTORE_FIN_MIN', 'class' => 'fixed-width-sm'],
+                ['type' => 'text', 'label' => $this->trans('Provider label', [], 'Modules.Itstorefinance.Admin'), 'name' => 'ITSTORE_FIN_PROVIDER'],
+                ['type' => 'text', 'label' => $this->trans('Provider URL', [], 'Modules.Itstorefinance.Admin'), 'name' => 'ITSTORE_FIN_URL'],
             ],
-            'submit' => ['title' => $this->l('Save'), 'name' => 'submitItstoreFin'],
+            'submit' => ['title' => $this->trans('Save', [], 'Modules.Itstorefinance.Admin'), 'name' => 'submitItstoreFin'],
         ]];
 
         $helper = new HelperForm();

@@ -30,8 +30,8 @@ class Itstorebulkpricing extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('IT Store Bulk Pricing');
-        $this->description = $this->l('Bulk / business quantity pricing tiers on the product page.');
+        $this->displayName = $this->trans('IT Store Bulk Pricing', [], 'Modules.Itstorebulkpricing.Admin');
+        $this->description = $this->trans('Bulk / business quantity pricing tiers on the product page.', [], 'Modules.Itstorebulkpricing.Admin');
     }
 
     protected function defaults()
@@ -149,7 +149,7 @@ class Itstorebulkpricing extends Module
             foreach (array_keys($this->defaults()) as $k) {
                 Configuration::updateValue($k, (int) Tools::getValue($k));
             }
-            $output .= $this->displayConfirmation($this->l('Settings saved.'));
+            $output .= $this->displayConfirmation($this->trans('Settings saved.', [], 'Modules.Itstorebulkpricing.Admin'));
         }
 
         return $output . $this->renderForm();
@@ -158,21 +158,21 @@ class Itstorebulkpricing extends Module
     protected function renderForm()
     {
         $fields = [[
-            'type' => 'switch', 'label' => $this->l('Enabled'), 'name' => 'ITSTORE_BP_ENABLED', 'is_bool' => true,
+            'type' => 'switch', 'label' => $this->trans('Enabled', [], 'Modules.Itstorebulkpricing.Admin'), 'name' => 'ITSTORE_BP_ENABLED', 'is_bool' => true,
             'values' => [
-                ['id' => 'bp_on', 'value' => 1, 'label' => $this->l('Yes')],
-                ['id' => 'bp_off', 'value' => 0, 'label' => $this->l('No')],
+                ['id' => 'bp_on', 'value' => 1, 'label' => $this->trans('Yes', [], 'Modules.Itstorebulkpricing.Admin')],
+                ['id' => 'bp_off', 'value' => 0, 'label' => $this->trans('No', [], 'Modules.Itstorebulkpricing.Admin')],
             ],
         ]];
         for ($i = 1; $i <= self::T; $i++) {
-            $fields[] = ['type' => 'text', 'label' => sprintf($this->l('Tier %d — min qty'), $i), 'name' => 'ITSTORE_BP_' . $i . '_QTY', 'class' => 'fixed-width-sm'];
-            $fields[] = ['type' => 'text', 'label' => sprintf($this->l('Tier %d — %% off'), $i), 'name' => 'ITSTORE_BP_' . $i . '_DISC', 'class' => 'fixed-width-sm'];
+            $fields[] = ['type' => 'text', 'label' => sprintf($this->trans('Tier %d — min qty', [], 'Modules.Itstorebulkpricing.Admin'), $i), 'name' => 'ITSTORE_BP_' . $i . '_QTY', 'class' => 'fixed-width-sm'];
+            $fields[] = ['type' => 'text', 'label' => sprintf($this->trans('Tier %d — %% off', [], 'Modules.Itstorebulkpricing.Admin'), $i), 'name' => 'ITSTORE_BP_' . $i . '_DISC', 'class' => 'fixed-width-sm'];
         }
 
         $form = ['form' => [
-            'legend' => ['title' => $this->l('Bulk pricing tiers'), 'icon' => 'icon-table'],
+            'legend' => ['title' => $this->trans('Bulk pricing tiers', [], 'Modules.Itstorebulkpricing.Admin'), 'icon' => 'icon-table'],
             'input' => $fields,
-            'submit' => ['title' => $this->l('Save'), 'name' => 'submitItstoreBp'],
+            'submit' => ['title' => $this->trans('Save', [], 'Modules.Itstorebulkpricing.Admin'), 'name' => 'submitItstoreBp'],
         ]];
 
         $helper = new HelperForm();

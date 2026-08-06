@@ -3,6 +3,30 @@
 All notable changes to the IT Store theme and its modules are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.3.0] - 2026-08-06
+
+### Added
+- `itstoreseo` (Organization/WebSite/Breadcrumb JSON-LD), `itstoretopbar`
+  (header utility bar), `itstoreordertrack` (guest order lookup), `itstorerecent`
+  (Recommended + Recently Viewed), `itstoresavedcart` (restore a saved cart),
+  and a printable **Download Spec Sheet** in `itstorespecsheet`.
+- `itstoreautoreorder` upgraded to a real subscription workflow: `itstore_subscription`
+  table, AJAX subscribe, "My subscriptions" account page, and a token-protected
+  reminder cron with a themed reorder email (reminder-based reorder — not
+  stored-card auto-charge).
+- Category page: dark banner + "About" block via a minimal `category.tpl` override
+  that extends the parent product-list (facets/products untouched).
+- Native `blockwishlist` + `psgdpr` enabled via `theme.yml`.
+
+### Changed
+- **Self-hosted fonts**: Inter + JetBrains Mono woff2 (latin) bundled in
+  `assets/fonts` with `assets/css/fonts.css`; dropped the Google Fonts request.
+- **i18n**: migrated module classes to `$this->trans(..., 'Modules.<Name>.Admin')`
+  and templates to `{l s='…' d='Modules.<Name>.Shop'}` (the PS 8/9 idiom).
+  `$this->l()` still worked on 9.1 (CI-verified); this is future-proofing.
+- **Verified on PrestaShop 9.1** end-to-end: all modules install and the front
+  office passes smoke tests (integration CI green).
+
 ## [1.2.0] - 2026-08-05
 
 ### Added — B2B sections from the mockup

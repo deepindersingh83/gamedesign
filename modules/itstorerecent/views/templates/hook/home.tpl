@@ -4,8 +4,8 @@
 {if $recent_recommended}
   <section class="page-section itstore-rec">
     <div class="container">
-      <span class="section-eyebrow">{l s='Based on your browsing' mod='itstorerecent'}</span>
-      <h2 class="section-title">{l s='Recommended For You' mod='itstorerecent'}</h2>
+      <span class="section-eyebrow">{l s='Based on your browsing' d='Modules.Itstorerecent.Shop'}</span>
+      <h2 class="section-title">{l s='Recommended For You' d='Modules.Itstorerecent.Shop'}</h2>
       <div class="itstore-rec__grid">
         {foreach from=$recent_recommended item=p}
           <a class="itstore-rec__card" href="{$p.url|escape:'html':'UTF-8'}">
@@ -21,7 +21,7 @@
 
 <section class="page-section itstore-rec itstore-rec--viewed" data-itstore-recent hidden>
   <div class="container">
-    <h2 class="section-title">{l s='Recently Viewed' mod='itstorerecent'}</h2>
+    <h2 class="section-title">{l s='Recently Viewed' d='Modules.Itstorerecent.Shop'}</h2>
     <div class="itstore-rec__grid" data-recent-grid></div>
   </div>
 </section>

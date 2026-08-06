@@ -28,8 +28,8 @@ class Itstorebrands extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('IT Store Brands');
-        $this->description = $this->l('Row of brand / manufacturer logos on the home page.');
+        $this->displayName = $this->trans('IT Store Brands', [], 'Modules.Itstorebrands.Admin');
+        $this->description = $this->trans('Row of brand / manufacturer logos on the home page.', [], 'Modules.Itstorebrands.Admin');
     }
 
     public function install()
@@ -39,7 +39,7 @@ class Itstorebrands extends Module
             || !$this->registerHook('actionFrontControllerSetMedia')) {
             return false;
         }
-        Configuration::updateValue('ITSTORE_BR_TITLE', $this->l('Top brands'));
+        Configuration::updateValue('ITSTORE_BR_TITLE', $this->trans('Top brands', [], 'Modules.Itstorebrands.Admin'));
         Configuration::updateValue('ITSTORE_BR_NB', 12);
 
         return true;
@@ -118,7 +118,7 @@ class Itstorebrands extends Module
         if (Tools::isSubmit('submitItstoreBrands')) {
             Configuration::updateValue('ITSTORE_BR_TITLE', Tools::getValue('ITSTORE_BR_TITLE'));
             Configuration::updateValue('ITSTORE_BR_NB', (int) Tools::getValue('ITSTORE_BR_NB'));
-            $output .= $this->displayConfirmation($this->l('Settings saved.'));
+            $output .= $this->displayConfirmation($this->trans('Settings saved.', [], 'Modules.Itstorebrands.Admin'));
         }
 
         return $output . $this->renderForm();
@@ -127,12 +127,12 @@ class Itstorebrands extends Module
     protected function renderForm()
     {
         $form = ['form' => [
-            'legend' => ['title' => $this->l('Brands strip'), 'icon' => 'icon-copyright'],
+            'legend' => ['title' => $this->trans('Brands strip', [], 'Modules.Itstorebrands.Admin'), 'icon' => 'icon-copyright'],
             'input' => [
-                ['type' => 'text', 'label' => $this->l('Block title'), 'name' => 'ITSTORE_BR_TITLE'],
-                ['type' => 'text', 'label' => $this->l('Max logos'), 'name' => 'ITSTORE_BR_NB', 'class' => 'fixed-width-sm'],
+                ['type' => 'text', 'label' => $this->trans('Block title', [], 'Modules.Itstorebrands.Admin'), 'name' => 'ITSTORE_BR_TITLE'],
+                ['type' => 'text', 'label' => $this->trans('Max logos', [], 'Modules.Itstorebrands.Admin'), 'name' => 'ITSTORE_BR_NB', 'class' => 'fixed-width-sm'],
             ],
-            'submit' => ['title' => $this->l('Save'), 'name' => 'submitItstoreBrands'],
+            'submit' => ['title' => $this->trans('Save', [], 'Modules.Itstorebrands.Admin'), 'name' => 'submitItstoreBrands'],
         ]];
 
         $helper = new HelperForm();

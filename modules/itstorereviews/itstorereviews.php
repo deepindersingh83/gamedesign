@@ -30,8 +30,8 @@ class Itstorereviews extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('IT Store Reviews');
-        $this->description = $this->l('Verified-buyer product reviews with ratings and moderation.');
+        $this->displayName = $this->trans('IT Store Reviews', [], 'Modules.Itstorereviews.Admin');
+        $this->description = $this->trans('Verified-buyer product reviews with ratings and moderation.', [], 'Modules.Itstorereviews.Admin');
     }
 
     public function install()
@@ -129,7 +129,7 @@ class Itstorereviews extends Module
 
         $html = $this->fetch('module:' . $this->name . '/views/templates/hook/reviews.tpl');
 
-        $title = $this->l('Reviews');
+        $title = $this->trans('Reviews', [], 'Modules.Itstorereviews.Admin');
         if ($count) {
             $title .= ' (' . $count . ')';
         }
@@ -207,16 +207,16 @@ class Itstorereviews extends Module
 
         if (Tools::isSubmit('submitItstoreRv')) {
             Configuration::updateValue('ITSTORE_RV_AUTOAPPROVE', (int) Tools::getValue('ITSTORE_RV_AUTOAPPROVE'));
-            $output .= $this->displayConfirmation($this->l('Settings saved.'));
+            $output .= $this->displayConfirmation($this->trans('Settings saved.', [], 'Modules.Itstorereviews.Admin'));
         } elseif (Tools::isSubmit('approveReview')) {
             Db::getInstance()->update('itstore_review', ['approved' => 1], 'id_review = ' . (int) Tools::getValue('id_review'));
-            $output .= $this->displayConfirmation($this->l('Review approved.'));
+            $output .= $this->displayConfirmation($this->trans('Review approved.', [], 'Modules.Itstorereviews.Admin'));
         } elseif (Tools::isSubmit('unapproveReview')) {
             Db::getInstance()->update('itstore_review', ['approved' => 0], 'id_review = ' . (int) Tools::getValue('id_review'));
-            $output .= $this->displayConfirmation($this->l('Review hidden.'));
+            $output .= $this->displayConfirmation($this->trans('Review hidden.', [], 'Modules.Itstorereviews.Admin'));
         } elseif (Tools::isSubmit('deleteReview')) {
             Db::getInstance()->delete('itstore_review', 'id_review = ' . (int) Tools::getValue('id_review'));
-            $output .= $this->displayConfirmation($this->l('Review deleted.'));
+            $output .= $this->displayConfirmation($this->trans('Review deleted.', [], 'Modules.Itstorereviews.Admin'));
         }
 
         return $output . $this->renderModeration() . $this->renderForm();
@@ -240,41 +240,41 @@ class Itstorereviews extends Module
         $body = '';
         foreach (array_slice($rows, 0, 200) as $r) {
             $action = (int) $r['approved']
-                ? '<a class="btn btn-default btn-xs" href="' . $base . '&unapproveReview&id_review=' . (int) $r['id_review'] . '">' . $this->l('Hide') . '</a>'
-                : '<a class="btn btn-success btn-xs" href="' . $base . '&approveReview&id_review=' . (int) $r['id_review'] . '">' . $this->l('Approve') . '</a>';
+                ? '<a class="btn btn-default btn-xs" href="' . $base . '&unapproveReview&id_review=' . (int) $r['id_review'] . '">' . $this->trans('Hide', [], 'Modules.Itstorereviews.Admin') . '</a>'
+                : '<a class="btn btn-success btn-xs" href="' . $base . '&approveReview&id_review=' . (int) $r['id_review'] . '">' . $this->trans('Approve', [], 'Modules.Itstorereviews.Admin') . '</a>';
             $body .= '<tr>'
                 . '<td>' . str_repeat('★', (int) $r['rating']) . '</td>'
                 . '<td>' . htmlspecialchars((string) $r['name']) . '</td>'
-                . '<td>' . htmlspecialchars($r['customer_name']) . ((int) $r['verified'] ? ' <span class="badge badge-success">' . $this->l('Verified') . '</span>' : '') . '</td>'
+                . '<td>' . htmlspecialchars($r['customer_name']) . ((int) $r['verified'] ? ' <span class="badge badge-success">' . $this->trans('Verified', [], 'Modules.Itstorereviews.Admin') . '</span>' : '') . '</td>'
                 . '<td>' . htmlspecialchars(Tools::substr((string) $r['content'], 0, 90)) . '</td>'
-                . '<td>' . ((int) $r['approved'] ? $this->l('Live') : '<strong>' . $this->l('Pending') . '</strong>') . '</td>'
+                . '<td>' . ((int) $r['approved'] ? $this->trans('Live', [], 'Modules.Itstorereviews.Admin') : '<strong>' . $this->trans('Pending', [], 'Modules.Itstorereviews.Admin') . '</strong>') . '</td>'
                 . '<td class="text-right">' . $action
-                . ' <a class="btn btn-danger btn-xs" onclick="return confirm(\'' . $this->l('Delete?') . '\')" href="' . $base . '&deleteReview&id_review=' . (int) $r['id_review'] . '">' . $this->l('Delete') . '</a></td>'
+                . ' <a class="btn btn-danger btn-xs" onclick="return confirm(\'' . $this->trans('Delete?', [], 'Modules.Itstorereviews.Admin') . '\')" href="' . $base . '&deleteReview&id_review=' . (int) $r['id_review'] . '">' . $this->trans('Delete', [], 'Modules.Itstorereviews.Admin') . '</a></td>'
                 . '</tr>';
         }
         if ($body === '') {
-            $body = '<tr><td colspan="6">' . $this->l('No reviews yet.') . '</td></tr>';
+            $body = '<tr><td colspan="6">' . $this->trans('No reviews yet.', [], 'Modules.Itstorereviews.Admin') . '</td></tr>';
         }
 
-        return '<div class="panel"><div class="panel-heading"><i class="icon-star"></i> ' . $this->l('Moderate reviews') . '</div>'
-            . '<table class="table"><thead><tr><th>' . $this->l('Rating') . '</th><th>' . $this->l('Product') . '</th><th>' . $this->l('Author')
-            . '</th><th>' . $this->l('Extract') . '</th><th>' . $this->l('Status') . '</th><th class="text-right">' . $this->l('Actions') . '</th></tr></thead><tbody>'
+        return '<div class="panel"><div class="panel-heading"><i class="icon-star"></i> ' . $this->trans('Moderate reviews', [], 'Modules.Itstorereviews.Admin') . '</div>'
+            . '<table class="table"><thead><tr><th>' . $this->trans('Rating', [], 'Modules.Itstorereviews.Admin') . '</th><th>' . $this->trans('Product', [], 'Modules.Itstorereviews.Admin') . '</th><th>' . $this->trans('Author', [], 'Modules.Itstorereviews.Admin')
+            . '</th><th>' . $this->trans('Extract', [], 'Modules.Itstorereviews.Admin') . '</th><th>' . $this->trans('Status', [], 'Modules.Itstorereviews.Admin') . '</th><th class="text-right">' . $this->trans('Actions', [], 'Modules.Itstorereviews.Admin') . '</th></tr></thead><tbody>'
             . $body . '</tbody></table></div>';
     }
 
     protected function renderForm()
     {
         $form = ['form' => [
-            'legend' => ['title' => $this->l('Review settings'), 'icon' => 'icon-cogs'],
+            'legend' => ['title' => $this->trans('Review settings', [], 'Modules.Itstorereviews.Admin'), 'icon' => 'icon-cogs'],
             'input' => [[
-                'type' => 'switch', 'label' => $this->l('Auto-approve new reviews'), 'name' => 'ITSTORE_RV_AUTOAPPROVE', 'is_bool' => true,
+                'type' => 'switch', 'label' => $this->trans('Auto-approve new reviews', [], 'Modules.Itstorereviews.Admin'), 'name' => 'ITSTORE_RV_AUTOAPPROVE', 'is_bool' => true,
                 'values' => [
-                    ['id' => 'aa_on', 'value' => 1, 'label' => $this->l('Yes')],
-                    ['id' => 'aa_off', 'value' => 0, 'label' => $this->l('No')],
+                    ['id' => 'aa_on', 'value' => 1, 'label' => $this->trans('Yes', [], 'Modules.Itstorereviews.Admin')],
+                    ['id' => 'aa_off', 'value' => 0, 'label' => $this->trans('No', [], 'Modules.Itstorereviews.Admin')],
                 ],
-                'desc' => $this->l('Off = new reviews wait for moderation.'),
+                'desc' => $this->trans('Off = new reviews wait for moderation.', [], 'Modules.Itstorereviews.Admin'),
             ]],
-            'submit' => ['title' => $this->l('Save'), 'name' => 'submitItstoreRv'],
+            'submit' => ['title' => $this->trans('Save', [], 'Modules.Itstorereviews.Admin'), 'name' => 'submitItstoreRv'],
         ]];
 
         $helper = new HelperForm();

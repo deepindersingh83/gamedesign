@@ -28,8 +28,8 @@ class Itstoreseo extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('IT Store SEO');
-        $this->description = $this->l('Organization, WebSite and Breadcrumb JSON-LD structured data.');
+        $this->displayName = $this->trans('IT Store SEO', [], 'Modules.Itstoreseo.Admin');
+        $this->description = $this->trans('Organization, WebSite and Breadcrumb JSON-LD structured data.', [], 'Modules.Itstoreseo.Admin');
     }
 
     protected function defaults()
@@ -146,18 +146,18 @@ class Itstoreseo extends Module
         $output = '';
         if (Tools::isSubmit('submitItstoreSeo')) {
             Configuration::updateValue('ITSTORE_SEO_SAMEAS', Tools::getValue('ITSTORE_SEO_SAMEAS'));
-            $output .= $this->displayConfirmation($this->l('Settings saved.'));
+            $output .= $this->displayConfirmation($this->trans('Settings saved.', [], 'Modules.Itstoreseo.Admin'));
         }
 
         $form = ['form' => [
-            'legend' => ['title' => $this->l('SEO'), 'icon' => 'icon-google'],
+            'legend' => ['title' => $this->trans('SEO', [], 'Modules.Itstoreseo.Admin'), 'icon' => 'icon-google'],
             'input' => [[
                 'type' => 'text',
-                'label' => $this->l('Social profile URLs'),
+                'label' => $this->trans('Social profile URLs', [], 'Modules.Itstoreseo.Admin'),
                 'name' => 'ITSTORE_SEO_SAMEAS',
-                'desc' => $this->l('Comma-separated (Facebook, LinkedIn, …) for Organization sameAs.'),
+                'desc' => $this->trans('Comma-separated (Facebook, LinkedIn, …) for Organization sameAs.', [], 'Modules.Itstoreseo.Admin'),
             ]],
-            'submit' => ['title' => $this->l('Save'), 'name' => 'submitItstoreSeo'],
+            'submit' => ['title' => $this->trans('Save', [], 'Modules.Itstoreseo.Admin'), 'name' => 'submitItstoreSeo'],
         ]];
 
         $helper = new HelperForm();

@@ -30,8 +30,8 @@ class Itstorespecsheet extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('IT Store Spec Sheet');
-        $this->description = $this->l('Formatted specifications tab on the product page, built from features.');
+        $this->displayName = $this->trans('IT Store Spec Sheet', [], 'Modules.Itstorespecsheet.Admin');
+        $this->description = $this->trans('Formatted specifications tab on the product page, built from features.', [], 'Modules.Itstorespecsheet.Admin');
     }
 
     public function install()
@@ -89,7 +89,7 @@ class Itstorespecsheet extends Module
         $html = $this->fetch('module:' . $this->name . '/views/templates/hook/specsheet.tpl');
 
         $extra = new ProductExtraContent();
-        $extra->setTitle($this->l('Specifications'))
+        $extra->setTitle($this->trans('Specifications', [], 'Modules.Itstorespecsheet.Admin'))
             ->setContent($html);
 
         return [$extra];

@@ -28,8 +28,8 @@ class Itstoresavedcart extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('IT Store Saved Cart');
-        $this->description = $this->l('Offer returning customers to restore a previously saved cart.');
+        $this->displayName = $this->trans('IT Store Saved Cart', [], 'Modules.Itstoresavedcart.Admin');
+        $this->description = $this->trans('Offer returning customers to restore a previously saved cart.', [], 'Modules.Itstoresavedcart.Admin');
     }
 
     public function install()

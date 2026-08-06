@@ -3,7 +3,7 @@
  * Icons are rendered as inline SVG (no external icon font dependency),
  * chosen from the configured icon keyword with a safe default.
  *}
-<a class="itstore-skip-link" href="#content">{l s='Skip to content' mod='itstoretrustbar'}</a>
+<a class="itstore-skip-link" href="#content">{l s='Skip to content' d='Modules.Itstoretrustbar.Shop'}</a>
 <div class="itstore-trustbar">
   <div class="container">
     <ul class="itstore-trustbar__list">

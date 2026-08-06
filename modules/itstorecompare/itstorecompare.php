@@ -31,8 +31,8 @@ class Itstorecompare extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('IT Store Compare');
-        $this->description = $this->l('Side-by-side product comparison with a compare tray.');
+        $this->displayName = $this->trans('IT Store Compare', [], 'Modules.Itstorecompare.Admin');
+        $this->description = $this->trans('Side-by-side product comparison with a compare tray.', [], 'Modules.Itstorecompare.Admin');
     }
 
     public function install()

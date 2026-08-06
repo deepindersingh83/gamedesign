@@ -33,8 +33,8 @@ class Itstoreautoreorder extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('IT Store Subscribe & Save');
-        $this->description = $this->l('Subscribe to products for reminder-based auto-reorder.');
+        $this->displayName = $this->trans('IT Store Subscribe & Save', [], 'Modules.Itstoreautoreorder.Admin');
+        $this->description = $this->trans('Subscribe to products for reminder-based auto-reorder.', [], 'Modules.Itstoreautoreorder.Admin');
     }
 
     protected function defaults()
@@ -42,7 +42,7 @@ class Itstoreautoreorder extends Module
         return [
             'ITSTORE_AR_ENABLED' => 1,
             'ITSTORE_AR_DISCOUNT' => 10,
-            'ITSTORE_AR_INTERVAL' => $this->l('every 3 months, cancel anytime'),
+            'ITSTORE_AR_INTERVAL' => $this->trans('every 3 months, cancel anytime', [], 'Modules.Itstoreautoreorder.Admin'),
             'ITSTORE_AR_DAYS' => 90,
         ];
     }
@@ -185,7 +185,7 @@ class Itstoreautoreorder extends Module
             Mail::Send(
                 (int) Configuration::get('PS_LANG_DEFAULT'),
                 'reorder',
-                $this->l('Time to reorder'),
+                $this->trans('Time to reorder', [], 'Modules.Itstoreautoreorder.Admin'),
                 [
                     '{firstname}' => $customer->firstname,
                     '{product}' => is_array($product->name) ? reset($product->name) : $product->name,
@@ -215,12 +215,12 @@ class Itstoreautoreorder extends Module
             Configuration::updateValue('ITSTORE_AR_DISCOUNT', (int) Tools::getValue('ITSTORE_AR_DISCOUNT'));
             Configuration::updateValue('ITSTORE_AR_INTERVAL', Tools::getValue('ITSTORE_AR_INTERVAL'));
             Configuration::updateValue('ITSTORE_AR_DAYS', (int) Tools::getValue('ITSTORE_AR_DAYS'));
-            $output .= $this->displayConfirmation($this->l('Settings saved.'));
+            $output .= $this->displayConfirmation($this->trans('Settings saved.', [], 'Modules.Itstoreautoreorder.Admin'));
         }
 
         $cron = $this->context->link->getModuleLink($this->name, 'cron', ['token' => Configuration::get('ITSTORE_AR_CRON_TOKEN')], true);
-        $output .= '<div class="panel"><div class="panel-heading"><i class="icon-time"></i> ' . $this->l('Reorder-reminder cron') . '</div>'
-            . '<p>' . $this->l('Call daily from your server cron:') . '</p><pre style="white-space:normal;word-break:break-all">'
+        $output .= '<div class="panel"><div class="panel-heading"><i class="icon-time"></i> ' . $this->trans('Reorder-reminder cron', [], 'Modules.Itstoreautoreorder.Admin') . '</div>'
+            . '<p>' . $this->trans('Call daily from your server cron:', [], 'Modules.Itstoreautoreorder.Admin') . '</p><pre style="white-space:normal;word-break:break-all">'
             . htmlspecialchars($cron) . '</pre></div>';
 
         return $output . $this->renderForm();
@@ -229,20 +229,20 @@ class Itstoreautoreorder extends Module
     protected function renderForm()
     {
         $form = ['form' => [
-            'legend' => ['title' => $this->l('Subscribe & Save'), 'icon' => 'icon-refresh'],
+            'legend' => ['title' => $this->trans('Subscribe & Save', [], 'Modules.Itstoreautoreorder.Admin'), 'icon' => 'icon-refresh'],
             'input' => [
                 [
-                    'type' => 'switch', 'label' => $this->l('Enabled'), 'name' => 'ITSTORE_AR_ENABLED', 'is_bool' => true,
+                    'type' => 'switch', 'label' => $this->trans('Enabled', [], 'Modules.Itstoreautoreorder.Admin'), 'name' => 'ITSTORE_AR_ENABLED', 'is_bool' => true,
                     'values' => [
-                        ['id' => 'ar_on', 'value' => 1, 'label' => $this->l('Yes')],
-                        ['id' => 'ar_off', 'value' => 0, 'label' => $this->l('No')],
+                        ['id' => 'ar_on', 'value' => 1, 'label' => $this->trans('Yes', [], 'Modules.Itstoreautoreorder.Admin')],
+                        ['id' => 'ar_off', 'value' => 0, 'label' => $this->trans('No', [], 'Modules.Itstoreautoreorder.Admin')],
                     ],
                 ],
-                ['type' => 'text', 'label' => $this->l('Discount %'), 'name' => 'ITSTORE_AR_DISCOUNT', 'class' => 'fixed-width-sm'],
-                ['type' => 'text', 'label' => $this->l('Interval (days)'), 'name' => 'ITSTORE_AR_DAYS', 'class' => 'fixed-width-sm'],
-                ['type' => 'text', 'label' => $this->l('Interval text'), 'name' => 'ITSTORE_AR_INTERVAL'],
+                ['type' => 'text', 'label' => $this->trans('Discount %', [], 'Modules.Itstoreautoreorder.Admin'), 'name' => 'ITSTORE_AR_DISCOUNT', 'class' => 'fixed-width-sm'],
+                ['type' => 'text', 'label' => $this->trans('Interval (days)', [], 'Modules.Itstoreautoreorder.Admin'), 'name' => 'ITSTORE_AR_DAYS', 'class' => 'fixed-width-sm'],
+                ['type' => 'text', 'label' => $this->trans('Interval text', [], 'Modules.Itstoreautoreorder.Admin'), 'name' => 'ITSTORE_AR_INTERVAL'],
             ],
-            'submit' => ['title' => $this->l('Save'), 'name' => 'submitItstoreAr'],
+            'submit' => ['title' => $this->trans('Save', [], 'Modules.Itstoreautoreorder.Admin'), 'name' => 'submitItstoreAr'],
         ]];
 
         $helper = new HelperForm();

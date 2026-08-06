@@ -5,7 +5,7 @@
   <div class="container">
     <div class="itstore-blog__head">
       <h2 class="section-title" style="margin-bottom:0">{$bl_title|escape:'html':'UTF-8'}</h2>
-      {if $bl_all}<a class="itstore-blog__all" href="{$bl_all|escape:'html':'UTF-8'}">{l s='View all articles' mod='itstoreblog'} &rarr;</a>{/if}
+      {if $bl_all}<a class="itstore-blog__all" href="{$bl_all|escape:'html':'UTF-8'}">{l s='View all articles' d='Modules.Itstoreblog.Shop'} &rarr;</a>{/if}
     </div>
     <div class="itstore-blog__grid">
       {foreach from=$bl_posts item=post}

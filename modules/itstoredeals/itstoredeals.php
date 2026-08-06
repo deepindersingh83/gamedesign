@@ -27,8 +27,8 @@ class Itstoredeals extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('IT Store Deals');
-        $this->description = $this->l('Home-page block of current deals / price drops.');
+        $this->displayName = $this->trans('IT Store Deals', [], 'Modules.Itstoredeals.Admin');
+        $this->description = $this->trans('Home-page block of current deals / price drops.', [], 'Modules.Itstoredeals.Admin');
     }
 
     public function install()
@@ -38,7 +38,7 @@ class Itstoredeals extends Module
             || !$this->registerHook('actionFrontControllerSetMedia')) {
             return false;
         }
-        Configuration::updateValue('ITSTORE_DEALS_TITLE', $this->l('Hot deals'));
+        Configuration::updateValue('ITSTORE_DEALS_TITLE', $this->trans('Hot deals', [], 'Modules.Itstoredeals.Admin'));
         Configuration::updateValue('ITSTORE_DEALS_NB', 8);
 
         return true;
@@ -139,7 +139,7 @@ class Itstoredeals extends Module
         if (Tools::isSubmit('submitItstoreDeals')) {
             Configuration::updateValue('ITSTORE_DEALS_TITLE', Tools::getValue('ITSTORE_DEALS_TITLE'));
             Configuration::updateValue('ITSTORE_DEALS_NB', (int) Tools::getValue('ITSTORE_DEALS_NB'));
-            $output .= $this->displayConfirmation($this->l('Settings saved.'));
+            $output .= $this->displayConfirmation($this->trans('Settings saved.', [], 'Modules.Itstoredeals.Admin'));
         }
 
         return $output . $this->renderForm();
@@ -148,12 +148,12 @@ class Itstoredeals extends Module
     protected function renderForm()
     {
         $form = ['form' => [
-            'legend' => ['title' => $this->l('Deals block'), 'icon' => 'icon-bolt'],
+            'legend' => ['title' => $this->trans('Deals block', [], 'Modules.Itstoredeals.Admin'), 'icon' => 'icon-bolt'],
             'input' => [
-                ['type' => 'text', 'label' => $this->l('Block title'), 'name' => 'ITSTORE_DEALS_TITLE'],
-                ['type' => 'text', 'label' => $this->l('Number of products'), 'name' => 'ITSTORE_DEALS_NB', 'class' => 'fixed-width-sm'],
+                ['type' => 'text', 'label' => $this->trans('Block title', [], 'Modules.Itstoredeals.Admin'), 'name' => 'ITSTORE_DEALS_TITLE'],
+                ['type' => 'text', 'label' => $this->trans('Number of products', [], 'Modules.Itstoredeals.Admin'), 'name' => 'ITSTORE_DEALS_NB', 'class' => 'fixed-width-sm'],
             ],
-            'submit' => ['title' => $this->l('Save'), 'name' => 'submitItstoreDeals'],
+            'submit' => ['title' => $this->trans('Save', [], 'Modules.Itstoredeals.Admin'), 'name' => 'submitItstoreDeals'],
         ]];
 
         $helper = new HelperForm();

@@ -28,8 +28,8 @@ class Itstorebundles extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('IT Store Bundles');
-        $this->description = $this->l('“Frequently bought together” block from product accessories.');
+        $this->displayName = $this->trans('IT Store Bundles', [], 'Modules.Itstorebundles.Admin');
+        $this->description = $this->trans('“Frequently bought together” block from product accessories.', [], 'Modules.Itstorebundles.Admin');
     }
 
     public function install()

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{$sheet_product|escape:'html':'UTF-8'} — {l s='Spec Sheet' mod='itstorespecsheet'}</title>
+<title>{$sheet_product|escape:'html':'UTF-8'} — {l s='Spec Sheet' d='Modules.Itstorespecsheet.Shop'}</title>
 <style>
   * { box-sizing: border-box; }
   body { font-family: Arial, Helvetica, sans-serif; color: #0b1220; margin: 0; padding: 32px; }
@@ -32,10 +32,10 @@
   </div>
   <h1>{$sheet_product|escape:'html':'UTF-8'}</h1>
   <div class="sheet__meta">
-    {if $sheet_reference}{l s='SKU' mod='itstorespecsheet'}: {$sheet_reference|escape:'html':'UTF-8'} · {/if}
+    {if $sheet_reference}{l s='SKU' d='Modules.Itstorespecsheet.Shop'}: {$sheet_reference|escape:'html':'UTF-8'} · {/if}
     <span class="sheet__price">{$sheet_price}</span>
   </div>
-  <div class="sheet__print"><button type="button" onclick="window.print()">{l s='Print / Save as PDF' mod='itstorespecsheet'}</button></div>
+  <div class="sheet__print"><button type="button" onclick="window.print()">{l s='Print / Save as PDF' d='Modules.Itstorespecsheet.Shop'}</button></div>
   {if $sheet_rows}
     <table>
       <tbody>
@@ -45,7 +45,7 @@
       </tbody>
     </table>
   {else}
-    <p>{l s='No published specifications for this product.' mod='itstorespecsheet'}</p>
+    <p>{l s='No published specifications for this product.' d='Modules.Itstorespecsheet.Shop'}</p>
   {/if}
   <p class="sheet__foot">{$sheet_url|escape:'html':'UTF-8'}</p>
 </div>

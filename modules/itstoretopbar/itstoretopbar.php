@@ -28,14 +28,14 @@ class Itstoretopbar extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('IT Store Top Bar');
-        $this->description = $this->l('Slim header utility bar: Track Order, Business Accounts, contact.');
+        $this->displayName = $this->trans('IT Store Top Bar', [], 'Modules.Itstoretopbar.Admin');
+        $this->description = $this->trans('Slim header utility bar: Track Order, Business Accounts, contact.', [], 'Modules.Itstoretopbar.Admin');
     }
 
     protected function defaults()
     {
         return [
-            'ITSTORE_TOPBAR_MSG' => $this->l('Free next-day delivery on in-stock orders over $99'),
+            'ITSTORE_TOPBAR_MSG' => $this->trans('Free next-day delivery on in-stock orders over $99', [], 'Modules.Itstoretopbar.Admin'),
             'ITSTORE_TOPBAR_TRACK' => '',
             'ITSTORE_TOPBAR_BIZ' => '',
         ];
@@ -94,18 +94,18 @@ class Itstoretopbar extends Module
             foreach (array_keys($this->defaults()) as $k) {
                 Configuration::updateValue($k, Tools::getValue($k));
             }
-            $output .= $this->displayConfirmation($this->l('Settings saved.'));
+            $output .= $this->displayConfirmation($this->trans('Settings saved.', [], 'Modules.Itstoretopbar.Admin'));
         }
 
         $fields = [
-            ['type' => 'text', 'label' => $this->l('Promo message'), 'name' => 'ITSTORE_TOPBAR_MSG'],
-            ['type' => 'text', 'label' => $this->l('Track Order URL'), 'name' => 'ITSTORE_TOPBAR_TRACK', 'desc' => $this->l('Defaults to the IT Store order-tracking page.')],
-            ['type' => 'text', 'label' => $this->l('Business Accounts URL'), 'name' => 'ITSTORE_TOPBAR_BIZ'],
+            ['type' => 'text', 'label' => $this->trans('Promo message', [], 'Modules.Itstoretopbar.Admin'), 'name' => 'ITSTORE_TOPBAR_MSG'],
+            ['type' => 'text', 'label' => $this->trans('Track Order URL', [], 'Modules.Itstoretopbar.Admin'), 'name' => 'ITSTORE_TOPBAR_TRACK', 'desc' => $this->trans('Defaults to the IT Store order-tracking page.', [], 'Modules.Itstoretopbar.Admin')],
+            ['type' => 'text', 'label' => $this->trans('Business Accounts URL', [], 'Modules.Itstoretopbar.Admin'), 'name' => 'ITSTORE_TOPBAR_BIZ'],
         ];
         $form = ['form' => [
-            'legend' => ['title' => $this->l('Top bar'), 'icon' => 'icon-minus'],
+            'legend' => ['title' => $this->trans('Top bar', [], 'Modules.Itstoretopbar.Admin'), 'icon' => 'icon-minus'],
             'input' => $fields,
-            'submit' => ['title' => $this->l('Save'), 'name' => 'submitItstoreTopbar'],
+            'submit' => ['title' => $this->trans('Save', [], 'Modules.Itstoretopbar.Admin'), 'name' => 'submitItstoreTopbar'],
         ]];
 
         $helper = new HelperForm();

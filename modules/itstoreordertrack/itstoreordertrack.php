@@ -28,8 +28,8 @@ class Itstoreordertrack extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('IT Store Order Tracking');
-        $this->description = $this->l('Guest order status lookup by reference + email.');
+        $this->displayName = $this->trans('IT Store Order Tracking', [], 'Modules.Itstoreordertrack.Admin');
+        $this->description = $this->trans('Guest order status lookup by reference + email.', [], 'Modules.Itstoreordertrack.Admin');
     }
 
     public function install()

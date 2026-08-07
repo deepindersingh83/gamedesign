@@ -30,8 +30,8 @@
     </div>
 
     <div class="itstore-hero2__media">
-      {if $hero_business.img}<img class="itstore-hero2__img is-active" data-hero-img="business" src="{$hero_business.img|escape:'html':'UTF-8'}" alt="">{/if}
-      {if $hero_gamer.img}<img class="itstore-hero2__img" data-hero-img="gamer" src="{$hero_gamer.img|escape:'html':'UTF-8'}" alt="">{/if}
+      {if $hero_business.img}<img class="itstore-hero2__img is-active" data-hero-img="business" src="{$hero_business.img|escape:'html':'UTF-8'}" alt="" decoding="async" fetchpriority="high">{/if}
+      {if $hero_gamer.img}<img class="itstore-hero2__img" data-hero-img="gamer" src="{$hero_gamer.img|escape:'html':'UTF-8'}" alt="" loading="lazy" decoding="async">{/if}
     </div>
   </div>
 </section>

@@ -103,7 +103,7 @@ class Itstoreautoreorder extends Module
             $this->context->controller->registerJavascript(
                 'itstore-autoreorder',
                 'modules/' . $this->name . '/views/js/autoreorder.js',
-                ['position' => 'bottom', 'priority' => 147]
+                ['position' => 'bottom', 'priority' => 147, 'attribute' => 'defer']
             );
         }
     }

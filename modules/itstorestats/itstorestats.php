@@ -76,7 +76,7 @@ class Itstorestats extends Module
         $this->context->controller->registerJavascript(
             'itstore-stats',
             'modules/' . $this->name . '/views/js/stats.js',
-            ['position' => 'bottom', 'priority' => 117]
+            ['position' => 'bottom', 'priority' => 117, 'attribute' => 'defer']
         );
     }
 

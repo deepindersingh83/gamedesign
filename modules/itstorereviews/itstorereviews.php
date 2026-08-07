@@ -81,7 +81,7 @@ class Itstorereviews extends Module
             $this->context->controller->registerJavascript(
                 'itstore-reviews',
                 'modules/' . $this->name . '/views/js/reviews.js',
-                ['position' => 'bottom', 'priority' => 145]
+                ['position' => 'bottom', 'priority' => 145, 'attribute' => 'defer']
             );
         }
     }

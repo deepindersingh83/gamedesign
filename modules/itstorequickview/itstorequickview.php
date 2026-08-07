@@ -50,7 +50,7 @@ class Itstorequickview extends Module
         $this->context->controller->registerJavascript(
             'itstore-quickview',
             'modules/' . $this->name . '/views/js/quickview.js',
-            ['position' => 'bottom', 'priority' => 150]
+            ['position' => 'bottom', 'priority' => 150, 'attribute' => 'defer']
         );
     }
 

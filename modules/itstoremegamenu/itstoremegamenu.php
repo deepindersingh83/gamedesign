@@ -77,7 +77,7 @@ class Itstoremegamenu extends Module
         $this->context->controller->registerJavascript(
             'itstore-megamenu',
             'modules/' . $this->name . '/views/js/megamenu.js',
-            ['position' => 'bottom', 'priority' => 90]
+            ['position' => 'bottom', 'priority' => 90, 'attribute' => 'defer']
         );
     }
 

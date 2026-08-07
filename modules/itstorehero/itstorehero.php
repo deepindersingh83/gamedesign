@@ -86,7 +86,7 @@ class Itstorehero extends Module
         $this->context->controller->registerJavascript(
             'itstore-hero',
             'modules/' . $this->name . '/views/js/hero.js',
-            ['position' => 'bottom', 'priority' => 100]
+            ['position' => 'bottom', 'priority' => 100, 'attribute' => 'defer']
         );
     }
 

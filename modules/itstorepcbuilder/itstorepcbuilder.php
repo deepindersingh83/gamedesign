@@ -83,7 +83,7 @@ class Itstorepcbuilder extends Module
         $this->context->controller->registerJavascript(
             'itstore-pcbuilder',
             'modules/' . $this->name . '/views/js/pcbuilder.js',
-            ['position' => 'bottom', 'priority' => 152]
+            ['position' => 'bottom', 'priority' => 152, 'attribute' => 'defer']
         );
     }
 

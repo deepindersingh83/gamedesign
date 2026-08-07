@@ -83,7 +83,7 @@ class Itstoresupport extends Module
         $this->context->controller->registerJavascript(
             'itstore-support',
             'modules/' . $this->name . '/views/js/support.js',
-            ['position' => 'bottom', 'priority' => 130]
+            ['position' => 'bottom', 'priority' => 130, 'attribute' => 'defer']
         );
     }
 

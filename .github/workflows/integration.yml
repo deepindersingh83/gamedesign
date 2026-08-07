@@ -178,6 +178,29 @@ jobs:
           if-no-files-found: warn
           retention-days: 14
 
+      - name: Lighthouse performance budget (informational)
+        continue-on-error: true
+        run: |
+          mkdir -p artifacts/lighthouse
+          npm install -g lighthouse@12 >/dev/null 2>&1
+          lighthouse "$BASE_URL/" \
+            --quiet \
+            --output=json --output=html \
+            --output-path=./artifacts/lighthouse/home \
+            --budget-path=tests/perf/budget.json \
+            --only-categories=performance,seo,best-practices,accessibility \
+            --chrome-flags="--headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage" \
+            || echo "Lighthouse run reported issues (informational)"
+
+      - name: Upload Lighthouse report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-report
+          path: artifacts/lighthouse/**
+          if-no-files-found: warn
+          retention-days: 14
+
       - name: Dump PrestaShop logs on failure
         if: failure()
         run: |

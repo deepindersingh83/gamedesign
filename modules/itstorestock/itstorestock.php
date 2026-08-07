@@ -126,7 +126,7 @@ class Itstorestock extends Module
             $this->context->controller->registerJavascript(
                 'itstore-stock',
                 'modules/' . $this->name . '/views/js/stock.js',
-                ['position' => 'bottom', 'priority' => 143]
+                ['position' => 'bottom', 'priority' => 143, 'attribute' => 'defer']
             );
         }
     }

@@ -26,7 +26,7 @@
               {foreach from=$compare_products item=p}
                 <th class="itstore-compare-table__head">
                   <a href="{$p.url|escape:'html':'UTF-8'}">
-                    <img src="{$p.image|escape:'html':'UTF-8'}" alt="{$p.name|escape:'html':'UTF-8'}">
+                    <img src="{$p.image|escape:'html':'UTF-8'}" alt="{$p.name|escape:'html':'UTF-8'}" loading="lazy" decoding="async">
                     <span class="itstore-compare-table__name">{$p.name|escape:'html':'UTF-8'}</span>
                   </a>
                   <span class="itstore-compare-table__price">{$p.price}</span>

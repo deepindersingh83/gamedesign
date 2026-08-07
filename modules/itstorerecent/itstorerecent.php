@@ -51,7 +51,7 @@ class Itstorerecent extends Module
         $this->context->controller->registerJavascript(
             'itstore-recent',
             'modules/' . $this->name . '/views/js/recent.js',
-            ['position' => 'bottom', 'priority' => 123]
+            ['position' => 'bottom', 'priority' => 123, 'attribute' => 'defer']
         );
     }
 

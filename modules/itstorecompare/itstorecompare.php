@@ -59,7 +59,7 @@ class Itstorecompare extends Module
         $this->context->controller->registerJavascript(
             'itstore-compare',
             'modules/' . $this->name . '/views/js/compare.js',
-            ['position' => 'bottom', 'priority' => 151]
+            ['position' => 'bottom', 'priority' => 151, 'attribute' => 'defer']
         );
     }
 

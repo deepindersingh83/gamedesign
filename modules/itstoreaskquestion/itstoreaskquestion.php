@@ -123,7 +123,7 @@ class Itstoreaskquestion extends Module
             $this->context->controller->registerJavascript(
                 'itstore-askq',
                 'modules/' . $this->name . '/views/js/askquestion.js',
-                ['position' => 'bottom', 'priority' => 148]
+                ['position' => 'bottom', 'priority' => 148, 'attribute' => 'defer']
             );
         }
     }

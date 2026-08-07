@@ -11,7 +11,7 @@
           <blockquote class="itstore-testi__text">&ldquo;{$t.text|escape:'html':'UTF-8'}&rdquo;</blockquote>
           <figcaption class="itstore-testi__author">
             {if $t.img}
-              <span class="itstore-testi__avatar"><img src="{$t.img|escape:'html':'UTF-8'}" alt="{$t.name|escape:'html':'UTF-8'}"></span>
+              <span class="itstore-testi__avatar"><img src="{$t.img|escape:'html':'UTF-8'}" alt="{$t.name|escape:'html':'UTF-8'}" loading="lazy" decoding="async"></span>
             {else}
               <span class="itstore-testi__avatar itstore-testi__avatar--initial">{$t.initial|escape:'html':'UTF-8'}</span>
             {/if}

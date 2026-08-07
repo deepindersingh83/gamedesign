@@ -135,7 +135,7 @@ class Itstoreimageslot extends Module
         $this->context->controller->registerJavascript(
             'itstore-imageslot',
             'modules/' . $this->name . '/views/js/image-slot.js',
-            ['position' => 'bottom', 'priority' => 120]
+            ['position' => 'bottom', 'priority' => 120, 'attribute' => 'defer']
         );
     }
 

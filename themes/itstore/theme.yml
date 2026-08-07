@@ -80,6 +80,7 @@ global_settings:
       - itstoresavedcart
       - itstoresecurity
       - itstoregallery
+      - itstoreadmin
 
   hooks:
     modules_to_hook:

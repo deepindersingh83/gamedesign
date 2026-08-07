@@ -1,0 +1,13 @@
+{
+  "name": "itstore-e2e",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Playwright storefront screenshot capture for CI",
+  "type": "module",
+  "scripts": {
+    "screenshots": "node screenshots.mjs"
+  },
+  "dependencies": {
+    "playwright": "^1.48.0"
+  }
+}

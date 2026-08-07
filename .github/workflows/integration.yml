@@ -142,6 +142,42 @@ jobs:
           check "Category listing (quickview/compare)" "$BASE_URL/index.php?controller=category&id_category=2" || rc=1
           exit $rc
 
+      - name: Enable the IT Store theme (best-effort)
+        run: |
+          # Switch the shop onto the child theme so screenshots capture the real
+          # look. The console theme command is not present on every image, so
+          # this is best-effort — the modules already render on the classic
+          # theme via the same hooks, and the smoke test above is authoritative.
+          docker exec -u www-data psweb sh -lc \
+            'php -d memory_limit=-1 bin/console prestashop:theme:enable itstore 2>/dev/null' \
+            && echo "IT Store theme enabled" \
+            || echo "theme:enable unavailable on this image — screenshots use the active theme"
+          # Give the shop a moment to rebuild after a theme switch.
+          sleep 4
+          curl -s -o /dev/null -w 'front office after theme step: HTTP %{http_code}\n' "$BASE_URL/" || true
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Capture storefront screenshots (Playwright)
+        continue-on-error: true
+        working-directory: tests/e2e
+        run: |
+          npm install --no-audit --no-fund
+          npx playwright install --with-deps chromium
+          OUT_DIR="$GITHUB_WORKSPACE/artifacts/screenshots" BASE_URL="$BASE_URL" node screenshots.mjs
+
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: storefront-screenshots
+          path: artifacts/screenshots/**
+          if-no-files-found: warn
+          retention-days: 14
+
       - name: Dump PrestaShop logs on failure
         if: failure()
         run: |

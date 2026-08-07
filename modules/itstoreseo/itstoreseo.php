@@ -127,6 +127,17 @@ class Itstoreseo extends Module
         if (!is_object($controller) || !method_exists($controller, 'getBreadcrumbLinks')) {
             return [];
         }
+        // getBreadcrumbLinks() is public on ModuleFrontController and the
+        // product/category controllers, but protected on the base
+        // FrontController (e.g. the home/index controller) — calling it there
+        // is a fatal error. Only call it when it is publicly accessible.
+        try {
+            if (!(new ReflectionMethod($controller, 'getBreadcrumbLinks'))->isPublic()) {
+                return [];
+            }
+        } catch (ReflectionException $e) {
+            return [];
+        }
         $bc = $controller->getBreadcrumbLinks();
         if (empty($bc['links']) || !is_array($bc['links'])) {
             return [];

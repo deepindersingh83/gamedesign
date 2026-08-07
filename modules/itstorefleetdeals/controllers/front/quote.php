@@ -21,6 +21,13 @@ class ItstorefleetdealsQuoteModuleFrontController extends ModuleFrontController
             return;
         }
 
+        // Silent-drop spam: a filled honeypot or a form posted implausibly fast.
+        if ($this->isLikelySpam()) {
+            $this->context->smarty->assign('quote_sent', true);
+
+            return;
+        }
+
         $name = trim((string) Tools::getValue('name'));
         $email = trim((string) Tools::getValue('email'));
         $company = trim((string) Tools::getValue('company'));
@@ -59,6 +66,20 @@ class ItstorefleetdealsQuoteModuleFrontController extends ModuleFrontController
         }
 
         $this->context->smarty->assign('quote_sent', true);
+    }
+
+    /**
+     * Dependency-free anti-spam: a non-empty honeypot field (hidden from humans)
+     * or a submission that arrived faster than a person could realistically type.
+     */
+    protected function isLikelySpam()
+    {
+        if (trim((string) Tools::getValue('itstore_hp')) !== '') {
+            return true;
+        }
+        $ts = (int) Tools::getValue('itstore_ts');
+
+        return $ts > 0 && (time() - $ts) < 2;
     }
 
     public function initContent()

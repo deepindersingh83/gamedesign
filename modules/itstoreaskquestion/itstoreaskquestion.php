@@ -22,7 +22,7 @@ class Itstoreaskquestion extends Module
     {
         $this->name = 'itstoreaskquestion';
         $this->tab = 'front_office_features';
-        $this->version = '1.0.0';
+        $this->version = '1.1.0';
         $this->author = 'Syber Info';
         $this->need_instance = 0;
         $this->ps_versions_compliancy = ['min' => '1.7.6.0', 'max' => '9.99.99'];
@@ -52,7 +52,9 @@ class Itstoreaskquestion extends Module
         return parent::install()
             && Db::getInstance()->execute($sql)
             && $this->registerHook('displayProductExtraContent')
-            && $this->registerHook('actionFrontControllerSetMedia');
+            && $this->registerHook('actionFrontControllerSetMedia')
+            && $this->registerHook('actionExportGDPRData')
+            && $this->registerHook('actionDeleteGDPRData');
     }
 
     public function uninstall()
@@ -60,6 +62,54 @@ class Itstoreaskquestion extends Module
         Db::getInstance()->execute('DROP TABLE IF EXISTS `' . _DB_PREFIX_ . 'itstore_question`;');
 
         return parent::uninstall();
+    }
+
+    /**
+     * GDPR (psgdpr): export the questions this email address submitted.
+     */
+    public function hookActionExportGDPRData($params)
+    {
+        $email = $this->gdprCustomerEmail($params);
+        if (!Validate::isEmail($email)) {
+            return '';
+        }
+        $rows = Db::getInstance()->executeS(
+            'SELECT id_question, id_product, email, question, answer, date_add
+             FROM `' . _DB_PREFIX_ . 'itstore_question` WHERE email = "' . pSQL($email) . '"'
+        ) ?: [];
+
+        return json_encode($rows, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    }
+
+    /**
+     * GDPR (psgdpr): erase the questions this email address submitted.
+     */
+    public function hookActionDeleteGDPRData($params)
+    {
+        $email = $this->gdprCustomerEmail($params);
+        if (!Validate::isEmail($email)) {
+            return '';
+        }
+
+        return json_encode((bool) Db::getInstance()->delete('itstore_question', 'email = "' . pSQL($email) . '"'));
+    }
+
+    /**
+     * Resolve the customer email from the psgdpr hook payload (version-tolerant).
+     */
+    protected function gdprCustomerEmail($params)
+    {
+        if (isset($params['email'])) {
+            return (string) $params['email'];
+        }
+        if (isset($params['customer']['email'])) {
+            return (string) $params['customer']['email'];
+        }
+        if (isset($params['customer']) && $params['customer'] instanceof Customer) {
+            return (string) $params['customer']->email;
+        }
+
+        return '';
     }
 
     public function hookActionFrontControllerSetMedia()

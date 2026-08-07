@@ -25,6 +25,10 @@ class ItstorestockNotifyModuleFrontController extends ModuleFrontController
         if (!$idProduct || $token !== Tools::getToken('itstorestock' . $idProduct)) {
             $this->ajaxJson(false, $this->module->l('Invalid request.', 'notify'));
         }
+        // Silent-drop spam bots: acknowledge without storing.
+        if ($this->isLikelySpam()) {
+            $this->ajaxJson(true, $this->module->l('Thanks! We’ll email you when it’s back in stock.', 'notify'));
+        }
         if (!Validate::isEmail($email)) {
             $this->ajaxJson(false, $this->module->l('Please enter a valid email address.', 'notify'));
         }
@@ -48,6 +52,20 @@ class ItstorestockNotifyModuleFrontController extends ModuleFrontController
         }
 
         $this->ajaxJson(true, $this->module->l('Thanks! We’ll email you when it’s back in stock.', 'notify'));
+    }
+
+    /**
+     * Dependency-free anti-spam: a non-empty honeypot field (hidden from humans)
+     * or a submission that arrived faster than a person could realistically type.
+     */
+    protected function isLikelySpam()
+    {
+        if (trim((string) Tools::getValue('itstore_hp')) !== '') {
+            return true;
+        }
+        $ts = (int) Tools::getValue('itstore_ts');
+
+        return $ts > 0 && (time() - $ts) < 2;
     }
 
     protected function ajaxJson($success, $message)

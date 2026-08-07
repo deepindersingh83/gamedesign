@@ -25,7 +25,7 @@ class Itstoreautoreorder extends Module
     {
         $this->name = 'itstoreautoreorder';
         $this->tab = 'front_office_features';
-        $this->version = '1.1.0';
+        $this->version = '1.2.0';
         $this->author = 'Syber Info';
         $this->need_instance = 0;
         $this->ps_versions_compliancy = ['min' => '1.7.6.0', 'max' => '9.99.99'];
@@ -68,7 +68,9 @@ class Itstoreautoreorder extends Module
             || !Db::getInstance()->execute($sql)
             || !$this->registerHook('displayProductAdditionalInfo')
             || !$this->registerHook('displayCustomerAccount')
-            || !$this->registerHook('actionFrontControllerSetMedia')) {
+            || !$this->registerHook('actionFrontControllerSetMedia')
+            || !$this->registerHook('actionExportGDPRData')
+            || !$this->registerHook('actionDeleteGDPRData')) {
             return false;
         }
         foreach ($this->defaults() as $k => $v) {
@@ -136,6 +138,54 @@ class Itstoreautoreorder extends Module
         $this->smarty->assign('ar_manage_url', $this->context->link->getModuleLink($this->name, 'manage', [], true));
 
         return $this->display(__FILE__, 'views/templates/hook/account-link.tpl');
+    }
+
+    /**
+     * GDPR (psgdpr): export this customer's reorder subscriptions.
+     */
+    public function hookActionExportGDPRData($params)
+    {
+        $idCustomer = $this->gdprCustomerId($params);
+        if (!$idCustomer) {
+            return '';
+        }
+        $rows = Db::getInstance()->executeS(
+            'SELECT id_subscription, id_product, id_product_attribute, qty, interval_days, next_date, active, date_add
+             FROM `' . _DB_PREFIX_ . 'itstore_subscription` WHERE id_customer = ' . (int) $idCustomer
+        ) ?: [];
+
+        return json_encode($rows, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    }
+
+    /**
+     * GDPR (psgdpr): erase this customer's reorder subscriptions.
+     */
+    public function hookActionDeleteGDPRData($params)
+    {
+        $idCustomer = $this->gdprCustomerId($params);
+        if (!$idCustomer) {
+            return '';
+        }
+
+        return json_encode((bool) Db::getInstance()->delete('itstore_subscription', 'id_customer = ' . (int) $idCustomer));
+    }
+
+    /**
+     * Resolve the customer id from the psgdpr hook payload (version-tolerant).
+     */
+    protected function gdprCustomerId($params)
+    {
+        if (isset($params['id'])) {
+            return (int) $params['id'];
+        }
+        if (isset($params['customer']['id'])) {
+            return (int) $params['customer']['id'];
+        }
+        if (isset($params['customer']) && $params['customer'] instanceof Customer) {
+            return (int) $params['customer']->id;
+        }
+
+        return 0;
     }
 
     /** Create/refresh a subscription for the logged-in customer. */

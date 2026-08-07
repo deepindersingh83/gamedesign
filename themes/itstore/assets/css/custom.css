@@ -291,3 +291,15 @@ img { max-width: 100%; height: auto; }
 .itstore-catabout { margin: 8px 0 24px; }
 .itstore-catabout summary { cursor: pointer; font-weight: 700; color: var(--it-ink); font-size: 15px; }
 .itstore-catabout__body { color: var(--it-muted); font-size: 14px; line-height: 1.7; margin-top: 10px; }
+
+/* Anti-spam honeypot: visually hidden, off-screen, never focusable. */
+.itstore-hp {
+  position: absolute !important;
+  left: -9999px !important;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}

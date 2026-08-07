@@ -18,6 +18,8 @@
   <form class="itstore-aq__form js-itstore-aq-form" method="post" action="{$aq_submit_url|escape:'html':'UTF-8'}">
     <input type="hidden" name="id_product" value="{$aq_id_product|intval}">
     <input type="hidden" name="token" value="{$aq_token|escape:'html':'UTF-8'}">
+    <input type="text" name="itstore_hp" value="" tabindex="-1" autocomplete="off" aria-hidden="true" class="itstore-hp">
+    <input type="hidden" name="itstore_ts" value="{$smarty.now|intval}">
     <div class="itstore-aq__form-title">{l s='Ask a Question' d='Modules.Itstoreaskquestion.Shop'}</div>
     <textarea name="question" rows="3" required placeholder="{l s='e.g. Does this include a Windows 11 licence key?' d='Modules.Itstoreaskquestion.Shop'}"></textarea>
     <input type="email" name="email" placeholder="{l s='Your email (for the reply)' d='Modules.Itstoreaskquestion.Shop'}">

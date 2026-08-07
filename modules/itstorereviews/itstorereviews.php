@@ -22,7 +22,7 @@ class Itstorereviews extends Module
     {
         $this->name = 'itstorereviews';
         $this->tab = 'front_office_features';
-        $this->version = '1.0.0';
+        $this->version = '1.1.0';
         $this->author = 'Syber Info';
         $this->need_instance = 0;
         $this->ps_versions_compliancy = ['min' => '1.7.6.0', 'max' => '9.99.99'];
@@ -57,7 +57,9 @@ class Itstorereviews extends Module
         return parent::install()
             && Db::getInstance()->execute($sql)
             && $this->registerHook('displayProductExtraContent')
-            && $this->registerHook('actionFrontControllerSetMedia');
+            && $this->registerHook('actionFrontControllerSetMedia')
+            && $this->registerHook('actionExportGDPRData')
+            && $this->registerHook('actionDeleteGDPRData');
     }
 
     public function uninstall()
@@ -181,6 +183,54 @@ class Itstorereviews extends Module
         ];
 
         return json_encode($data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+    }
+
+    /**
+     * GDPR (psgdpr): export the reviews written by this customer.
+     */
+    public function hookActionExportGDPRData($params)
+    {
+        $idCustomer = $this->gdprCustomerId($params);
+        if (!$idCustomer) {
+            return '';
+        }
+        $rows = Db::getInstance()->executeS(
+            'SELECT id_review, id_product, customer_name, rating, title, content, date_add
+             FROM `' . _DB_PREFIX_ . 'itstore_review` WHERE id_customer = ' . (int) $idCustomer
+        ) ?: [];
+
+        return json_encode($rows, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    }
+
+    /**
+     * GDPR (psgdpr): erase the reviews written by this customer.
+     */
+    public function hookActionDeleteGDPRData($params)
+    {
+        $idCustomer = $this->gdprCustomerId($params);
+        if (!$idCustomer) {
+            return '';
+        }
+
+        return json_encode((bool) Db::getInstance()->delete('itstore_review', 'id_customer = ' . (int) $idCustomer));
+    }
+
+    /**
+     * Resolve the customer id from the psgdpr hook payload (version-tolerant).
+     */
+    protected function gdprCustomerId($params)
+    {
+        if (isset($params['id'])) {
+            return (int) $params['id'];
+        }
+        if (isset($params['customer']['id'])) {
+            return (int) $params['customer']['id'];
+        }
+        if (isset($params['customer']) && $params['customer'] instanceof Customer) {
+            return (int) $params['customer']->id;
+        }
+
+        return 0;
     }
 
     /**

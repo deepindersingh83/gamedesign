@@ -8,6 +8,8 @@
       <p class="itstore-quote__lead">{l s='Buying in volume? Tell us what you need and we’ll price it up.' d='Modules.Itstorefleetdeals.Shop'}</p>
       <form class="itstore-quote__form" method="post" action="{$quote_action|escape:'html':'UTF-8'}">
         <input type="hidden" name="submitQuote" value="1">
+        <input type="text" name="itstore_hp" value="" tabindex="-1" autocomplete="off" aria-hidden="true" class="itstore-hp">
+        <input type="hidden" name="itstore_ts" value="{$smarty.now|intval}">
         <div class="itstore-quote__row">
           <input type="text" name="name" required placeholder="{l s='Your name' d='Modules.Itstorefleetdeals.Shop'}">
           <input type="text" name="company" placeholder="{l s='Company' d='Modules.Itstorefleetdeals.Shop'}">

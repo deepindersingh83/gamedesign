@@ -27,6 +27,10 @@ class ItstorereviewsSubmitModuleFrontController extends ModuleFrontController
         if (!$idProduct || $token !== Tools::getToken('itstorereviews' . $idProduct)) {
             $this->ajaxJson(false, $this->module->l('Invalid request.', 'submit'));
         }
+        // Silent-drop spam bots: acknowledge without storing.
+        if ($this->isLikelySpam()) {
+            $this->ajaxJson(true, $this->module->l('Thanks for your review!', 'submit'));
+        }
 
         $customer = $this->context->customer;
         if (!$customer || !$customer->isLogged()) {
@@ -76,6 +80,20 @@ class ItstorereviewsSubmitModuleFrontController extends ModuleFrontController
             : $this->module->l('Thanks! Your review will appear once approved.', 'submit');
 
         $this->ajaxJson(true, $msg);
+    }
+
+    /**
+     * Dependency-free anti-spam: a non-empty honeypot field (hidden from humans)
+     * or a submission that arrived faster than a person could realistically type.
+     */
+    protected function isLikelySpam()
+    {
+        if (trim((string) Tools::getValue('itstore_hp')) !== '') {
+            return true;
+        }
+        $ts = (int) Tools::getValue('itstore_ts');
+
+        return $ts > 0 && (time() - $ts) < 2;
     }
 
     protected function ajaxJson($success, $message)

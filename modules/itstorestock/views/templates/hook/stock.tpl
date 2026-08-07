@@ -16,6 +16,8 @@
     <input type="hidden" name="id_product" value="{$itstore_stk_id_product|intval}">
     <input type="hidden" name="id_product_attribute" value="{$itstore_stk_id_attr|intval}">
     <input type="hidden" name="token" value="{$itstore_stk_token|escape:'html':'UTF-8'}">
+    <input type="text" name="itstore_hp" value="" tabindex="-1" autocomplete="off" aria-hidden="true" class="itstore-hp">
+    <input type="hidden" name="itstore_ts" value="{$smarty.now|intval}">
     <label class="itstore-stock__notify-label">{l s='Get notified when it’s back:' d='Modules.Itstorestock.Shop'}</label>
     <div class="itstore-stock__notify-row">
       <input type="email" name="email" required placeholder="{l s='your@email.com' d='Modules.Itstorestock.Shop'}">

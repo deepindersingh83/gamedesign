@@ -39,6 +39,8 @@
       <form class="itstore-reviews__form js-itstore-review-form" action="{$itstore_rv_submit_url|escape:'html':'UTF-8'}" method="post">
         <input type="hidden" name="id_product" value="{$itstore_rv_id_product|intval}">
         <input type="hidden" name="token" value="{$itstore_rv_token|escape:'html':'UTF-8'}">
+        <input type="text" name="itstore_hp" value="" tabindex="-1" autocomplete="off" aria-hidden="true" class="itstore-hp">
+        <input type="hidden" name="itstore_ts" value="{$smarty.now|intval}">
         <input type="hidden" name="rating" value="5" class="js-itstore-rating-value">
         <div class="itstore-reviews__rating js-itstore-rating" role="radiogroup" aria-label="{l s='Rating' d='Modules.Itstorereviews.Shop'}">
           {section name=st start=1 loop=6 step=1}

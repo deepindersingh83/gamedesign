@@ -22,6 +22,10 @@ class ItstoreaskquestionAskModuleFrontController extends ModuleFrontController
         if (!$idProduct || $token !== Tools::getToken('itstoreaskquestion' . $idProduct)) {
             $this->ajaxJson(false, $this->module->l('Invalid request.', 'ask'));
         }
+        // Silent-drop spam bots: acknowledge without storing or emailing.
+        if ($this->isLikelySpam()) {
+            $this->ajaxJson(true, $this->module->l('Thanks — your question has been sent to our product team; we reply by email within 1 business day.', 'ask'));
+        }
         if (Tools::strlen($question) < 5 || !Validate::isCleanHtml($question)) {
             $this->ajaxJson(false, $this->module->l('Please enter your question.', 'ask'));
         }
@@ -51,6 +55,20 @@ class ItstoreaskquestionAskModuleFrontController extends ModuleFrontController
         }
 
         $this->ajaxJson(true, $this->module->l('Thanks — your question has been sent to our product team; we reply by email within 1 business day.', 'ask'));
+    }
+
+    /**
+     * Dependency-free anti-spam: a non-empty honeypot field (hidden from humans)
+     * or a submission that arrived faster than a person could realistically type.
+     */
+    protected function isLikelySpam()
+    {
+        if (trim((string) Tools::getValue('itstore_hp')) !== '') {
+            return true;
+        }
+        $ts = (int) Tools::getValue('itstore_ts');
+
+        return $ts > 0 && (time() - $ts) < 2;
     }
 
     protected function ajaxJson($success, $message)

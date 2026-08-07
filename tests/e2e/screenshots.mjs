@@ -19,6 +19,7 @@ const pages = [
   { name: 'category', url: `${BASE_URL}/index.php?controller=category&id_category=2` },
   { name: 'product', url: `${BASE_URL}/index.php?controller=product&id_product=1` },
   { name: 'quote', url: `${BASE_URL}/index.php?fc=module&module=itstorefleetdeals&controller=quote` },
+  { name: 'blog', url: `${BASE_URL}/index.php?fc=module&module=itstoreblog&controller=list` },
 ];
 
 const viewports = [

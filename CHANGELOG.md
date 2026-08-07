@@ -3,6 +3,38 @@
 All notable changes to the IT Store theme and its modules are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.4.0] - 2026-08-07
+
+### Added
+- **Real blog CMS** (`itstoreblog`): `itstore_blog_post` table + `ItstoreBlogPost`
+  ObjectModel, a back-office CRUD tab (`AdminItstoreBlog`), front listing and
+  article controllers (with pagination, breadcrumbs, per-post meta and Article
+  JSON-LD) and starter posts seeded on install. The "From the Blog" home block
+  now shows the latest published posts (teaser cards fall back in when empty).
+- **Admin hub** (`itstoreadmin`): a single "IT Store" back-office tab grouping
+  every itstore* module — live KPI counters (pending reviews, unanswered
+  questions, quote requests, waiting stock alerts, active subscriptions, blog
+  posts) and a status/configure grid.
+- **Security headers** (`itstoresecurity`): configurable nosniff, frame,
+  referrer & permissions policies, optional HSTS and an optional (Report-Only
+  by default) CSP.
+- **Gallery zoom** (`itstoregallery`): product-page hover-magnifier and a
+  full-screen lightbox with prev/next, arrow-key and Esc navigation.
+- **Quote → order**: convert a fleet quote into a draft cart owned by the
+  requester and jump into PrestaShop's native create-order screen; the request
+  text rides along as a private cart note.
+- **Anti-spam** honeypot + time-trap on the quote, ask-a-question, review and
+  stock-alert forms (silent-drop).
+- **GDPR**: `actionExportGDPRData` / `actionDeleteGDPRData` on every module that
+  stores personal data (reviews, questions, quotes, stock alerts, subscriptions).
+- **CI**: Playwright storefront screenshots + a Lighthouse performance budget,
+  both uploaded as artifacts; a real 1110×900 branded `preview.png`.
+- Sample **fr-FR** XLIFF catalogues for the most visible storefront strings.
+
+### Changed
+- **Performance**: every module script now loads with `defer`; below-the-fold
+  images lazy-load and async-decode; the hero LCP image is `fetchpriority=high`.
+
 ## [1.3.0] - 2026-08-06
 
 ### Added

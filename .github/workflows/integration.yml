@@ -140,6 +140,7 @@ jobs:
           check "PC builder controller"               "$BASE_URL/index.php?fc=module&module=itstorepcbuilder&controller=builder" || rc=1
           check "Compare controller"                  "$BASE_URL/index.php?fc=module&module=itstorecompare&controller=compare&ids=1,2" || rc=1
           check "Category listing (quickview/compare)" "$BASE_URL/index.php?controller=category&id_category=2" || rc=1
+          check "Blog list controller"                "$BASE_URL/index.php?fc=module&module=itstoreblog&controller=list" || rc=1
           exit $rc
 
       - name: Enable the IT Store theme (best-effort)

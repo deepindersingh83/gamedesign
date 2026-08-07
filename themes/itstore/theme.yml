@@ -78,6 +78,7 @@ global_settings:
       - itstoreordertrack
       - itstorerecent
       - itstoresavedcart
+      - itstoresecurity
 
   hooks:
     modules_to_hook:

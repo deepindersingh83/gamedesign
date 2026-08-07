@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="ModulesItstorefleetdealsShop" source-language="en-US" target-language="fr-FR" datatype="plaintext">
+    <body>
+      <trans-unit id="87b3ad90a9095ab815f186f0f52ac96e" resname="Buying in volume? Tell us what you need and we’ll price it up.">
+        <source>Buying in volume? Tell us what you need and we’ll price it up.</source>
+        <target>Vous achetez en volume ? Dites-nous ce dont vous avez besoin et nous établissons un devis.</target>
+      </trans-unit>
+      <trans-unit id="1c76cbfe21c6f44c1d1e59d54f3e4420" resname="Company">
+        <source>Company</source>
+        <target>Société</target>
+      </trans-unit>
+      <trans-unit id="02c9347aaa43aeb4dd97e6ac07b137fa" resname="Phone (optional)">
+        <source>Phone (optional)</source>
+        <target>Téléphone (facultatif)</target>
+      </trans-unit>
+      <trans-unit id="0e34a7c4e5d28cdaafea5b9d734687c8" resname="Request Quote">
+        <source>Request Quote</source>
+        <target>Demander un devis</target>
+      </trans-unit>
+      <trans-unit id="d6b6e245fdfc23f5e16ab496800d3254" resname="Request a bulk quote">
+        <source>Request a bulk quote</source>
+        <target>Demander un devis en gros</target>
+      </trans-unit>
+      <trans-unit id="c7c7146cbe62021c0fa93b38f0124f20" resname="Send request">
+        <source>Send request</source>
+        <target>Envoyer la demande</target>
+      </trans-unit>
+      <trans-unit id="0aa9dfdd79a3f7b378a29e7d9c15e4c6" resname="Shop Deals">
+        <source>Shop Deals</source>
+        <target>Voir les offres</target>
+      </trans-unit>
+      <trans-unit id="ab831850889171a72ba3979871a12508" resname="Thanks — our team will email you a tailored quote within 1 business day.">
+        <source>Thanks — our team will email you a tailored quote within 1 business day.</source>
+        <target>Merci — notre équipe vous enverra un devis personnalisé par e-mail sous 1 jour ouvré.</target>
+      </trans-unit>
+      <trans-unit id="14b2a57cd2e35ccf06d9137eb899ffa9" resname="What do you need? e.g. 15× business desktops, 3-year warranty…">
+        <source>What do you need? e.g. 15× business desktops, 3-year warranty…</source>
+        <target>De quoi avez-vous besoin ? p. ex. 15× ordinateurs de bureau pro, garantie 3 ans…</target>
+      </trans-unit>
+      <trans-unit id="221e705c06e231636fdbccfdd14f4d5c" resname="Your name">
+        <source>Your name</source>
+        <target>Votre nom</target>
+      </trans-unit>
+      <trans-unit id="35f976f11f3e75cf71fd67798e7ece03" resname="you@company.com">
+        <source>you@company.com</source>
+        <target>vous@societe.com</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -79,6 +79,7 @@ global_settings:
       - itstorerecent
       - itstoresavedcart
       - itstoresecurity
+      - itstoregallery
 
   hooks:
     modules_to_hook:

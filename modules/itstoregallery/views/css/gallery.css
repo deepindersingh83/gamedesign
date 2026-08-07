@@ -1,0 +1,98 @@
+/**
+ * IT Store — product gallery zoom & lightbox.
+ */
+.itstore-zoom-wrap { position: relative; }
+.itstore-zoom-wrap .product-cover img,
+.itstore-zoom-wrap img.js-qv-product-cover { cursor: zoom-in; }
+
+.itstore-zoom-lens {
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-color: #fff;
+  opacity: 0;
+  transition: opacity .12s ease;
+  pointer-events: none;
+  border-radius: 14px;
+  z-index: 3;
+}
+
+/* Lightbox overlay */
+.itstore-lb {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(11, 18, 32, .92);
+  z-index: 10000;
+}
+.itstore-lb.is-open { display: flex; }
+body.itstore-lb-open { overflow: hidden; }
+
+.itstore-lb__img {
+  max-width: 88vw;
+  max-height: 86vh;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, .45);
+  background: #fff;
+}
+
+.itstore-lb__close,
+.itstore-lb__nav {
+  position: absolute;
+  border: 0;
+  background: rgba(255, 255, 255, .12);
+  color: #fff;
+  cursor: pointer;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .15s ease;
+}
+.itstore-lb__close:hover,
+.itstore-lb__nav:hover { background: rgba(255, 255, 255, .28); }
+
+.itstore-lb__close {
+  top: 18px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  font-size: 28px;
+  line-height: 1;
+}
+.itstore-lb__nav {
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 52px;
+  font-size: 34px;
+  line-height: 1;
+}
+.itstore-lb__prev { left: 20px; }
+.itstore-lb__next { right: 20px; }
+
+.itstore-lb__count {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  font-family: var(--it-mono, ui-monospace, monospace);
+  font-size: 13px;
+  letter-spacing: .5px;
+  background: rgba(0, 0, 0, .35);
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+@media (max-width: 767px) {
+  .itstore-zoom-lens { display: none; }
+  .itstore-lb__nav { width: 44px; height: 44px; font-size: 28px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .itstore-zoom-lens { transition: none; }
+}

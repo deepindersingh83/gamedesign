@@ -3,6 +3,31 @@
 All notable changes to the IT Store theme and its modules are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.5.0] - 2026-08-08
+
+### Added
+- **`itstorefaq`** — categorised FAQ: `itstore_faq` table + ObjectModel, a
+  back-office CRUD tab (`AdminItstoreFaq`), an accordion front page grouped by
+  category and FAQPage JSON-LD for rich results.
+- **`itstorecookies`** — dependency-free cookie-consent banner (accept/decline,
+  first-party cookie, configurable text + CMS policy link) that dispatches an
+  `itstore:consent` event for gating trackers.
+- **`itstorerecentcompare`** — a "Recently compared" strip built from the
+  products a visitor runs through the compare page (localStorage, capped &
+  de-duplicated), hidden on the compare page itself and when empty.
+- **Bundle → cart**: `itstorebundles` gains a combined total and an "Add all to
+  cart" action (new `addbundle` controller) that adds the main product plus its
+  accessories in one go, skipping unavailable items.
+- **Blog**: categories, comma-separated tags, author and a "Related articles"
+  grid, plus a category filter bar, tag-filtered listings and an RSS 2.0 feed.
+- **Wishlist**: themed styling for the native `blockwishlist` button, listing,
+  empty state and toast.
+
+### Changed
+- **Removed all demo/fabricated content**: emptied the seeded testimonials and
+  stats band (they self-hide until configured) and dropped every Unsplash
+  hotlink (hero falls back to its gradient; image-slot seeds text-on-gradient).
+
 ## [1.4.0] - 2026-08-07
 
 ### Added

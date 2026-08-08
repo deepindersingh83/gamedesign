@@ -83,6 +83,7 @@ global_settings:
       - itstoreadmin
       - itstorecookies
       - itstorerecentcompare
+      - itstorefaq
 
   hooks:
     modules_to_hook:

@@ -141,6 +141,8 @@ jobs:
           check "Compare controller"                  "$BASE_URL/index.php?fc=module&module=itstorecompare&controller=compare&ids=1,2" || rc=1
           check "Category listing (quickview/compare)" "$BASE_URL/index.php?controller=category&id_category=2" || rc=1
           check "Blog list controller"                "$BASE_URL/index.php?fc=module&module=itstoreblog&controller=list" || rc=1
+          check "Blog RSS feed"                       "$BASE_URL/index.php?fc=module&module=itstoreblog&controller=rss" || rc=1
+          check "FAQ page controller"                 "$BASE_URL/index.php?fc=module&module=itstorefaq&controller=faq" || rc=1
           exit $rc
 
       - name: Enable the IT Store theme (best-effort)

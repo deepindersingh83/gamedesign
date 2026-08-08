@@ -3,6 +3,24 @@
 All notable changes to the IT Store theme and its modules are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.6.0] - 2026-08-08
+
+### Theme
+- **Page coverage**: branded 404 page plus design-matched styling carried
+  across the product (sticky desktop buy-box), cart, checkout, account and
+  search pages.
+- **Accessibility**: skip-to-content link, visible focus-visible ring on all
+  interactive elements, a back-to-top button and a guarded mobile-nav toggle.
+- **Performance**: preload the body + heading woff2 (via the itstoreseo head
+  hook, theme-guarded) so first paint doesn't wait on the font fetch.
+- **CSS/build**: spacing/radius/shadow/type token scale + opt-in utilities;
+  a dependency-free CSS minifier (`build/minify-css.mjs`).
+- **Brand assets**: real branded app icons (apple-touch-icon + 192/512 PWA
+  icons) and a web manifest with `theme-color`; removed the stale
+  `preview.svg`; branded customer-service email overrides (contact, reply_msg).
+- **theme.yml**: added `itstore_wide` (1200×480) and `itstore_tile` (600×600)
+  image types.
+
 ## [1.5.0] - 2026-08-08
 
 ### Added

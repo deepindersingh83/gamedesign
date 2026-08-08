@@ -186,6 +186,17 @@ global_settings:
       height: 115
       scope:
         - stores
+    itstore_wide:
+      width: 1200
+      height: 480
+      scope:
+        - products
+        - manufacturers
+    itstore_tile:
+      width: 600
+      height: 600
+      scope:
+        - products
 
 theme_settings:
   default_layout: layout-full-width

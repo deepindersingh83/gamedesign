@@ -141,6 +141,13 @@ class Itstoreseo extends Module
                 . htmlspecialchars($dir . $f, ENT_QUOTES) . '">' . "\n";
         }
 
+        // PWA / mobile app icons + theme colour.
+        $img = $base . 'themes/itstore/assets/img/';
+        $out .= '<link rel="apple-touch-icon" sizes="180x180" href="' . htmlspecialchars($img . 'apple-touch-icon.png', ENT_QUOTES) . '">' . "\n";
+        $out .= '<link rel="manifest" href="' . htmlspecialchars($img . 'manifest.webmanifest', ENT_QUOTES) . '">' . "\n";
+        $out .= '<meta name="theme-color" content="#2f6fed">' . "\n";
+        $out .= '<meta name="apple-mobile-web-app-title" content="IT Store">' . "\n";
+
         return $out;
     }
 

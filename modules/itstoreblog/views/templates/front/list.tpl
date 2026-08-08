@@ -1,7 +1,21 @@
 {extends file='page.tpl'}
-{block name='page_title'}{$blog_title|escape:'html':'UTF-8'}{/block}
+{block name='page_title'}{$blog_title|escape:'html':'UTF-8'}{if $blog_filter_label} — {$blog_filter_label|escape:'html':'UTF-8'}{/if}{/block}
 {block name='page_content'}
   <div class="itstore-bloglist">
+    <div class="itstore-bloglist__bar">
+      <nav class="itstore-bloglist__cats">
+        <a class="itstore-bloglist__cat{if !$blog_filter_label} is-active{/if}" href="{$blog_all_url|escape:'html':'UTF-8'}">{l s='All' d='Modules.Itstoreblog.Shop'}</a>
+        {foreach from=$blog_categories item=c}
+          <a class="itstore-bloglist__cat{if $c.active} is-active{/if}" href="{$c.url|escape:'html':'UTF-8'}">{$c.name|escape:'html':'UTF-8'} <span>{$c.count}</span></a>
+        {/foreach}
+      </nav>
+      <a class="itstore-bloglist__rss" href="{$blog_rss_url|escape:'html':'UTF-8'}" title="{l s='RSS feed' d='Modules.Itstoreblog.Shop'}">RSS</a>
+    </div>
+
+    {if $blog_filter_label}
+      <p class="itstore-bloglist__filter">{l s='Showing' d='Modules.Itstoreblog.Shop'} <strong>{$blog_filter_label|escape:'html':'UTF-8'}</strong> · <a href="{$blog_all_url|escape:'html':'UTF-8'}">{l s='clear' d='Modules.Itstoreblog.Shop'}</a></p>
+    {/if}
+
     {if $blog_posts}
       <div class="itstore-bloglist__grid">
         {foreach from=$blog_posts item=post}
@@ -14,7 +28,9 @@
                 {if $post.tag}<span class="itstore-bloglist__tag">{$post.tag|escape:'html':'UTF-8'}</span>{/if}
                 <span class="itstore-bloglist__title">{$post.title|escape:'html':'UTF-8'}</span>
                 {if $post.excerpt}<span class="itstore-bloglist__excerpt">{$post.excerpt|escape:'html':'UTF-8'}</span>{/if}
-                <span class="itstore-bloglist__date">{$post.date|escape:'html':'UTF-8'}</span>
+                <span class="itstore-bloglist__meta">
+                  {if $post.author}{l s='By' d='Modules.Itstoreblog.Shop'} {$post.author|escape:'html':'UTF-8'} · {/if}{$post.date|escape:'html':'UTF-8'}
+                </span>
               </span>
             </a>
           </article>

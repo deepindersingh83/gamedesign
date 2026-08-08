@@ -32,8 +32,9 @@ class AdminItstoreBlogController extends ModuleAdminController
         $this->fields_list = [
             'id_post' => ['title' => $this->l('ID'), 'align' => 'center', 'class' => 'fixed-width-xs'],
             'title' => ['title' => $this->l('Title')],
+            'category' => ['title' => $this->l('Category')],
+            'author' => ['title' => $this->l('Author')],
             'tag' => ['title' => $this->l('Tag')],
-            'slug' => ['title' => $this->l('Slug')],
             'active' => ['title' => $this->l('Published'), 'active' => 'status', 'type' => 'bool', 'align' => 'center', 'class' => 'fixed-width-sm'],
             'date_add' => ['title' => $this->l('Created'), 'type' => 'datetime'],
         ];
@@ -54,7 +55,10 @@ class AdminItstoreBlogController extends ModuleAdminController
             'input' => [
                 ['type' => 'text', 'label' => $this->l('Title'), 'name' => 'title', 'required' => true, 'col' => 6],
                 ['type' => 'text', 'label' => $this->l('Slug'), 'name' => 'slug', 'col' => 6, 'desc' => $this->l('Leave blank to auto-generate from the title.')],
-                ['type' => 'text', 'label' => $this->l('Tag'), 'name' => 'tag', 'col' => 4],
+                ['type' => 'text', 'label' => $this->l('Tag (badge)'), 'name' => 'tag', 'col' => 4, 'desc' => $this->l('Short label shown on the card.')],
+                ['type' => 'text', 'label' => $this->l('Category'), 'name' => 'category', 'col' => 4, 'desc' => $this->l('Groups posts and drives related articles.')],
+                ['type' => 'text', 'label' => $this->l('Tags'), 'name' => 'tags', 'col' => 6, 'desc' => $this->l('Comma-separated, e.g. gpu, gaming, benchmarks.')],
+                ['type' => 'text', 'label' => $this->l('Author'), 'name' => 'author', 'col' => 4],
                 ['type' => 'text', 'label' => $this->l('Image URL'), 'name' => 'image', 'col' => 8, 'desc' => $this->l('Absolute URL or a path under your shop.')],
                 ['type' => 'textarea', 'label' => $this->l('Excerpt'), 'name' => 'excerpt', 'rows' => 3, 'desc' => $this->l('Short summary shown in listings.')],
                 ['type' => 'textarea', 'label' => $this->l('Content'), 'name' => 'content', 'autoload_rte' => true, 'rows' => 15, 'cols' => 60],

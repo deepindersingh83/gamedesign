@@ -63,14 +63,39 @@ class ItstoreblogPostModuleFrontController extends ModuleFrontController
         ]);
         $this->context->smarty->assign('page', $page);
 
+        $idShop = (int) $this->context->shop->id;
+
+        $tags = [];
+        foreach (ItstoreBlogPost::splitTags($this->post->tags) as $t) {
+            $tags[] = [
+                'name' => $t,
+                'url' => $this->context->link->getModuleLink('itstoreblog', 'list', ['tag' => $t], true),
+            ];
+        }
+
+        $related = [];
+        foreach (ItstoreBlogPost::getRelated($idShop, (int) $this->post->id, (string) $this->post->category, 3) as $r) {
+            $related[] = [
+                'title' => $r['title'],
+                'image' => $r['image'],
+                'date' => Tools::displayDate($r['date_add']),
+                'url' => $this->context->link->getModuleLink('itstoreblog', 'post', ['id_post' => (int) $r['id_post'], 'slug' => $r['slug']], true),
+            ];
+        }
+
         $this->context->smarty->assign([
             'post' => [
                 'title' => $this->post->title,
                 'tag' => $this->post->tag,
+                'category' => $this->post->category,
+                'category_url' => $this->post->category ? $this->context->link->getModuleLink('itstoreblog', 'list', ['cat' => $this->post->category], true) : '',
+                'author' => $this->post->author,
                 'image' => $this->post->image,
                 'content' => $this->post->content,
                 'date' => Tools::displayDate($this->post->date_add),
+                'tags' => $tags,
             ],
+            'post_related' => $related,
             'post_jsonld' => $this->buildJsonLd($metaDesc),
             'blog_list_url' => $this->context->link->getModuleLink('itstoreblog', 'list', [], true),
         ]);

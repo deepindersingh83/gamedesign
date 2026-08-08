@@ -26,7 +26,7 @@ class Itstoreblog extends Module
     {
         $this->name = 'itstoreblog';
         $this->tab = 'front_office_features';
-        $this->version = '1.1.0';
+        $this->version = '1.2.0';
         $this->author = 'Syber Info';
         $this->need_instance = 0;
         $this->ps_versions_compliancy = ['min' => '1.7.6.0', 'max' => '9.99.99'];
@@ -88,6 +88,9 @@ class Itstoreblog extends Module
             `title` VARCHAR(255) NOT NULL,
             `slug` VARCHAR(255) NOT NULL DEFAULT "",
             `tag` VARCHAR(128) NOT NULL DEFAULT "",
+            `category` VARCHAR(128) NOT NULL DEFAULT "",
+            `tags` VARCHAR(512) NOT NULL DEFAULT "",
+            `author` VARCHAR(128) NOT NULL DEFAULT "",
             `excerpt` VARCHAR(1024) NOT NULL DEFAULT "",
             `content` TEXT,
             `image` VARCHAR(1024) NOT NULL DEFAULT "",
@@ -158,17 +161,20 @@ class Itstoreblog extends Module
             return;
         }
         $samples = [
-            ['Buying Guide', 'How to spec a business desktop fleet in 2026', 'A practical checklist for standardising desktops across your organisation — CPU tiers, RAM, warranty and imaging.'],
-            ['Gaming', 'RTX 4070 vs 4070 Ti: which belongs in your build?', 'We compare price-to-performance, power draw and 1440p vs 4K targets to help you pick the right GPU.'],
-            ['Networking', 'Wi-Fi 6E in the office: is it worth upgrading?', 'What the 6 GHz band actually changes for a busy office, and when a wired backbone still wins.'],
+            ['Buying Guide', 'Guides', 'desktops, fleet, procurement', 'How to spec a business desktop fleet in 2026', 'A practical checklist for standardising desktops across your organisation — CPU tiers, RAM, warranty and imaging.'],
+            ['Gaming', 'Hardware', 'gpu, gaming, benchmarks', 'RTX 4070 vs 4070 Ti: which belongs in your build?', 'We compare price-to-performance, power draw and 1440p vs 4K targets to help you pick the right GPU.'],
+            ['Networking', 'Guides', 'networking, wifi, office', 'Wi-Fi 6E in the office: is it worth upgrading?', 'What the 6 GHz band actually changes for a busy office, and when a wired backbone still wins.'],
         ];
         foreach ($samples as $s) {
             $post = new ItstoreBlogPost();
             $post->id_shop = 0;
-            $post->title = $s[1];
             $post->tag = $s[0];
-            $post->excerpt = $s[2];
-            $post->content = '<p>' . $s[2] . '</p><p>' . $this->trans('Edit this article from the IT Store Blog back office.', [], 'Modules.Itstoreblog.Admin') . '</p>';
+            $post->category = $s[1];
+            $post->tags = $s[2];
+            $post->author = 'IT Store Team';
+            $post->title = $s[3];
+            $post->excerpt = $s[4];
+            $post->content = '<p>' . $s[4] . '</p><p>' . $this->trans('Edit this article from the IT Store Blog back office.', [], 'Modules.Itstoreblog.Admin') . '</p>';
             $post->image = '';
             $post->active = 1;
             try {

@@ -10,3 +10,6 @@ node_modules/
 .idea/
 .vscode/
 /dist/
+
+# Generated (regenerate with: node build/minify-css.mjs)
+themes/itstore/assets/css/*.min.css

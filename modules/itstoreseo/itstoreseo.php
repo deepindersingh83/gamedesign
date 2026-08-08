@@ -113,9 +113,35 @@ class Itstoreseo extends Module
 
         $data = ['@context' => 'https://schema.org', '@graph' => $graph];
 
-        return "\n" . '<script type="application/ld+json">'
+        return "\n" . $this->fontPreloads($base) . '<script type="application/ld+json">'
             . json_encode($data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)
             . '</script>' . "\n";
+    }
+
+    /**
+     * Preload the woff2 the IT Store theme renders body + headings in, so the
+     * first paint doesn't wait on the CSS-triggered font fetch. Only emitted
+     * when the IT Store theme is the active theme.
+     */
+    protected function fontPreloads($base)
+    {
+        $themeName = defined('_THEME_NAME_') ? _THEME_NAME_ : '';
+        if ($themeName === '' && isset($this->context->shop->theme_name)) {
+            $themeName = $this->context->shop->theme_name;
+        }
+        if ($themeName !== 'itstore') {
+            return '';
+        }
+
+        $dir = $base . 'themes/itstore/assets/fonts/';
+        $fonts = ['Inter-400.woff2', 'Inter-700.woff2'];
+        $out = '';
+        foreach ($fonts as $f) {
+            $out .= '<link rel="preload" as="font" type="font/woff2" crossorigin href="'
+                . htmlspecialchars($dir . $f, ENT_QUOTES) . '">' . "\n";
+        }
+
+        return $out;
     }
 
     /**

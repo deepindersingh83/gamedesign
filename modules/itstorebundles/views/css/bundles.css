@@ -22,3 +22,24 @@
 .itstore-bundle__add { margin-top: auto; }
 .itstore-bundle__plus { display: flex; align-items: center; font-size: 24px; font-weight: 700; color: #8b94a8; }
 @media (max-width: 600px) { .itstore-bundle__plus { display: none; } .itstore-bundle__product { flex: 1 1 140px; } }
+
+/* Add-all footer */
+.itstore-bundle__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e3e7ef;
+}
+.itstore-bundle__total { display: flex; flex-direction: column; }
+.itstore-bundle__total-label { color: #5a6478; font-size: 12.5px; }
+.itstore-bundle__total-value { color: #0b1220; font-size: 22px; font-weight: 800; }
+.itstore-bundle__all-form { margin: 0; }
+.itstore-bundle__add-all { padding: 12px 22px; border-radius: 11px; font-weight: 700; }
+@media (max-width: 560px) {
+  .itstore-bundle__foot { flex-direction: column; align-items: stretch; }
+  .itstore-bundle__add-all { width: 100%; }
+}

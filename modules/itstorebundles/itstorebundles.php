@@ -92,12 +92,25 @@ class Itstorebundles extends Module
         $cover = Product::getCover($idProduct);
         $coverId = is_array($cover) && isset($cover['id_image']) ? (int) $cover['id_image'] : 0;
 
+        // Combined bundle total: the main product + every accessory shown.
+        $total = (float) Product::getPriceStatic($idProduct, true);
+        $bundleIds = [$idProduct];
+        foreach ($items as $it) {
+            $total += (float) Product::getPriceStatic((int) $it['id'], true);
+            $bundleIds[] = (int) $it['id'];
+        }
+
         $this->smarty->assign([
             'itstore_bundle_main' => [
                 'name' => $product->name,
                 'image' => $this->context->link->getImageLink($product->link_rewrite, $coverId, 'home_default'),
             ],
             'itstore_bundle_items' => $items,
+            'itstore_bundle_id' => $idProduct,
+            'itstore_bundle_count' => count($bundleIds),
+            'itstore_bundle_total' => $this->context->getCurrentLocale()->formatPrice($total, $this->context->currency->iso_code),
+            'itstore_bundle_add_url' => $this->context->link->getModuleLink($this->name, 'addbundle', [], true),
+            'itstore_bundle_token' => Tools::getToken('itstorebundles' . $idProduct),
         ]);
 
         return $this->display(__FILE__, 'views/templates/hook/bundles.tpl');

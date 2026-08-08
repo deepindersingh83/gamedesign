@@ -26,4 +26,16 @@
       </div>
     {/foreach}
   </div>
+
+  <div class="itstore-bundle__foot">
+    <div class="itstore-bundle__total">
+      <span class="itstore-bundle__total-label">{l s='Total for %d items' sprintf=[$itstore_bundle_count] d='Modules.Itstorebundles.Shop'}</span>
+      <span class="itstore-bundle__total-value">{$itstore_bundle_total}</span>
+    </div>
+    <form class="itstore-bundle__all-form" method="post" action="{$itstore_bundle_add_url|escape:'html':'UTF-8'}">
+      <input type="hidden" name="id_product" value="{$itstore_bundle_id|intval}">
+      <input type="hidden" name="token" value="{$itstore_bundle_token|escape:'html':'UTF-8'}">
+      <button type="submit" class="btn btn-primary itstore-bundle__add-all">{l s='Add all to cart' d='Modules.Itstorebundles.Shop'}</button>
+    </form>
+  </div>
 </section>

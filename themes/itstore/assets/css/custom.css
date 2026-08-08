@@ -303,3 +303,75 @@ img { max-width: 100%; height: auto; }
   opacity: 0;
   pointer-events: none;
 }
+
+/* ============================================================
+   Wishlist (native blockwishlist) — themed to the IT Store design.
+   Selectors are defensive: they enhance the module's markup where
+   present and never break layout when class names differ by version.
+   ============================================================ */
+.wishlist-button-add,
+.wishlist-add-to,
+button.wishlist-button-add {
+  border: 1px solid var(--it-border, #e3e7ef);
+  background: #fff;
+  color: var(--it-blue, #2f6fed);
+  border-radius: 10px;
+  transition: background .15s ease, border-color .15s ease, color .15s ease;
+}
+.wishlist-button-add:hover,
+.wishlist-add-to:hover {
+  background: var(--it-blue-lt, #eaf1ff);
+  border-color: var(--it-blue, #2f6fed);
+  color: var(--it-blue-hi, #1d4ed8);
+}
+.wishlist-button-add.active,
+.wishlist-button-add[aria-pressed="true"] {
+  background: var(--it-blue-lt, #eaf1ff);
+  border-color: var(--it-blue, #2f6fed);
+}
+
+/* Wishlist listing + product cards */
+.wishlist-list,
+.wishlist-products-container {
+  background: #fff;
+  border: 1px solid var(--it-border, #e3e7ef);
+  border-radius: 14px;
+  padding: 18px 20px;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, .04);
+}
+.wishlist-list-item,
+.wishlist-list .wishlist-list-item {
+  border-bottom: 1px solid var(--it-border2, #d7dce6);
+}
+.wishlist-list-item:last-child { border-bottom: 0; }
+.wishlist-list-item-title,
+.wishlist-list-item a { color: var(--it-ink, #0b1220); font-weight: 700; }
+
+/* Empty state + toast */
+.wishlist-empty {
+  color: var(--it-muted, #5a6478);
+  text-align: center;
+  padding: 40px 0;
+}
+.wishlist-toast {
+  border-radius: 12px;
+  box-shadow: 0 12px 28px rgba(16, 24, 40, .12);
+  background: var(--it-ink, #0b1220);
+  color: #fff;
+}
+.wishlist-add-to-new,
+.wishlist-create {
+  border-radius: 10px;
+  border: 1px dashed var(--it-border2, #d7dce6);
+  color: var(--it-blue-hi, #1d4ed8);
+}
+
+/* Heart icon inside product miniatures sits with quick-view/compare */
+.product-miniature .wishlist-button-add {
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}

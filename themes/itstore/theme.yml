@@ -81,6 +81,8 @@ global_settings:
       - itstoresecurity
       - itstoregallery
       - itstoreadmin
+      - itstorecookies
+      - itstorerecentcompare
 
   hooks:
     modules_to_hook:

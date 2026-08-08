@@ -88,7 +88,7 @@ best done on a running store.
 | 10 | **Header** | NOT overridden — classic markup restyled via CSS | | needs `templates/_partials/header.tpl` override | ☐ |
 | 11 | Utility/top bar | none (contact via classic `ps_contactinfo`) | | header override / `itstoretrustbar` | ☐ |
 | 12 | Hero (image-slot) | full-bleed slider, left caption, cyan eyebrow, orange CTA | | `modules/itstoreimageslot/views/templates/hook/imageslot.tpl` + css | ☐ |
-| 13 | Home section order | hero → categories → PC-builder CTA → featured → deals → brands → banner → text | | `themes/itstore/theme.yml` (`displayHome`) | ☐ |
+| 13 | Home section order | hero → categories → PC-builder CTA → featured → deals → brands → banner → text | | `themes/itstore/config/theme.yml` (`displayHome`) | ☐ |
 | 14 | Home sections that may be missing | testimonials, stats/counters, "why choose us", promo grid, blog/news, brand story | | new module(s) if the design has them | ☐ |
 | 15 | Trust/USP bar | 4 items, placeholder copy/icons | | `modules/itstoretrustbar/*` | ☐ |
 | 16 | Product card | classic miniature restyled via CSS | | needs `templates/catalog/_partials/miniatures/product.tpl` | ☐ |

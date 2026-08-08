@@ -10,7 +10,7 @@ if (!defined('_PS_VERSION_')) {
     exit;
 }
 
-class ItstoreFaq extends ObjectModel
+class ItstoreFaqItem extends ObjectModel
 {
     public $id_faq;
     public $id_shop;

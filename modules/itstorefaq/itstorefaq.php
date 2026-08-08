@@ -14,7 +14,7 @@ if (!defined('_PS_VERSION_')) {
     exit;
 }
 
-require_once _PS_MODULE_DIR_ . 'itstorefaq/classes/ItstoreFaq.php';
+require_once _PS_MODULE_DIR_ . 'itstorefaq/classes/ItstoreFaqItem.php';
 
 class Itstorefaq extends Module
 {
@@ -123,7 +123,7 @@ class Itstorefaq extends Module
 
     protected function seed()
     {
-        if (ItstoreFaq::countActive(0) > 0) {
+        if (ItstoreFaqItem::countActive(0) > 0) {
             return;
         }
         $samples = [
@@ -134,7 +134,7 @@ class Itstorefaq extends Module
         ];
         $pos = 0;
         foreach ($samples as $s) {
-            $faq = new ItstoreFaq();
+            $faq = new ItstoreFaqItem();
             $faq->id_shop = 0;
             $faq->category = $s[0];
             $faq->question = $s[1];

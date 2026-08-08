@@ -10,14 +10,14 @@ if (!defined('_PS_VERSION_')) {
     exit;
 }
 
-require_once _PS_MODULE_DIR_ . 'itstorefaq/classes/ItstoreFaq.php';
+require_once _PS_MODULE_DIR_ . 'itstorefaq/classes/ItstoreFaqItem.php';
 
 class AdminItstoreFaqController extends ModuleAdminController
 {
     public function __construct()
     {
         $this->table = 'itstore_faq';
-        $this->className = 'ItstoreFaq';
+        $this->className = 'ItstoreFaqItem';
         $this->identifier = 'id_faq';
         $this->lang = false;
         $this->bootstrap = true;

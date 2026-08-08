@@ -10,7 +10,7 @@ if (!defined('_PS_VERSION_')) {
     exit;
 }
 
-require_once _PS_MODULE_DIR_ . 'itstorefaq/classes/ItstoreFaq.php';
+require_once _PS_MODULE_DIR_ . 'itstorefaq/classes/ItstoreFaqItem.php';
 
 class ItstorefaqFaqModuleFrontController extends ModuleFrontController
 {
@@ -21,7 +21,7 @@ class ItstorefaqFaqModuleFrontController extends ModuleFrontController
         parent::initContent();
 
         $idShop = (int) $this->context->shop->id;
-        $rows = ItstoreFaq::getActive($idShop);
+        $rows = ItstoreFaqItem::getActive($idShop);
 
         // Group by category (preserving order).
         $groups = [];

@@ -79,7 +79,7 @@ class Itstoreimageslot extends Module
         $shopId = (int) $this->context->shop->id;
         $demo = [
             [
-                'image' => 'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=1600&q=80',
+                'image' => '',
                 'title' => $this->trans('Build Your Dream Rig', [], 'Modules.Itstoreimageslot.Admin'),
                 'subtitle' => $this->trans('Custom PCs, components & peripherals', [], 'Modules.Itstoreimageslot.Admin'),
                 'caption' => $this->trans('Hand-picked hardware from the brands you trust.', [], 'Modules.Itstoreimageslot.Admin'),
@@ -87,7 +87,7 @@ class Itstoreimageslot extends Module
                 'btn_link' => $this->context->link->getPageLink('category', true, null, 'id_category=2'),
             ],
             [
-                'image' => 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1600&q=80',
+                'image' => '',
                 'title' => $this->trans('Laptops for Work & Play', [], 'Modules.Itstoreimageslot.Admin'),
                 'subtitle' => $this->trans('Ultrabooks, gaming & business laptops', [], 'Modules.Itstoreimageslot.Admin'),
                 'caption' => $this->trans('Next-day delivery on in-stock machines.', [], 'Modules.Itstoreimageslot.Admin'),
@@ -95,7 +95,7 @@ class Itstoreimageslot extends Module
                 'btn_link' => $this->context->link->getPageLink('category', true, null, 'id_category=3'),
             ],
             [
-                'image' => 'https://images.unsplash.com/photo-1591405351990-4726e331f141?auto=format&fit=crop&w=1600&q=80',
+                'image' => '',
                 'title' => $this->trans('Networking & Smart Office', [], 'Modules.Itstoreimageslot.Admin'),
                 'subtitle' => $this->trans('Routers, switches & Wi-Fi 6E', [], 'Modules.Itstoreimageslot.Admin'),
                 'caption' => $this->trans('Set up a faster, more reliable network today.', [], 'Modules.Itstoreimageslot.Admin'),

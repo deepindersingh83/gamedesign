@@ -36,10 +36,13 @@ class Itstorestats extends Module
     protected function defaults()
     {
         return [
-            'ITSTORE_ST_1_VALUE' => '4.9★', 'ITSTORE_ST_1_LABEL' => $this->trans('from 3,200+ verified reviews', [], 'Modules.Itstorestats.Admin'),
-            'ITSTORE_ST_2_VALUE' => '18k+', 'ITSTORE_ST_2_LABEL' => $this->trans('businesses & gamers supplied', [], 'Modules.Itstorestats.Admin'),
-            'ITSTORE_ST_3_VALUE' => $this->trans('Same-Day', [], 'Modules.Itstorestats.Admin'), 'ITSTORE_ST_3_LABEL' => $this->trans('dispatch before 1pm AEST', [], 'Modules.Itstorestats.Admin'),
-            'ITSTORE_ST_4_VALUE' => $this->trans('3-Year', [], 'Modules.Itstorestats.Admin'), 'ITSTORE_ST_4_LABEL' => $this->trans('warranty on desktops & servers', [], 'Modules.Itstorestats.Admin'),
+            // Ship empty: these make specific factual claims (ratings, counts),
+            // so fill them with your real figures from the back office. The band
+            // stays hidden until at least one stat has a value.
+            'ITSTORE_ST_1_VALUE' => '', 'ITSTORE_ST_1_LABEL' => '',
+            'ITSTORE_ST_2_VALUE' => '', 'ITSTORE_ST_2_LABEL' => '',
+            'ITSTORE_ST_3_VALUE' => '', 'ITSTORE_ST_3_LABEL' => '',
+            'ITSTORE_ST_4_VALUE' => '', 'ITSTORE_ST_4_LABEL' => '',
         ];
     }
 

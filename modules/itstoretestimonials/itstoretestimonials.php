@@ -37,12 +37,11 @@ class Itstoretestimonials extends Module
     {
         return [
             'ITSTORE_TS_TITLE' => $this->trans('What Our Customers Say', [], 'Modules.Itstoretestimonials.Admin'),
-            'ITSTORE_TS_1_TEXT' => $this->trans('Kitted out our whole new office — 40 desktops delivered and set up in two days. Faultless.', [], 'Modules.Itstoretestimonials.Admin'),
-            'ITSTORE_TS_1_NAME' => 'Priya N.', 'ITSTORE_TS_1_ROLE' => $this->trans('IT Manager, Meridian Group', [], 'Modules.Itstoretestimonials.Admin'), 'ITSTORE_TS_1_IMG' => '',
-            'ITSTORE_TS_2_TEXT' => $this->trans('My gaming build arrived cable-managed and stress-tested. Runs cool and quiet under load.', [], 'Modules.Itstoretestimonials.Admin'),
-            'ITSTORE_TS_2_NAME' => 'Jordan R.', 'ITSTORE_TS_2_ROLE' => $this->trans('Verified buyer', [], 'Modules.Itstoretestimonials.Admin'), 'ITSTORE_TS_2_IMG' => '',
-            'ITSTORE_TS_3_TEXT' => $this->trans('The bulk pricing and same-day dispatch make these the only supplier we use now.', [], 'Modules.Itstoretestimonials.Admin'),
-            'ITSTORE_TS_3_NAME' => 'Sam K.', 'ITSTORE_TS_3_ROLE' => $this->trans('Operations, Northwind IT', [], 'Modules.Itstoretestimonials.Admin'), 'ITSTORE_TS_3_IMG' => '',
+            // Ship empty: add real customer testimonials from the module's back
+            // office. Nothing renders until at least one is filled in.
+            'ITSTORE_TS_1_TEXT' => '', 'ITSTORE_TS_1_NAME' => '', 'ITSTORE_TS_1_ROLE' => '', 'ITSTORE_TS_1_IMG' => '',
+            'ITSTORE_TS_2_TEXT' => '', 'ITSTORE_TS_2_NAME' => '', 'ITSTORE_TS_2_ROLE' => '', 'ITSTORE_TS_2_IMG' => '',
+            'ITSTORE_TS_3_TEXT' => '', 'ITSTORE_TS_3_NAME' => '', 'ITSTORE_TS_3_ROLE' => '', 'ITSTORE_TS_3_IMG' => '',
             'ITSTORE_TS_4_TEXT' => '', 'ITSTORE_TS_4_NAME' => '', 'ITSTORE_TS_4_ROLE' => '', 'ITSTORE_TS_4_IMG' => '',
             'ITSTORE_TS_5_TEXT' => '', 'ITSTORE_TS_5_NAME' => '', 'ITSTORE_TS_5_ROLE' => '', 'ITSTORE_TS_5_IMG' => '',
             'ITSTORE_TS_6_TEXT' => '', 'ITSTORE_TS_6_NAME' => '', 'ITSTORE_TS_6_ROLE' => '', 'ITSTORE_TS_6_IMG' => '',

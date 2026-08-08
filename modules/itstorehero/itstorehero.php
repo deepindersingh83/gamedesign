@@ -42,14 +42,14 @@ class Itstorehero extends Module
             'ITSTORE_HERO_B_SUB' => $this->trans('Business desktops, laptops and network kits — pre-configured, bulk-priced and dispatched same day.', [], 'Modules.Itstorehero.Admin'),
             'ITSTORE_HERO_B_CTA' => $this->trans('Shop business gear', [], 'Modules.Itstorehero.Admin'),
             'ITSTORE_HERO_B_LINK' => '',
-            'ITSTORE_HERO_B_IMG' => 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1200&q=80',
+            'ITSTORE_HERO_B_IMG' => '',
             // Gamer / home view
             'ITSTORE_HERO_G_EYEBROW' => $this->trans('Build of the Month', [], 'Modules.Itstorehero.Admin'),
             'ITSTORE_HERO_G_TITLE' => $this->trans('Build your dream rig', [], 'Modules.Itstorehero.Admin'),
             'ITSTORE_HERO_G_SUB' => $this->trans('RTX-ready desktops, high-refresh monitors and the components to push every frame.', [], 'Modules.Itstorehero.Admin'),
             'ITSTORE_HERO_G_CTA' => $this->trans('Shop gaming', [], 'Modules.Itstorehero.Admin'),
             'ITSTORE_HERO_G_LINK' => '',
-            'ITSTORE_HERO_G_IMG' => 'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=1200&q=80',
+            'ITSTORE_HERO_G_IMG' => '',
         ];
     }
 

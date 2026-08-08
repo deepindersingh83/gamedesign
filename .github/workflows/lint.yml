@@ -61,4 +61,8 @@ jobs:
       - run: pip install pyyaml
       - name: Validate theme YAML
         run: |
-          python -c "import yaml; yaml.safe_load(open('themes/itstore/theme.yml')); yaml.safe_load(open('themes/itstore/config/theme.yml')); print('YAML OK')"
+          # PrestaShop reads the theme manifest from config/theme.yml. Validate
+          # it and assert there is no stray root theme.yml (which PrestaShop
+          # ignores and which would drift out of sync).
+          python -c "import yaml; m=yaml.safe_load(open('themes/itstore/config/theme.yml')); assert m.get('name')=='itstore' and 'global_settings' in m, 'config/theme.yml missing name/global_settings'; print('config/theme.yml OK')"
+          test ! -f themes/itstore/theme.yml || { echo '::error::themes/itstore/theme.yml should not exist — the manifest lives at config/theme.yml'; exit 1; }

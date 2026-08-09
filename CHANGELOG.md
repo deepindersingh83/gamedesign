@@ -3,6 +3,18 @@
 All notable changes to the IT Store theme and its modules are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.7.2] - 2026-08-09
+
+### Fixed
+- **`itstoreupdate` — "Maximum execution time exceeded" on update**: applying an
+  update downloads the archive and copies the theme plus every `itstore*` module,
+  which runs past PHP's default 30–60s `max_execution_time`. The updater now
+  lifts the execution-time and memory ceilings for the duration of the run
+  (best-effort `set_time_limit(0)` / `ini_set`), keeps the request alive if the
+  admin navigates away (`ignore_user_abort`), and re-arms the timer before the
+  download and at each per-module copy/upgrade step so hosts with a per-step
+  budget still get a fresh slice.
+
 ## [1.7.1] - 2026-08-09
 
 ### Fixed

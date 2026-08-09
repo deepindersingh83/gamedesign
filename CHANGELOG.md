@@ -3,6 +3,18 @@
 All notable changes to the IT Store theme and its modules are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.7.4] - 2026-08-09
+
+### Changed
+- **Header redesigned to the light/white mockup**: the storefront header is now a
+  thin dark utility strip (topbar message on the left; account links + a blue
+  "Cart" pill on the right) above a white main row carrying the logo and a
+  horizontal category menu. Replaces the previous all-dark header. CSS targets
+  PrestaShop classic's real header markup (`.header-nav` / `.header-top`).
+- **Search in the header**: `ps_searchbar` is now hooked into `displayTop` so the
+  search bar appears in the header row (as in the design), with matching styling.
+  Existing installs must hook it via Back Office → Design → Positions (see notes).
+
 ## [1.7.3] - 2026-08-09
 
 ### Fixed

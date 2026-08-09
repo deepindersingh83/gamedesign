@@ -3,6 +3,18 @@
 All notable changes to the IT Store theme and its modules are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.7.3] - 2026-08-09
+
+### Fixed
+- **`itstoreupdate` — stale CCC bundles after an update (broken layout)**: an
+  update copies the new theme CSS/JS but the old combined `theme-*.css` / `*.js`
+  in `themes/itstore/assets/cache/` stayed in place, so the storefront kept
+  serving the previous stylesheet against the new templates — which showed up as
+  a broken footer (columns collapsing to the left) and dark-on-dark header text.
+  `clearCaches()` now deletes the theme's combined CCC files (keeping the
+  directory and its `index.php`) so PrestaShop rebuilds them from the fresh
+  sources on the next request.
+
 ## [1.7.2] - 2026-08-09
 
 ### Fixed

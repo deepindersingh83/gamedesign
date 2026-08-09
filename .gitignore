@@ -13,3 +13,7 @@ node_modules/
 
 # Generated (regenerate with: node build/minify-css.mjs)
 themes/itstore/assets/css/*.min.css
+
+# itstoreupdate runtime dirs
+modules/itstoreupdate/work/
+modules/itstoreupdate/backups/

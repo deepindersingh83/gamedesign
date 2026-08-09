@@ -3,6 +3,18 @@
 All notable changes to the IT Store theme and its modules are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.7.0] - 2026-08-09
+
+### Added
+- **`itstoreupdate`** — a self-updater that fetches the IT Store theme and every
+  `itstore*` module from GitHub and updates them in place. One-click
+  "Check for updates" / "Update now" from the module's configure page, or
+  automatic updates via a token-protected cron endpoint. Each run takes a
+  timestamped backup of the replaced files, runs each installed module's
+  upgrade scripts and clears the cache. Configurable source (owner / repo /
+  branch or latest-release channel / optional token). Version is tracked via a
+  shipped `version.json`; nothing touches the network on install.
+
 ## [1.6.0] - 2026-08-08
 
 ### Theme

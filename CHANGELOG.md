@@ -3,6 +3,30 @@
 All notable changes to the IT Store theme and its modules are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.7.1] - 2026-08-09
+
+### Fixed
+- **PrestaShop 9 compatibility**: the hook-only modules (`itstorebundles`,
+  `itstorecompare`, `itstoregallery`, `itstoreordertrack`, `itstorequickview`,
+  `itstorerecent`, `itstorerecentcompare`, `itstoresavedcart`,
+  `itstorespecsheet`) now declare a `getContent()` method that shows a small
+  informational panel, so the Module Manager no longer warns that they have
+  "no getContent() method".
+- **CCC cache / live `mkdir(): Permission denied`**: the theme now ships the
+  `themes/itstore/assets/cache/` directory pre-created (and the package script
+  ships it writable), so PrestaShop's Combine/Compress/Cache never has to create
+  it on the fly. The combined CSS/JS bundles are browser-fetched assets and must
+  stay under the web root — they cannot live in `var/cache` — so the fix removes
+  the fatal without any nginx/vhost or manual chmod/chown change.
+  `itstoreupdate` also recreates the directory at install and when its configure
+  page is opened (as the PHP user, so ownership is correct), and reports its
+  writability in the pre-flight panel.
+- **Footer layout**: the footer grid was applied to the wrong wrapper, collapsing
+  the link columns and squeezing the copyright bar into a narrow cell. The grid
+  now sits on a dedicated `.footer__links` wrapper around the `displayFooter`
+  hook, so `ps_linklist` / `ps_customtext` / `ps_contactinfo` lay out as proper
+  columns while the newsletter and copyright bar span full width.
+
 ## [1.7.0] - 2026-08-09
 
 ### Added

@@ -205,11 +205,18 @@ img { max-width: 100%; height: auto; }
 #footer a { color: #b7c6da; }
 #footer a:hover { color: #fff; }
 .footer-container { padding: 46px 0 20px; }
-.footer-container .container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; }
+/* Lay the footer link blocks out as auto-fit columns. The grid sits on the
+   .footer__links wrapper (around displayFooter) so each hooked block becomes a
+   column; the direct children have their Bootstrap col widths/padding cleared so
+   the grid — not the .col-* classes the modules ship — governs the layout. */
+.footer-container .footer__links { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; }
+.footer-container .footer__links > * { flex: none; max-width: none; width: auto; padding-left: 0; padding-right: 0; margin: 0; }
+.footer-container .footer__before { margin-bottom: 30px; }
+.footer-container .footer__after:not(:empty) { margin-top: 30px; }
 #footer h3, #footer .h3 { color: #fff; font-size: 15px; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 16px; }
 #footer ul { list-style: none; padding: 0; margin: 0; }
 #footer li { padding: 5px 0; font-size: 14px; }
-.footer__copyright { border-top: 1px solid var(--it-navy-700); padding: 18px 0; text-align: center; font-size: 13px; color: #8aa0bb; }
+#footer .footer__copyright { border-top: 1px solid var(--it-navy-700); margin-top: 30px; padding: 18px 0; text-align: center; font-size: 13px; color: #8aa0bb; }
 .itstore-footer__brand { font-weight: 800; color: #fff; margin-right: 6px; }
 .itstore-footer__brand span { color: var(--it-cyan); }
 

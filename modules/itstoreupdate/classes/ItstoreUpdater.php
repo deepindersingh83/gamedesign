@@ -385,10 +385,13 @@ class ItstoreUpdater
      */
     public static function writableReport()
     {
+        $themeCache = rtrim(_PS_ALL_THEMES_DIR_, '/') . '/itstore/assets/cache';
+
         return [
             'modules' => is_writable(rtrim(_PS_MODULE_DIR_, '/')),
             'themes' => is_writable(rtrim(_PS_ALL_THEMES_DIR_, '/')),
             'self' => is_writable(_PS_MODULE_DIR_ . 'itstoreupdate'),
+            'theme_cache' => is_dir($themeCache) && is_writable($themeCache),
         ];
     }
 }

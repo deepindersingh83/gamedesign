@@ -45,6 +45,44 @@ class ItstoreUpdater
         $this->log[] = '[' . date('H:i:s') . '] ' . $msg;
     }
 
+    /**
+     * Give the update as much runway as the host allows.
+     *
+     * Downloading the archive, extracting it and copying the theme plus every
+     * itstore* module easily runs past PHP's default 30–60s max_execution_time,
+     * which is what surfaces as "Maximum execution time of N seconds exceeded".
+     * We lift the wall-clock and memory ceilings (best-effort — some hosts hard
+     * disable set_time_limit) and keep the request alive if the admin navigates
+     * away. resetTimer() is called again at each heavy step so a per-step budget
+     * host still gets a fresh slice.
+     */
+    protected function raiseLimits()
+    {
+        $this->resetTimer();
+        if (function_exists('ignore_user_abort')) {
+            @ignore_user_abort(true);
+        }
+        $mem = @ini_get('memory_limit');
+        if ($mem !== false && $mem !== '-1') {
+            $bytes = (int) $mem;
+            if (stripos($mem, 'g') !== false) {
+                $bytes *= 1024;
+            }
+            if ($bytes < 256) {
+                @ini_set('memory_limit', '256M');
+            }
+        }
+    }
+
+    /** Reset the max-execution-time counter (best-effort). */
+    protected function resetTimer()
+    {
+        if (function_exists('set_time_limit')) {
+            @set_time_limit(0);
+        }
+        @ini_set('max_execution_time', '0');
+    }
+
     /* ---------------------------------------------------------------- HTTP */
 
     protected function http($url, $binary = false)
@@ -57,6 +95,10 @@ class ItstoreUpdater
         $headers = ['User-Agent: itstoreupdate'];
         if ($this->token !== '') {
             $headers[] = 'Authorization: token ' . $this->token;
+        }
+        if ($binary) {
+            // The archive download is the single longest network step.
+            $this->resetTimer();
         }
         $ch = curl_init($url);
         curl_setopt_array($ch, [
@@ -176,6 +218,7 @@ class ItstoreUpdater
      */
     public function run($force = false)
     {
+        $this->raiseLimits();
         $this->log('Starting update.');
         $remote = $this->getRemote();
         if ($remote === false) {
@@ -207,6 +250,7 @@ class ItstoreUpdater
 
         $zipPath = $work . '/package.zip';
         $this->log('Downloading package…');
+        $this->resetTimer();
         $bytes = $this->http($remote['zip'], true);
         if ($bytes === false || @file_put_contents($zipPath, $bytes) === false) {
             $this->log('Aborted: download failed.');
@@ -263,6 +307,7 @@ class ItstoreUpdater
             }
             $dest = rtrim(_PS_MODULE_DIR_, '/') . '/' . $name;
             // Update the updater itself last / without re-running its upgrade.
+            $this->resetTimer();
             $this->backupAndCopy($src, $dest, $backup . '/modules/' . $name);
             $updatedModules[] = $name;
         }
@@ -276,6 +321,7 @@ class ItstoreUpdater
             if (!Module::isInstalled($name)) {
                 continue;
             }
+            $this->resetTimer();
             try {
                 $module = Module::getInstanceByName($name);
                 if ($module && Module::initUpgradeModule($module)) {

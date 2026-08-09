@@ -83,3 +83,8 @@
   .itstore-hero2__title { font-size: 30px; }
   .itstore-hero2__media { height: 220px; order: -1; }
 }
+
+/* When no hero image is configured, let the copy span the full width instead
+   of leaving an empty second column. */
+.itstore-hero2__inner--nomedia { grid-template-columns: 1fr; }
+.itstore-hero2__inner--nomedia .itstore-hero2__copy { max-width: 760px; }

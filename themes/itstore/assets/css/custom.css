@@ -117,6 +117,13 @@ img { max-width: 100%; height: auto; }
 #_desktop_top_menu ul { display: flex; gap: 6px; list-style: none; margin: 0; padding: 0; }
 #_desktop_top_menu a { display: block; padding: 12px 16px; font-weight: 600; }
 
+/* Keep widget headings/labels legible on the dark header (e.g. the
+   "Your account" title from ps_customeraccountlinks was dark-on-dark). */
+#header h1, #header h2, #header h3, #header h4, #header h5, #header h6,
+#header .h1, #header .h2, #header .h3, #header dt, #header .title,
+#header .navbar-text { color: #fff; }
+#header .text-muted, #header small { color: #b6c4d8; }
+
 /* Trust bar lives in the itstoretrustbar module (.itstore-trustbar). */
 
 /* ---------- Sections ---------- */
@@ -243,24 +250,12 @@ img { max-width: 100%; height: auto; }
   * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
 }
 
-/* ---------- Dark mode ---------- */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --it-ink: #e6edf6;
-    --it-muted: #9fb0c4;
-    --it-line: #24344a;
-    --it-bg: #0a1622;
-    --it-white: #0f1e2e;
-  }
-  body { background: var(--it-bg); color: var(--it-ink); }
-  .product-miniature .thumbnail-container,
-  .js-product-miniature { background: #0f1e2e; border-color: #24344a; }
-  .product-title a { color: var(--it-ink); }
-  .section-title { color: #e6edf6; }
-  .trust-bar, .itstore-trustbar { background: #0f1e2e; border-color: #24344a; }
-  #search_widget form { background: #0f1e2e; }
-  #search_widget input[type="text"] { background: #0f1e2e; color: var(--it-ink); }
-}
+/* IT Store is a light design with a dark header. An earlier automatic
+   prefers-color-scheme:dark override only darkened some backgrounds and left
+   several text colours light-mode dark, producing dark-on-dark text (trust bar,
+   account links, cards) for visitors whose OS is set to dark. It was removed so
+   the storefront renders its intended light palette consistently. A complete
+   dark theme can be reintroduced later as a first-class, fully-tokenised pass. */
 
 /* ---------- Print ---------- */
 @media print {

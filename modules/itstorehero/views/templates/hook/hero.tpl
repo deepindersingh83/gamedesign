@@ -2,7 +2,7 @@
  * IT Store — home hero (audience-toggled).
  *}
 <section class="itstore-hero2" data-itstore-hero>
-  <div class="itstore-hero2__inner">
+  <div class="itstore-hero2__inner{if !$hero_business.img && !$hero_gamer.img} itstore-hero2__inner--nomedia{/if}">
     <div class="itstore-hero2__copy">
       <div class="itstore-hero2__toggle" role="tablist">
         <button type="button" class="itstore-hero2__tab is-active" data-hero-view="business" role="tab" aria-selected="true">{l s='For Business' d='Modules.Itstorehero.Shop'}</button>
@@ -29,9 +29,11 @@
       </div>
     </div>
 
+    {if $hero_business.img || $hero_gamer.img}
     <div class="itstore-hero2__media">
       {if $hero_business.img}<img class="itstore-hero2__img is-active" data-hero-img="business" src="{$hero_business.img|escape:'html':'UTF-8'}" alt="" decoding="async" fetchpriority="high">{/if}
       {if $hero_gamer.img}<img class="itstore-hero2__img" data-hero-img="gamer" src="{$hero_gamer.img|escape:'html':'UTF-8'}" alt="" loading="lazy" decoding="async">{/if}
     </div>
+    {/if}
   </div>
 </section>

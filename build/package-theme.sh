@@ -38,6 +38,14 @@ done
 # Strip VCS / OS noise from the bundle.
 find "$STAGE" -name '.DS_Store' -delete 2>/dev/null || true
 
+# Ship the CCC (Combine/Compress/Cache) directory pre-created and writable so
+# PrestaShop never has to mkdir() themes/itstore/assets/cache/ at runtime — that
+# on-the-fly mkdir is what fatals with "Permission denied" when the theme's
+# assets/ dir is not writable by PHP. Shipping it removes the need for any manual
+# chmod/chown or nginx/vhost change on the live server.
+mkdir -p "$STAGE/assets/cache"
+chmod 0775 "$STAGE/assets/cache"
+
 # Sanity check: the manifest PrestaShop reads must sit at config/theme.yml.
 if [ ! -f "$STAGE/config/theme.yml" ]; then
   echo "ERROR: config/theme.yml missing from the staged theme" >&2

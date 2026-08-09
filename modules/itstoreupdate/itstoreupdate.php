@@ -57,8 +57,40 @@ class Itstoreupdate extends Module
             Configuration::updateValue($k, $v);
         }
         Configuration::updateValue('ITSTORE_UPD_CRON_TOKEN', Tools::passwdGen(24));
+        $this->ensureThemeCacheDir();
 
         return true;
+    }
+
+    /**
+     * Make sure the IT Store theme's CCC cache directory exists and is writable.
+     *
+     * PrestaShop's Combine/Compress/Cache writes the combined CSS/JS bundles to
+     * themes/itstore/assets/cache/. Those files are fetched by the browser, so
+     * they must stay under the web root — they cannot live in var/cache. If the
+     * directory is missing, the core CccReducer tries to mkdir() it on the fly
+     * and fatals with "Permission denied" when assets/ is not writable by PHP.
+     *
+     * We create the directory here (as the PHP/web-server user, so it is owned
+     * correctly and writable) so no manual chmod/chown or vhost change is ever
+     * needed on the live server. Shipping the folder in the theme package makes
+     * this a belt-and-suspenders safety net for re-uploaded themes.
+     */
+    public function ensureThemeCacheDir()
+    {
+        $dir = rtrim(_PS_ALL_THEMES_DIR_, '/') . '/itstore/assets/cache';
+        if (!is_dir($dir)) {
+            @mkdir($dir, 0775, true);
+        }
+        if (is_dir($dir) && !is_writable($dir)) {
+            @chmod($dir, 0775);
+        }
+        $index = $dir . '/index.php';
+        if (is_dir($dir) && !file_exists($index)) {
+            @file_put_contents($index, "<?php\n/**\n * Silence is golden.\n */\nheader('Location: ../');\nexit;\n");
+        }
+
+        return is_dir($dir) && is_writable($dir);
     }
 
     public function uninstall()
@@ -128,6 +160,9 @@ class Itstoreupdate extends Module
         $current = $updater->getLocalVersion();
         $latest = (string) Configuration::get('ITSTORE_UPD_LATEST_VERSION');
         $lastCheck = (string) Configuration::get('ITSTORE_UPD_LAST_CHECK');
+        // Opening this page self-heals the theme's CCC cache directory so the
+        // storefront never fatals on a missing themes/itstore/assets/cache/.
+        $this->ensureThemeCacheDir();
         $w = ItstoreUpdater::writableReport();
 
         $token = Tools::getAdminTokenLite('AdminModules');
@@ -141,6 +176,10 @@ class Itstoreupdate extends Module
                 $warn .= '<li><strong>' . htmlspecialchars($label) . '</strong> '
                     . $this->trans('is not writable by PHP — updates cannot be applied until it is.', [], 'Modules.Itstoreupdate.Admin') . '</li>';
             }
+        }
+        if (empty($w['theme_cache'])) {
+            $warn .= '<li><strong>themes/itstore/assets/cache/</strong> '
+                . $this->trans('is missing or not writable — the storefront Combine/Compress/Cache option needs it. Re-open this page to create it, or set it 0775.', [], 'Modules.Itstoreupdate.Admin') . '</li>';
         }
 
         $h = '<div class="panel"><div class="panel-heading"><i class="icon-cloud-download"></i> '

@@ -33,6 +33,22 @@ class Itstorerecent extends Module
         $this->description = $this->trans('“Recommended For You” best-sellers block and a “Recently Viewed” strip.', [], 'Modules.Itstorerecent.Admin');
     }
 
+    public function getContent()
+    {
+        // This module is driven entirely by its front-office hooks and has no
+        // adjustable settings, so its configure screen is purely informational.
+        // Declaring getContent() keeps PrestaShop's Module Manager from warning
+        // that the module has "no getContent() method".
+        return '<div class="panel">'
+            . '<div class="panel-heading"><i class="icon-info-circle"></i> ' . $this->displayName . '</div>'
+            . '<div class="panel-body">'
+            . '<p>' . $this->description . '</p>'
+            . '<p class="text-muted" style="margin-bottom:0">'
+            . $this->trans('This module works automatically once enabled — there is nothing to configure here.', [], 'Modules.Itstorerecent.Admin')
+            . '</p>'
+            . '</div></div>';
+    }
+
     public function install()
     {
         return parent::install()

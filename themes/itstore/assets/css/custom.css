@@ -1,28 +1,45 @@
 /**
  * IT Store — theme stylesheet
- * A modern, tech-focused storefront design for PrestaShop.
- * Restyles the classic parent theme markup with an IT / tech identity.
+ * Tokens taken from the IT Store Mockups design:
+ *   ink #0b1220 · blue #2f6fed (hover #1d4ed8) · greys #5a6478/#8b94a8
+ *   borders #e3e7ef/#d7dce6 · surfaces #f6f7fb/#eef0f4 · success #16a34a
+ *   amber #f59e0b · danger #dc2626 · Inter + JetBrains Mono + Source Serif 4.
+ *
+ * Fonts match the mockup. To self-host (GDPR), drop the .woff2 files into
+ * assets/fonts/, uncomment the @font-face block, and remove the @import.
  */
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+@import url("fonts.css");
 
 :root {
-  --it-navy: #0b1f33;
-  --it-navy-700: #12314f;
-  --it-blue: #1f6feb;
-  --it-cyan: #22d3ee;
-  --it-accent: #ff7a18;
-  --it-ink: #0f172a;
-  --it-muted: #64748b;
-  --it-line: #e2e8f0;
-  --it-bg: #f5f7fb;
+  --it-ink: #0b1220;
+  --it-ink-700: #101a30;
+  --it-slate: #3c485f;
+  --it-blue: #2f6fed;
+  --it-blue-700: #1d4ed8;
+  --it-blue-050: #eaf1ff;
+  --it-accent: #2f6fed;
+  --it-muted: #5a6478;
+  --it-muted-2: #8b94a8;
+  --it-line: #e3e7ef;
+  --it-line-2: #d7dce6;
+  --it-bg: #f6f7fb;
+  --it-bg-2: #eef0f4;
   --it-white: #ffffff;
   --it-success: #16a34a;
-  --it-radius: 12px;
+  --it-amber: #f59e0b;
+  --it-danger: #dc2626;
+  /* legacy aliases (kept so existing rules resolve) */
+  --it-navy: #0b1220;
+  --it-navy-700: #101a30;
+  --it-cyan: #2f6fed;
+  --it-radius: 14px;
   --it-radius-sm: 8px;
-  --it-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
-  --it-shadow-sm: 0 2px 10px rgba(15, 23, 42, 0.06);
+  --it-shadow: 0 12px 28px rgba(16, 24, 40, 0.12);
+  --it-shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.04);
   --it-font: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --it-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --it-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
 }
 
 * { box-sizing: border-box; }
@@ -56,9 +73,10 @@ img { max-width: 100%; height: auto; }
 }
 .btn:active { transform: translateY(1px); }
 .btn-primary { background: var(--it-blue); color: #fff; }
-.btn-primary:hover { background: #1a5fd0; color: #fff; box-shadow: var(--it-shadow-sm); }
-.btn-accent { background: var(--it-accent); color: #fff; }
-.btn-accent:hover { background: #ef6a08; color: #fff; }
+.btn-primary:hover { background: var(--it-blue-700); color: #fff; box-shadow: var(--it-shadow-sm); }
+/* Design's product CTA: near-black that turns blue on hover. */
+.btn-accent, .btn-dark { background: var(--it-ink); color: #fff; }
+.btn-accent:hover, .btn-dark:hover { background: var(--it-blue); color: #fff; }
 .btn-ghost { background: transparent; color: #fff; border-color: rgba(255,255,255,.5); }
 .btn-ghost:hover { background: rgba(255,255,255,.12); color: #fff; }
 
@@ -80,8 +98,6 @@ img { max-width: 100%; height: auto; }
   padding-bottom: 14px;
 }
 #header .logo { max-height: 44px; }
-.header-nav__brand { font-size: 22px; font-weight: 800; color: #fff; letter-spacing: .3px; }
-.header-nav__brand span { color: var(--it-cyan); }
 
 #search_widget form {
   display: flex;
@@ -94,18 +110,21 @@ img { max-width: 100%; height: auto; }
 #search_widget input[type="text"] { border: 0; padding: 12px 16px; flex: 1; outline: none; }
 #search_widget button { background: var(--it-blue); border: 0; color: #fff; padding: 0 18px; cursor: pointer; }
 
-.header-top__actions { display: flex; align-items: center; gap: 18px; margin-left: auto; }
+#_desktop_user_info, #_desktop_cart { display: flex; align-items: center; }
 
 /* Main menu bar */
-#header .menu, .header-nav { background: var(--it-navy-700); }
+.header-nav, #_desktop_top_menu { background: var(--it-navy-700); }
 #_desktop_top_menu ul { display: flex; gap: 6px; list-style: none; margin: 0; padding: 0; }
 #_desktop_top_menu a { display: block; padding: 12px 16px; font-weight: 600; }
 
-/* ---------- Trust bar ---------- */
-.trust-bar { background: #fff; border-bottom: 1px solid var(--it-line); }
-.trust-bar .container { display: flex; flex-wrap: wrap; gap: 24px; padding: 14px 20px; }
-.trust-bar__item { display: flex; align-items: center; gap: 10px; color: var(--it-muted); font-size: 14px; font-weight: 600; }
-.trust-bar__item i { color: var(--it-blue); font-size: 20px; }
+/* Keep widget headings/labels legible on the dark header (e.g. the
+   "Your account" title from ps_customeraccountlinks was dark-on-dark). */
+#header h1, #header h2, #header h3, #header h4, #header h5, #header h6,
+#header .h1, #header .h2, #header .h3, #header dt, #header .title,
+#header .navbar-text { color: #fff; }
+#header .text-muted, #header small { color: #b6c4d8; }
+
+/* Trust bar lives in the itstoretrustbar module (.itstore-trustbar). */
 
 /* ---------- Sections ---------- */
 .page-section { padding: 40px 0; }
@@ -124,6 +143,17 @@ img { max-width: 100%; height: auto; }
   width: 56px; height: 3px;
   background: var(--it-accent);
   border-radius: 2px;
+}
+/* Design pattern: uppercase mono eyebrow above the section heading. */
+.section-eyebrow {
+  display: block;
+  font-family: var(--it-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--it-blue);
+  margin-bottom: 8px;
 }
 
 /* ---------- Product cards ---------- */
@@ -150,21 +180,25 @@ img { max-width: 100%; height: auto; }
   border-color: #cdd8e6;
 }
 .product-thumbnail img { width: 100%; display: block; }
-.product-description { padding: 14px 16px 18px; }
-.product-title a { color: var(--it-ink); font-weight: 600; }
-.product-price-and-shipping .price { color: var(--it-navy); font-weight: 800; font-size: 18px; }
+.product-description { padding: 16px; }
+.product-title a { color: var(--it-ink); font-weight: 700; }
+.product-price-and-shipping .price { color: var(--it-ink); font-weight: 800; font-size: 18px; font-family: var(--it-mono); }
+.product-reference, .product-flags .discount { font-family: var(--it-mono); }
 .product-flags { position: absolute; top: 10px; left: 10px; }
 .product-flag {
-  background: var(--it-accent);
-  color: #fff;
-  font-size: 11px;
-  font-weight: 700;
+  background: #eef0f4;
+  color: var(--it-ink);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: .3px;
   padding: 4px 10px;
   border-radius: 20px;
   display: inline-block;
+  box-shadow: 0 2px 6px rgba(0,0,0,.12);
 }
-.product-flag.new { background: var(--it-blue); }
-.product-flag.on-sale { background: var(--it-success); }
+.product-flag.new { background: #ccfbf1; color: #0f766e; }
+.product-flag.on-sale, .product-flag.discount { background: #fee2e2; color: var(--it-danger); }
+.product-flag.pack { background: var(--it-blue-050); color: var(--it-blue-700); }
 
 /* ---------- Footer ---------- */
 #footer { background: var(--it-navy); color: #b7c6da; margin-top: 40px; }
@@ -176,10 +210,12 @@ img { max-width: 100%; height: auto; }
 #footer ul { list-style: none; padding: 0; margin: 0; }
 #footer li { padding: 5px 0; font-size: 14px; }
 .footer__copyright { border-top: 1px solid var(--it-navy-700); padding: 18px 0; text-align: center; font-size: 13px; color: #8aa0bb; }
+.itstore-footer__brand { font-weight: 800; color: #fff; margin-right: 6px; }
+.itstore-footer__brand span { color: var(--it-cyan); }
 
 /* ---------- Newsletter ---------- */
 .block_newsletter {
-  background: linear-gradient(120deg, var(--it-blue), var(--it-cyan));
+  background: linear-gradient(120deg, var(--it-ink), var(--it-blue-700));
   color: #fff;
   border-radius: var(--it-radius);
   padding: 30px;
@@ -195,4 +231,335 @@ img { max-width: 100%; height: auto; }
 @media (max-width: 600px) {
   .products, .product_list { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
   .section-title { font-size: 20px; }
+}
+
+/* ---------- Accessibility ---------- */
+:focus-visible { outline: 3px solid rgba(47, 111, 237, 0.55); outline-offset: 2px; }
+.itstore-skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 3000;
+  background: var(--it-navy);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 0 0 8px 0;
+}
+.itstore-skip-link:focus { left: 0; color: #fff; }
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+}
+
+/* IT Store is a light design with a dark header. An earlier automatic
+   prefers-color-scheme:dark override only darkened some backgrounds and left
+   several text colours light-mode dark, producing dark-on-dark text (trust bar,
+   account links, cards) for visitors whose OS is set to dark. It was removed so
+   the storefront renders its intended light palette consistently. A complete
+   dark theme can be reintroduced later as a first-class, fully-tokenised pass. */
+
+/* ---------- Print ---------- */
+@media print {
+  #header, #footer, .itstore-trustbar, .support-widget, .itstore-cmp-tray { display: none !important; }
+}
+
+/* ---------- Category page (design banner + about) ---------- */
+.itstore-cathero {
+  background:
+    linear-gradient(90deg, rgba(11, 18, 32, .82), rgba(11, 18, 32, .1)),
+    linear-gradient(120deg, #0b1220, #1a2a4a);
+  color: #fff;
+  padding: 34px 0;
+  margin-bottom: 20px;
+  border-radius: 0 0 14px 14px;
+}
+.itstore-cathero__eyebrow {
+  display: block;
+  font-family: var(--it-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #7fa3f5;
+  margin-bottom: 6px;
+}
+.itstore-cathero__title { font-size: 26px; font-weight: 800; margin: 0; color: #fff; }
+.itstore-catabout { margin: 8px 0 24px; }
+.itstore-catabout summary { cursor: pointer; font-weight: 700; color: var(--it-ink); font-size: 15px; }
+.itstore-catabout__body { color: var(--it-muted); font-size: 14px; line-height: 1.7; margin-top: 10px; }
+
+/* Anti-spam honeypot: visually hidden, off-screen, never focusable. */
+.itstore-hp {
+  position: absolute !important;
+  left: -9999px !important;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ============================================================
+   Wishlist (native blockwishlist) — themed to the IT Store design.
+   Selectors are defensive: they enhance the module's markup where
+   present and never break layout when class names differ by version.
+   ============================================================ */
+.wishlist-button-add,
+.wishlist-add-to,
+button.wishlist-button-add {
+  border: 1px solid var(--it-border, #e3e7ef);
+  background: #fff;
+  color: var(--it-blue, #2f6fed);
+  border-radius: 10px;
+  transition: background .15s ease, border-color .15s ease, color .15s ease;
+}
+.wishlist-button-add:hover,
+.wishlist-add-to:hover {
+  background: var(--it-blue-lt, #eaf1ff);
+  border-color: var(--it-blue, #2f6fed);
+  color: var(--it-blue-hi, #1d4ed8);
+}
+.wishlist-button-add.active,
+.wishlist-button-add[aria-pressed="true"] {
+  background: var(--it-blue-lt, #eaf1ff);
+  border-color: var(--it-blue, #2f6fed);
+}
+
+/* Wishlist listing + product cards */
+.wishlist-list,
+.wishlist-products-container {
+  background: #fff;
+  border: 1px solid var(--it-border, #e3e7ef);
+  border-radius: 14px;
+  padding: 18px 20px;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, .04);
+}
+.wishlist-list-item,
+.wishlist-list .wishlist-list-item {
+  border-bottom: 1px solid var(--it-border2, #d7dce6);
+}
+.wishlist-list-item:last-child { border-bottom: 0; }
+.wishlist-list-item-title,
+.wishlist-list-item a { color: var(--it-ink, #0b1220); font-weight: 700; }
+
+/* Empty state + toast */
+.wishlist-empty {
+  color: var(--it-muted, #5a6478);
+  text-align: center;
+  padding: 40px 0;
+}
+.wishlist-toast {
+  border-radius: 12px;
+  box-shadow: 0 12px 28px rgba(16, 24, 40, .12);
+  background: var(--it-ink, #0b1220);
+  color: #fff;
+}
+.wishlist-add-to-new,
+.wishlist-create {
+  border-radius: 10px;
+  border: 1px dashed var(--it-border2, #d7dce6);
+  color: var(--it-blue-hi, #1d4ed8);
+}
+
+/* Heart icon inside product miniatures sits with quick-view/compare */
+.product-miniature .wishlist-button-add {
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+/* ============================================================
+   Page coverage — carry the IT Store design across the stock
+   product / cart / checkout / account / search pages. Selectors
+   target the classic markup and degrade gracefully if absent.
+   ============================================================ */
+
+/* ---- Branded 404 ---- */
+.itstore-404 { text-align: center; padding: 60px 0 72px; }
+.itstore-404__code { display: block; font-family: var(--it-mono, ui-monospace, monospace); font-size: 84px; font-weight: 800; letter-spacing: -2px; color: var(--it-blue, #2f6fed); line-height: 1; }
+.itstore-404__title { font-size: 28px; font-weight: 800; color: var(--it-ink, #0b1220); margin: 12px 0 8px; }
+.itstore-404__text { color: var(--it-muted, #5a6478); max-width: 520px; margin: 0 auto 24px; line-height: 1.6; }
+.itstore-404__search { display: flex; gap: 8px; max-width: 460px; margin: 0 auto 18px; }
+.itstore-404__input { flex: 1; border: 1px solid var(--it-border, #e3e7ef); border-radius: 10px; padding: 11px 14px; font-size: 14px; }
+.itstore-404__links { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+/* ---- Product page: sticky buy-box + tidy tabs ---- */
+@media (min-width: 992px) {
+  #product .product-information,
+  #product .product-actions { align-self: flex-start; }
+  #product .product-actions {
+    position: sticky;
+    top: 90px;
+  }
+}
+#product .product-prices .current-price { color: var(--it-ink, #0b1220); font-weight: 800; }
+#product .product-prices .discount { background: var(--it-danger, #dc2626); border-radius: 6px; }
+#product .tabs { border: 1px solid var(--it-border, #e3e7ef); border-radius: 14px; box-shadow: 0 1px 2px rgba(16,24,40,.04); }
+#product .tabs .nav-tabs { border-bottom: 1px solid var(--it-border, #e3e7ef); }
+#product .tabs .nav-tabs .nav-link.active { color: var(--it-blue-hi, #1d4ed8); border-color: var(--it-blue, #2f6fed); }
+#product .product-add-to-cart .add-to-cart { border-radius: 11px; font-weight: 700; }
+
+/* ---- Cart ---- */
+.cart-grid .card,
+.cart-summary,
+.cart-container .cart-summary { border: 1px solid var(--it-border, #e3e7ef); border-radius: 14px; box-shadow: 0 1px 2px rgba(16,24,40,.04); }
+.cart-summary .cart-total .value,
+.cart-summary-line.cart-total .value { color: var(--it-ink, #0b1220); font-weight: 800; }
+.cart-detailed-actions .btn,
+.checkout .btn-primary { border-radius: 11px; font-weight: 700; }
+.cart-grid-body .cart-overview { border-radius: 14px; }
+
+/* ---- Checkout ---- */
+#checkout .checkout-step { border: 1px solid var(--it-border, #e3e7ef); border-radius: 14px; margin-bottom: 14px; box-shadow: 0 1px 2px rgba(16,24,40,.04); }
+#checkout .step-title { font-weight: 800; color: var(--it-ink, #0b1220); }
+#checkout .checkout-step.-current { border-color: var(--it-blue, #2f6fed); }
+#order-summary-content .card,
+.order-confirmation-card { border-radius: 14px; border: 1px solid var(--it-border, #e3e7ef); }
+
+/* ---- Account ---- */
+.page-my-account #content .links a,
+.page-my-account #content .link-item {
+  border: 1px solid var(--it-border, #e3e7ef);
+  border-radius: 14px;
+  transition: box-shadow .16s ease, transform .16s ease, border-color .16s ease;
+}
+.page-my-account #content .links a:hover {
+  box-shadow: 0 12px 28px rgba(16,24,40,.12);
+  transform: translateY(-2px);
+  border-color: var(--it-blue, #2f6fed);
+}
+.page-my-account #content .links a i,
+.page-my-account #content .link-item i { color: var(--it-blue, #2f6fed); }
+#authentication .card,
+#password .card,
+.page-authentication .card { border: 1px solid var(--it-border, #e3e7ef); border-radius: 14px; }
+
+/* ---- Search results header ---- */
+#products .total-products,
+#js-product-list-top .total-products p { color: var(--it-muted, #5a6478); font-weight: 600; }
+
+/* ---- Global form fields to match the design ---- */
+.form-control:focus,
+.itstore-404__input:focus {
+  border-color: var(--it-blue, #2f6fed);
+  box-shadow: 0 0 0 3px var(--it-blue-lt, #eaf1ff);
+  outline: none;
+}
+
+/* ============================================================
+   Design-token scale + utilities (spacing / radius / type) and
+   accessibility polish (skip-link, focus ring, back-to-top).
+   ============================================================ */
+:root {
+  --it-space-1: 4px;
+  --it-space-2: 8px;
+  --it-space-3: 12px;
+  --it-space-4: 16px;
+  --it-space-5: 24px;
+  --it-space-6: 32px;
+  --it-space-7: 48px;
+  --it-space-8: 64px;
+  --it-radius-sm: 8px;
+  --it-radius: 14px;
+  --it-radius-lg: 18px;
+  --it-radius-pill: 999px;
+  --it-shadow-sm: 0 1px 2px rgba(16, 24, 40, .04);
+  --it-shadow-lg: 0 12px 28px rgba(16, 24, 40, .12);
+  --it-fs-xs: 12px;
+  --it-fs-sm: 13.5px;
+  --it-fs-md: 15px;
+  --it-fs-lg: 18px;
+  --it-fs-xl: 24px;
+  --it-fs-2xl: 32px;
+}
+
+/* Small, opt-in utility set (prefixed to avoid collisions) */
+.u-stack-2 > * + * { margin-top: var(--it-space-2); }
+.u-stack-4 > * + * { margin-top: var(--it-space-4); }
+.u-muted { color: var(--it-muted, #5a6478); }
+.u-mono { font-family: var(--it-mono, ui-monospace, monospace); }
+.u-card { background: #fff; border: 1px solid var(--it-border, #e3e7ef); border-radius: var(--it-radius); box-shadow: var(--it-shadow-sm); }
+.u-hide { display: none !important; }
+.u-visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0);
+  white-space: nowrap; border: 0;
+}
+
+/* Skip link */
+.itstore-skip {
+  position: absolute;
+  left: 12px;
+  top: -48px;
+  z-index: 10001;
+  background: var(--it-ink, #0b1220);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 0 0 10px 10px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: top .16s ease;
+}
+.itstore-skip:focus { top: 0; color: #fff; outline: 2px solid var(--it-blue, #2f6fed); outline-offset: 2px; }
+
+/* Visible keyboard focus ring across interactive elements */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--it-blue, #2f6fed);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Back-to-top */
+.itstore-totop {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 9998;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: var(--it-radius-pill);
+  background: var(--it-blue, #2f6fed);
+  color: #fff;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity .18s ease, transform .18s ease, background .15s ease, visibility .18s;
+  box-shadow: var(--it-shadow-lg);
+}
+.itstore-totop.is-visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.itstore-totop:hover { background: var(--it-blue-hi, #1d4ed8); }
+
+/* Mobile nav drawer (only active when a toggle+nav are present) */
+@media (max-width: 991px) {
+  body.itstore-nav-open { overflow: hidden; }
+  body.itstore-nav-open [data-itstore-mobile-nav],
+  body.itstore-nav-open .itstore-mega {
+    position: fixed;
+    inset: 0 20% 0 0;
+    z-index: 9997;
+    background: #fff;
+    overflow-y: auto;
+    box-shadow: var(--it-shadow-lg);
+    padding: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .itstore-totop, .itstore-skip { transition: none; }
+  html { scroll-behavior: auto; }
 }

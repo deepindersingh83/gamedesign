@@ -1,0 +1,11 @@
+{shop_name}
+
+Good news - it's back in stock!
+
+The product you were waiting for, {product}, is available again.
+Stock can move fast, so grab yours while it lasts.
+
+View product: {url}
+
+You received this email because you asked to be notified when this item
+returned to stock.

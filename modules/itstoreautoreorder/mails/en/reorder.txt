@@ -1,0 +1,11 @@
+{shop_name}
+
+Time to reorder, {firstname}!
+
+Your subscription for {product} is due. Reorder in a couple of clicks — your
+Subscribe & Save discount still applies.
+
+Reorder now: {url}
+
+You're receiving this because you subscribed to auto-reorder. Manage or cancel
+anytime from your account.

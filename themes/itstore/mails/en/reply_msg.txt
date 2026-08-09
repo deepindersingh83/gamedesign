@@ -1,0 +1,9 @@
+Hello {firstname} {lastname},
+
+Our team has replied to your message:
+
+{message}
+
+If you have any further questions, simply reply to this email.
+
+(c) {shop_name} - {shop_url}

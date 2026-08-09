@@ -1,0 +1,40 @@
+/** IT Store — stock indicator + notify form styles. */
+.itstore-stock {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  margin: 10px 0;
+}
+.itstore-stock__dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.itstore-stock--in { color: #16a34a; }
+.itstore-stock--in .itstore-stock__dot { background: #16a34a; }
+.itstore-stock--low { color: #d97706; }
+.itstore-stock--low .itstore-stock__dot { background: #d97706; }
+.itstore-stock--out { color: #dc2626; }
+.itstore-stock--out .itstore-stock__dot { background: #dc2626; }
+
+/* Design's out-of-stock box: amber card. */
+.itstore-stock__notify {
+  margin: 10px 0 16px;
+  max-width: 460px;
+  border: 1px solid #fde2b8;
+  background: #fff7ec;
+  border-radius: 12px;
+  padding: 18px;
+}
+.itstore-stock__notify-label { display: block; font-size: 14px; font-weight: 700; color: #0b1220; margin-bottom: 8px; }
+.itstore-stock__notify-row { display: flex; gap: 8px; }
+.itstore-stock__notify-row input {
+  flex: 1;
+  border: 1px solid #f3d38a;
+  border-radius: 8px;
+  padding: 11px 12px;
+  font-size: 13.5px;
+}
+.itstore-stock__notify-row button { background: #f59e0b; color: #1a1200; border: 0; padding: 0 20px; border-radius: 9px; font-weight: 700; cursor: pointer; }
+.itstore-stock__notify-row button:hover { background: #e08e08; }
+.itstore-stock__notify-msg { margin: 8px 0 0; font-size: 13px; }
+.itstore-stock__notify-msg.is-ok { color: #16a34a; }
+.itstore-stock__notify-msg.is-error { color: #dc2626; }

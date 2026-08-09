@@ -1,0 +1,21 @@
+/** IT Store — header utility top bar. */
+.itstore-topbar {
+  background: #101a30;
+  color: #b7c1d9;
+  font-size: 12.5px;
+}
+.itstore-topbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 7px 20px;
+}
+.itstore-topbar__msg { font-weight: 600; }
+.itstore-topbar__links { display: flex; gap: 18px; }
+.itstore-topbar__links a { color: #b7c1d9; font-weight: 600; }
+.itstore-topbar__links a:hover { color: #fff; }
+@media (max-width: 640px) {
+  .itstore-topbar__msg { display: none; }
+  .itstore-topbar__inner { justify-content: center; }
+}

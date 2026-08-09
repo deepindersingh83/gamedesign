@@ -1,0 +1,29 @@
+/**
+ * IT Store — brands strip styles.
+ */
+.itstore-brands__strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 14px;
+}
+.itstore-brands__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 84px;
+  padding: 14px 18px;
+  background: #fff;
+  border: 1px solid #e3e7ef;
+  border-radius: 12px;
+  transition: box-shadow .15s ease, border-color .15s ease;
+}
+.itstore-brands__item:hover { box-shadow: 0 6px 18px rgba(15, 23, 42, .07); border-color: #cdd8e6; }
+.itstore-brands__item img {
+  max-height: 48px;
+  max-width: 100%;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: .75;
+  transition: filter .15s ease, opacity .15s ease;
+}
+.itstore-brands__item:hover img { filter: grayscale(0); opacity: 1; }

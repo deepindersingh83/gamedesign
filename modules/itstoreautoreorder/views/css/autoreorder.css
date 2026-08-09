@@ -1,0 +1,17 @@
+/** IT Store — Subscribe & Save. */
+.itstore-ar {
+  border: 1px solid #e3e7ef;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin: 14px 0;
+  background: #fff;
+}
+.itstore-ar__head { display: flex; flex-direction: column; margin-bottom: 10px; }
+.itstore-ar__title { font-weight: 700; font-size: 13px; color: #0b1220; }
+.itstore-ar__sub { font-size: 12px; color: #8b94a8; }
+.itstore-ar__btn { font-size: 13px; }
+.itstore-ar__signin { font-size: 13px; font-weight: 600; }
+.itstore-ar__msg { margin: 8px 0 0; font-size: 12.5px; }
+.itstore-ar__msg.is-ok { color: #166534; }
+.itstore-ar__msg.is-error { color: #dc2626; }
+.itstore-ar-table td, .itstore-ar-table th { vertical-align: middle; }

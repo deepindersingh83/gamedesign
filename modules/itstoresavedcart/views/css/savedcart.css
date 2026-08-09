@@ -1,0 +1,15 @@
+/** IT Store — saved cart banner. */
+.itstore-savedcart {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  background: #eaf1ff;
+  border: 1px solid #cfe0ff;
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin: 16px 0;
+}
+.itstore-savedcart__text { font-size: 14px; color: #0b1220; }
+.itstore-savedcart__btn { flex-shrink: 0; }

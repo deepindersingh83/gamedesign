@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="ModulesItstoretopbarShop" source-language="en-US" target-language="fr-FR" datatype="plaintext">
+    <body>
+      <trans-unit id="0cf0a8c5b8e9158e0892225cec28ee3f" resname="Business Accounts">
+        <source>Business Accounts</source>
+        <target>Comptes professionnels</target>
+      </trans-unit>
+      <trans-unit id="2d78425c400d6401dbb41bac2d4d794c" resname="Track Order">
+        <source>Track Order</source>
+        <target>Suivre ma commande</target>
+      </trans-unit>
+      <trans-unit id="94df2a6972ca1fa79411645fe9b42339" resname="Utility">
+        <source>Utility</source>
+        <target>Utilitaire</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="ModulesItstorestockShop" source-language="en-US" target-language="fr-FR" datatype="plaintext">
+    <body>
+      <trans-unit id="a445c2660c6619b44a69f2b7fb3afc98" resname="Currently out of stock">
+        <source>Currently out of stock</source>
+        <target>Actuellement en rupture de stock</target>
+      </trans-unit>
+      <trans-unit id="0c9a03af69a81c951e86a37d144288d2" resname="Get notified when it’s back:">
+        <source>Get notified when it’s back:</source>
+        <target>Être prévenu du retour en stock :</target>
+      </trans-unit>
+      <trans-unit id="fcebe56087b9373f15514831184fa572" resname="In stock">
+        <source>In stock</source>
+        <target>En stock</target>
+      </trans-unit>
+      <trans-unit id="5c8e6fb71f9831e259d0e52c095acc38" resname="Notify me">
+        <source>Notify me</source>
+        <target>Me prévenir</target>
+      </trans-unit>
+      <trans-unit id="8392461cf759088854e16710b9b75d1a" resname="Only">
+        <source>Only</source>
+        <target>Plus que</target>
+      </trans-unit>
+      <trans-unit id="aa0df81053f73ab4189b7f5b59e899b4" resname="left — order soon">
+        <source>left — order soon</source>
+        <target>en stock — commandez vite</target>
+      </trans-unit>
+      <trans-unit id="67135a14d3ac4f1369633dd006d6efec" resname="your@email.com">
+        <source>your@email.com</source>
+        <target>votre@email.com</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

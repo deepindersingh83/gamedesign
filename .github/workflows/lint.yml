@@ -1,0 +1,68 @@
+name: Lint
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  php:
+    name: PHP syntax (php -l)
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version: ["8.1", "8.2", "8.3"]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up PHP ${{ matrix.php-version }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+      - name: Lint all PHP files
+        run: |
+          set -e
+          fail=0
+          while IFS= read -r -d '' f; do
+            if ! php -l "$f" >/dev/null; then
+              echo "Syntax error in $f"
+              fail=1
+            fi
+          done < <(find modules themes -name '*.php' -print0)
+          exit $fail
+
+  js:
+    name: JavaScript syntax (node --check)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Check all JS files
+        run: |
+          set -e
+          fail=0
+          while IFS= read -r -d '' f; do
+            if ! node --check "$f"; then
+              echo "Syntax error in $f"
+              fail=1
+            fi
+          done < <(find modules themes -name '*.js' -print0)
+          exit $fail
+
+  yaml:
+    name: theme.yml validity
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml
+      - name: Validate theme YAML
+        run: |
+          # PrestaShop reads the theme manifest from config/theme.yml. Validate
+          # it and assert there is no stray root theme.yml (which PrestaShop
+          # ignores and which would drift out of sync).
+          python -c "import yaml; m=yaml.safe_load(open('themes/itstore/config/theme.yml')); assert m.get('name')=='itstore' and 'global_settings' in m, 'config/theme.yml missing name/global_settings'; print('config/theme.yml OK')"
+          test ! -f themes/itstore/theme.yml || { echo '::error::themes/itstore/theme.yml should not exist — the manifest lives at config/theme.yml'; exit 1; }

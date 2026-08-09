@@ -1,0 +1,42 @@
+/**
+ * IT Store — right-to-left overrides.
+ * PrestaShop's FrontController auto-registers this file when the shop language
+ * is RTL (PS_RTL_ENABLED). It mirrors the directional bits of custom.css and
+ * the module blocks.
+ */
+
+/* Header */
+.header-top__actions { margin-left: 0; margin-right: auto; }
+.section-title::after { left: auto; right: 0; }
+
+/* Trust bar */
+.itstore-trustbar__item { flex-direction: row-reverse; text-align: right; }
+
+/* Image slot hero */
+.image-slot__caption { left: auto; right: 6%; }
+.image-slot__nav--prev { left: auto; right: 16px; }
+.image-slot__nav--next { right: auto; left: 16px; }
+.image-slot__overlay {
+  background: linear-gradient(270deg, rgba(6, 18, 32, 0.85) 0%, rgba(6, 18, 32, 0.45) 45%, rgba(6, 18, 32, 0.05) 100%);
+}
+
+/* Support widget */
+.support-widget { right: auto; left: 22px; }
+.support-widget__panel { right: auto; left: 0; transform-origin: bottom left; }
+
+/* Compare tray & mega-menu */
+.itstore-cmp-tray__actions { margin-left: 0; margin-right: auto; }
+.itstore-mm__panel { left: auto; right: 0; }
+
+/* Spec / compare tables */
+.itstore-specsheet__key,
+.itstore-specsheet__val,
+.itstore-compare-table th,
+.itstore-compare-table td { text-align: right; }
+
+/* Product-page blocks */
+.itstore-finance,
+.itstore-warranty__tier,
+.itstore-stock { flex-direction: row-reverse; }
+.itstore-warranty__price { margin-left: 0; margin-right: auto; }
+.itstore-deals__was { margin-left: 0; margin-right: 8px; }

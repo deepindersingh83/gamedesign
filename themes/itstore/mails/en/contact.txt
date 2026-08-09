@@ -1,0 +1,7 @@
+New contact message
+
+From: {email}
+
+{message}
+
+(c) {shop_name} - {shop_url}

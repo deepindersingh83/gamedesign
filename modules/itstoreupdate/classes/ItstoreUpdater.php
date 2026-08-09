@@ -423,7 +423,31 @@ class ItstoreUpdater
         foreach (['prod', 'dev'] as $env) {
             $this->rrmdir(_PS_ROOT_DIR_ . '/var/cache/' . $env);
         }
+        // Drop the theme's CCC (Combine/Compress/Cache) bundles so PrestaShop
+        // rebuilds them from the freshly-copied CSS/JS. Without this, an update
+        // leaves the old combined theme-*.css / *.js in place while the new
+        // templates reference new markup — which renders as a broken layout
+        // (e.g. the footer columns collapsing) until the cache is cleared by hand.
+        $this->clearThemeCcc();
         $this->log('Caches cleared.');
+    }
+
+    /** Delete the combined CSS/JS the theme's CCC produced, keeping the dir. */
+    protected function clearThemeCcc()
+    {
+        $dir = rtrim(_PS_ALL_THEMES_DIR_, '/') . '/itstore/assets/cache';
+        if (!is_dir($dir)) {
+            return;
+        }
+        foreach (scandir($dir) as $e) {
+            if ($e === '.' || $e === '..' || $e === 'index.php') {
+                continue;
+            }
+            $p = $dir . '/' . $e;
+            if (is_file($p) && preg_match('/\.(css|js)$/i', $e)) {
+                @unlink($p);
+            }
+        }
     }
 
     /**

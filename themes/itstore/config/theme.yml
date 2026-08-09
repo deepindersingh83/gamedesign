@@ -102,6 +102,7 @@ global_settings:
       displayTop:
         - ps_mainmenu
         - itstoremegamenu
+        - ps_searchbar
       displayWrapperTop:
         - itstoretrustbar
       displayHome:

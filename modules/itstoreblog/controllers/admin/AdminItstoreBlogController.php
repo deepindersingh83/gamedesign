@@ -30,20 +30,20 @@ class AdminItstoreBlogController extends ModuleAdminController
         parent::__construct();
 
         $this->fields_list = [
-            'id_post' => ['title' => $this->l('ID'), 'align' => 'center', 'class' => 'fixed-width-xs'],
-            'title' => ['title' => $this->l('Title')],
-            'category' => ['title' => $this->l('Category')],
-            'author' => ['title' => $this->l('Author')],
-            'tag' => ['title' => $this->l('Tag')],
-            'active' => ['title' => $this->l('Published'), 'active' => 'status', 'type' => 'bool', 'align' => 'center', 'class' => 'fixed-width-sm'],
-            'date_add' => ['title' => $this->l('Created'), 'type' => 'datetime'],
+            'id_post' => ['title' => $this->trans('ID', [], 'Modules.Itstoreblog.Admin'), 'align' => 'center', 'class' => 'fixed-width-xs'],
+            'title' => ['title' => $this->trans('Title', [], 'Modules.Itstoreblog.Admin')],
+            'category' => ['title' => $this->trans('Category', [], 'Modules.Itstoreblog.Admin')],
+            'author' => ['title' => $this->trans('Author', [], 'Modules.Itstoreblog.Admin')],
+            'tag' => ['title' => $this->trans('Tag', [], 'Modules.Itstoreblog.Admin')],
+            'active' => ['title' => $this->trans('Published', [], 'Modules.Itstoreblog.Admin'), 'active' => 'status', 'type' => 'bool', 'align' => 'center', 'class' => 'fixed-width-sm'],
+            'date_add' => ['title' => $this->trans('Created', [], 'Modules.Itstoreblog.Admin'), 'type' => 'datetime'],
         ];
 
         $this->bulk_actions = [
             'delete' => [
-                'text' => $this->l('Delete selected'),
+                'text' => $this->trans('Delete selected', [], 'Modules.Itstoreblog.Admin'),
                 'icon' => 'icon-trash',
-                'confirm' => $this->l('Delete selected items?'),
+                'confirm' => $this->trans('Delete selected items?', [], 'Modules.Itstoreblog.Admin'),
             ],
         ];
     }
@@ -51,28 +51,28 @@ class AdminItstoreBlogController extends ModuleAdminController
     public function renderForm()
     {
         $this->fields_form = [
-            'legend' => ['title' => $this->l('Blog post'), 'icon' => 'icon-rss'],
+            'legend' => ['title' => $this->trans('Blog post', [], 'Modules.Itstoreblog.Admin'), 'icon' => 'icon-rss'],
             'input' => [
-                ['type' => 'text', 'label' => $this->l('Title'), 'name' => 'title', 'required' => true, 'col' => 6],
-                ['type' => 'text', 'label' => $this->l('Slug'), 'name' => 'slug', 'col' => 6, 'desc' => $this->l('Leave blank to auto-generate from the title.')],
-                ['type' => 'text', 'label' => $this->l('Tag (badge)'), 'name' => 'tag', 'col' => 4, 'desc' => $this->l('Short label shown on the card.')],
-                ['type' => 'text', 'label' => $this->l('Category'), 'name' => 'category', 'col' => 4, 'desc' => $this->l('Groups posts and drives related articles.')],
-                ['type' => 'text', 'label' => $this->l('Tags'), 'name' => 'tags', 'col' => 6, 'desc' => $this->l('Comma-separated, e.g. gpu, gaming, benchmarks.')],
-                ['type' => 'text', 'label' => $this->l('Author'), 'name' => 'author', 'col' => 4],
-                ['type' => 'text', 'label' => $this->l('Image URL'), 'name' => 'image', 'col' => 8, 'desc' => $this->l('Absolute URL or a path under your shop.')],
-                ['type' => 'textarea', 'label' => $this->l('Excerpt'), 'name' => 'excerpt', 'rows' => 3, 'desc' => $this->l('Short summary shown in listings.')],
-                ['type' => 'textarea', 'label' => $this->l('Content'), 'name' => 'content', 'autoload_rte' => true, 'rows' => 15, 'cols' => 60],
-                ['type' => 'text', 'label' => $this->l('Meta title'), 'name' => 'meta_title', 'col' => 8],
-                ['type' => 'text', 'label' => $this->l('Meta description'), 'name' => 'meta_description', 'col' => 8],
+                ['type' => 'text', 'label' => $this->trans('Title', [], 'Modules.Itstoreblog.Admin'), 'name' => 'title', 'required' => true, 'col' => 6],
+                ['type' => 'text', 'label' => $this->trans('Slug', [], 'Modules.Itstoreblog.Admin'), 'name' => 'slug', 'col' => 6, 'desc' => $this->trans('Leave blank to auto-generate from the title.', [], 'Modules.Itstoreblog.Admin')],
+                ['type' => 'text', 'label' => $this->trans('Tag (badge)', [], 'Modules.Itstoreblog.Admin'), 'name' => 'tag', 'col' => 4, 'desc' => $this->trans('Short label shown on the card.', [], 'Modules.Itstoreblog.Admin')],
+                ['type' => 'text', 'label' => $this->trans('Category', [], 'Modules.Itstoreblog.Admin'), 'name' => 'category', 'col' => 4, 'desc' => $this->trans('Groups posts and drives related articles.', [], 'Modules.Itstoreblog.Admin')],
+                ['type' => 'text', 'label' => $this->trans('Tags', [], 'Modules.Itstoreblog.Admin'), 'name' => 'tags', 'col' => 6, 'desc' => $this->trans('Comma-separated, e.g. gpu, gaming, benchmarks.', [], 'Modules.Itstoreblog.Admin')],
+                ['type' => 'text', 'label' => $this->trans('Author', [], 'Modules.Itstoreblog.Admin'), 'name' => 'author', 'col' => 4],
+                ['type' => 'text', 'label' => $this->trans('Image URL', [], 'Modules.Itstoreblog.Admin'), 'name' => 'image', 'col' => 8, 'desc' => $this->trans('Absolute URL or a path under your shop.', [], 'Modules.Itstoreblog.Admin')],
+                ['type' => 'textarea', 'label' => $this->trans('Excerpt', [], 'Modules.Itstoreblog.Admin'), 'name' => 'excerpt', 'rows' => 3, 'desc' => $this->trans('Short summary shown in listings.', [], 'Modules.Itstoreblog.Admin')],
+                ['type' => 'textarea', 'label' => $this->trans('Content', [], 'Modules.Itstoreblog.Admin'), 'name' => 'content', 'autoload_rte' => true, 'rows' => 15, 'cols' => 60],
+                ['type' => 'text', 'label' => $this->trans('Meta title', [], 'Modules.Itstoreblog.Admin'), 'name' => 'meta_title', 'col' => 8],
+                ['type' => 'text', 'label' => $this->trans('Meta description', [], 'Modules.Itstoreblog.Admin'), 'name' => 'meta_description', 'col' => 8],
                 [
-                    'type' => 'switch', 'label' => $this->l('Published'), 'name' => 'active', 'is_bool' => true,
+                    'type' => 'switch', 'label' => $this->trans('Published', [], 'Modules.Itstoreblog.Admin'), 'name' => 'active', 'is_bool' => true,
                     'values' => [
-                        ['id' => 'active_on', 'value' => 1, 'label' => $this->l('Yes')],
-                        ['id' => 'active_off', 'value' => 0, 'label' => $this->l('No')],
+                        ['id' => 'active_on', 'value' => 1, 'label' => $this->trans('Yes', [], 'Modules.Itstoreblog.Admin')],
+                        ['id' => 'active_off', 'value' => 0, 'label' => $this->trans('No', [], 'Modules.Itstoreblog.Admin')],
                     ],
                 ],
             ],
-            'submit' => ['title' => $this->l('Save')],
+            'submit' => ['title' => $this->trans('Save', [], 'Modules.Itstoreblog.Admin')],
         ];
 
         if (!($obj = $this->loadObject(true))) {
